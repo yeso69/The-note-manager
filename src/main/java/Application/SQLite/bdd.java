@@ -1,0 +1,232 @@
+package Application.SQLite;
+
+import Application.Categorie.categorie;
+
+import java.io.*;
+import java.sql.*;
+
+/**
+ * Cette classe fait l'interface avec la base de données.
+ * @author Leucistic
+ *
+ */
+public class bdd
+
+{
+    private String      dbName;
+    private  Connection  connection;
+    private Statement   requete;
+
+    /**
+     * Constructeur de la classe Database
+     * @param dbName Le nom de la base de données
+     */
+    public bdd (String dbName)
+    {
+        // Charge le driver sqlite JDBC en utilisant le class loader actuel
+        try
+        {
+            Class.forName("org.sqlite.JDBC");
+        }
+        catch (ClassNotFoundException e1)
+        {
+            System.err.println(e1.getMessage());
+        }
+
+        this.dbName     = dbName;
+        this.connection = null;
+    }
+
+    /**
+     * Ouvre la base de données spécifiée
+     * @return True si la connection à été réussie. False sinon.
+     */
+    public boolean connect ()
+    {
+        try
+        {
+            connection = DriverManager.getConnection("jdbc:sqlite:db/"+this.dbName);
+            requete = connection.createStatement();
+
+            requete.executeUpdate("PRAGMA synchronous = OFF;");
+            requete.setQueryTimeout(30);
+
+            return true;
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    /**
+     * Ferme la connection à la base de données
+     * @return True si la connection a bien été fermée. False sinon.
+     */
+    public boolean disconnect ()
+    {
+        try
+        {
+            if(connection != null)
+                connection.close();
+
+            return true;
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    /**
+     * @param requete La requête SQL (avec un ";" à la fin)
+     * @return Un ResultSet contenant le résultat de la requête
+     */
+    public ResultSet getResultOf (String requete)
+    {
+        try
+        {
+            return this.requete.executeQuery(requete);
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    /**
+     * @param requete La requete SQL de modification
+     */
+    public void updateValue (String requete)
+    {
+        try
+        {
+            this.requete.executeUpdate(requete);
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     *  Permet de remplir la base de donnée
+     */
+    public void remplirDB()
+    {
+        String path="db/data.sql";
+        String sql = "";
+        BufferedReader in = null;
+        try {
+            in = new BufferedReader(new FileReader(new File(path)));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        String line;
+        try {
+            while ((line = in.readLine()) != null)
+            {
+               sql+= line;
+            }
+            String str[] = sql.toString().split(";");
+
+            for(int i = 0; i < str.length; i++)
+            {
+                System.out.println("REQUETE >> "+str[i]);
+                updateValue(str[i]);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            in.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        updateValue(sql);
+    }
+
+    public void addCategorie(categorie cat)
+    {
+        try {
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement("INSERT INTO categorie (libelle,id_parent) VALUES(?,?)");
+            preparedStatement.setString(1, cat.getLibelle());
+            preparedStatement.setInt(2, cat.getId_parent());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        System.out.println("Ajout de la catégorie : "+cat.getLibelle());
+    }
+
+    public void showAllCategories()
+    {
+        java.sql.ResultSet rs = null;
+        try
+        {
+            java.sql.PreparedStatement pstatement = connection.prepareStatement("Select * from categorie");
+            rs = pstatement.executeQuery();
+
+            while (rs.next())
+            {
+                int id = rs.getInt(1);
+                String libelle = rs.getString(2);
+                int id_parent = rs.getInt(3);
+                System.out.println("-----------------------------------");
+                System.out.println("ID : " + id);
+                System.out.println("Libelle : " + libelle);
+                System.out.println("ID_PARENT : " + id_parent);
+                System.out.println("-----------------------------------");
+            }
+            rs.close();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void removeCategorie(categorie cat)
+    {
+        try {
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement("DELETE FROM categorie WHERE libelle = ?");
+            preparedStatement.setString(1, cat.getLibelle());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        System.out.println("Supression de la catégorie : "+cat.getLibelle());
+    }
+
+    public void showCategorie(String lib)
+    {
+        java.sql.ResultSet rs = null;
+        try
+        {
+            java.sql.PreparedStatement pstatement = connection.prepareStatement("Select * from categorie WHERE libelle= ?");
+            pstatement.setString(1,lib);
+            rs = pstatement.executeQuery();
+
+                int id = rs.getInt(1);
+                String libelle = rs.getString(2);
+                int id_parent = rs.getInt(3);
+                System.out.println("-----------------------------------");
+                System.out.println("ID : " + id);
+                System.out.println("Libelle : " + libelle);
+                System.out.println("ID_PARENT : " + id_parent);
+                System.out.println("-----------------------------------");
+            rs.close();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+}
