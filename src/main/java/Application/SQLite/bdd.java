@@ -1,6 +1,6 @@
 package Application.SQLite;
 
-import Application.Categorie.categorie;
+import Application.Models.categorie;
 
 import java.io.*;
 import java.sql.*;
@@ -35,6 +35,10 @@ public class bdd
 
         this.dbName     = dbName;
         this.connection = null;
+    }
+
+    public String getDbName() {
+        return dbName;
     }
 
     /**
@@ -152,16 +156,23 @@ public class bdd
 
     public void addCategorie(categorie cat)
     {
-        try {
-            PreparedStatement preparedStatement = connection
-                    .prepareStatement("INSERT INTO categorie (libelle,id_parent) VALUES(?,?)");
-            preparedStatement.setString(1, cat.getLibelle());
-            preparedStatement.setInt(2, cat.getId_parent());
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
+        if(!this.existCategorie(cat.getLibelle()))
+        {
+            try {
+                PreparedStatement preparedStatement = connection
+                        .prepareStatement("INSERT INTO categorie (libelle,id_parent) VALUES(?,?)");
+                preparedStatement.setString(1, cat.getLibelle());
+                preparedStatement.setInt(2, cat.getId_parent());
+                preparedStatement.executeUpdate();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            System.out.println("Ajout de la catégorie : "+cat.getLibelle());
+        }else
+        {
+            System.out.println("La catégorie existe déjà !");
         }
-        System.out.println("Ajout de la catégorie : "+cat.getLibelle());
+
     }
 
     public void showAllCategories()
@@ -171,19 +182,21 @@ public class bdd
         {
             java.sql.PreparedStatement pstatement = connection.prepareStatement("Select * from categorie");
             rs = pstatement.executeQuery();
-
+            System.out.println();
+            System.out.println("      AFFICHAGE DES CATEGORIES     ");
+            System.out.println("-----------------------------------");
             while (rs.next())
             {
                 int id = rs.getInt(1);
                 String libelle = rs.getString(2);
                 int id_parent = rs.getInt(3);
-                System.out.println("-----------------------------------");
                 System.out.println("ID : " + id);
                 System.out.println("Libelle : " + libelle);
                 System.out.println("ID_PARENT : " + id_parent);
-                System.out.println("-----------------------------------");
+                System.out.println();
             }
             rs.close();
+            System.out.println("-----------------------------------");
         }
         catch(Exception e)
         {
@@ -191,28 +204,41 @@ public class bdd
         }
     }
 
-    public void removeCategorie(categorie cat)
+    public void removeCategorie(String lib)
     {
-        try {
-            PreparedStatement preparedStatement = connection
-                    .prepareStatement("DELETE FROM categorie WHERE libelle = ?");
-            preparedStatement.setString(1, cat.getLibelle());
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+        if(!existCategorie(lib))
+        {
+            System.out.println("La catégorie "+lib+" n'existe pas !");
         }
-        System.out.println("Supression de la catégorie : "+cat.getLibelle());
+        else
+        {
+            try {
+                PreparedStatement preparedStatement = connection
+                        .prepareStatement("DELETE FROM categorie WHERE libelle = ?");
+                preparedStatement.setString(1, lib);
+                preparedStatement.executeUpdate();
+            } catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            System.out.println("Supression de la catégorie : "+lib);
+        }
     }
 
     public void showCategorie(String lib)
     {
-        java.sql.ResultSet rs = null;
-        try
+        if(!existCategorie(lib))
         {
-            java.sql.PreparedStatement pstatement = connection.prepareStatement("Select * from categorie WHERE libelle= ?");
-            pstatement.setString(1,lib);
-            rs = pstatement.executeQuery();
+            System.out.println("La catégorie "+lib+" n'existe pas !");
+        }
+        else
+        {
+            java.sql.ResultSet rs = null;
+            try
+            {
+                java.sql.PreparedStatement pstatement = connection.prepareStatement("Select * from categorie WHERE libelle= ?");
+                pstatement.setString(1,lib);
+                rs = pstatement.executeQuery();
 
                 int id = rs.getInt(1);
                 String libelle = rs.getString(2);
@@ -222,11 +248,37 @@ public class bdd
                 System.out.println("Libelle : " + libelle);
                 System.out.println("ID_PARENT : " + id_parent);
                 System.out.println("-----------------------------------");
-            rs.close();
+                rs.close();
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+            }
         }
-        catch(Exception e)
-        {
+    }
+
+    public boolean existCategorie(String lib)
+    {
+        boolean res = false;
+        try {
+
+            java.sql.PreparedStatement pstatement = connection.prepareStatement("Select * from categorie WHERE libelle= ?");
+            pstatement.setString(1,lib);
+
+            try (ResultSet rs = pstatement.executeQuery()) {
+                // Only expecting a single result
+                if (rs.next()) {
+                    boolean found = rs.getBoolean(1); // "found" column
+                    if (found) {
+                        res = true;
+                    } else {
+                        res = false;
+                    }
+                }
+            }
+        } catch (SQLException e) {
             e.printStackTrace();
         }
+        return res;
     }
 }

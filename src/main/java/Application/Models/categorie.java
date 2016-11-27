@@ -1,4 +1,4 @@
-package Application.Categorie;
+package Application.Models;
 
 /**
  * Created by peter on 22/11/16.
