@@ -4,6 +4,7 @@ import Application.Models.categorie;
 
 import java.io.*;
 import java.sql.*;
+import java.util.ArrayList;
 
 /**
  * Cette classe fait l'interface avec la base de données.
@@ -280,5 +281,50 @@ public class bdd
             e.printStackTrace();
         }
         return res;
+    }
+
+    public ArrayList<categorie> getCategories() {
+        java.sql.ResultSet rs = null;
+        ArrayList<categorie> cats = new ArrayList<categorie>();
+        try {
+            java.sql.PreparedStatement pstatement = connection.prepareStatement("Select * from categorie");
+            rs = pstatement.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt(1);
+                String libelle = rs.getString(2);
+                int id_parent = rs.getInt(3);
+                cats.add(new categorie(id, libelle, id_parent));
+            }
+            rs.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return cats;
+    }
+
+    public int getId(String lib){
+        int id = 0;
+        if(!existCategorie(lib))
+        {
+            System.out.println("La catégorie "+lib+" n'existe pas !");
+        }
+        else
+        {
+            java.sql.ResultSet rs = null;
+            try
+            {
+                java.sql.PreparedStatement pstatement = connection.prepareStatement("Select * from categorie WHERE libelle= ?");
+                pstatement.setString(1,lib);
+                rs = pstatement.executeQuery();
+
+                id = rs.getInt(1);
+                rs.close();
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+        return id;
     }
 }
