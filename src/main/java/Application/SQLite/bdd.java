@@ -156,6 +156,14 @@ public class bdd
         updateValue(sql);
     }
 
+    public void saveDB(){
+        /*
+        ATTACH DATABASE '/the/path/to/the/other/db.sqlite' AS otherdb;
+        CREATE TABLE otherdb.theTableName (...);
+        INSERT INTO otherdb.theTableName SELECT * FROM main.theTableName;
+        */
+    }
+
     public void addCategorie(categorie cat)
     {
         if(!this.existCategorie(cat.getLibelle()))

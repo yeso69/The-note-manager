@@ -35,8 +35,6 @@ public class documentGenerator {
     }
 
     private void buildInterface(){
-        //JDialog jd = new JDialog(frame, "Noeuds selectionés", true);
-        //jd.setLayout(new FlowLayout());
         JPanel pan = new JPanel(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         c.gridx = 0;
@@ -54,10 +52,6 @@ public class documentGenerator {
         c.anchor = GridBagConstraints.NORTH;
         frame.setLayout(new GridBagLayout());
         frame.add(pan,c);
-        //jd.setLocationRelativeTo(frame);
-        //jd.pack();
-        //jd.setResizable(true);
-        //jd.setVisible(true);
     }
 
     public void onClose(){

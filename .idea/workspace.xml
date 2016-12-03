@@ -1,20 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7dafa4de-0fd5-45c5-af46-166b43897725" name="Default" comment="Grande avancée du projet !!!&#10;&#10;--&gt; Création de la classe portion&#10;--&gt; Chargement des portions depuis la BDD au lancement de l'appli&#10;--&gt; Ajout/Suppression des portions&#10;--&gt; Création de la classe documentGenerator : les bases de la génération d'un document sont en place&#10;--&gt; &#10;&#10;Améliorations&#10;--&gt; Prise en charge de la selection multiple sur l'arbre&#10;--&gt; La génération de document n'est permise que lorsque tous les éléments sélectionés sont des portions de texte&#10;&#10;Optimisations&#10;--&gt; Fix des quelques nullPointerExceptions quand aucun noeud est sélectionné&#10;--&gt; Optimisation des requêtes BDD (moins d'appels)&#10;--&gt; Factorisation du code&#10;--&gt; Amélioration du  contrôle d'intégrité des données&#10;&#10;Refonte de l'interface&#10;&#10;--&gt; Changement de dispostion des éléments&#10;--&gt; Le contenu de la fenêtre prend désormais tout l'espace disponible&#10;--&gt; Ajout des icones sur les boutons &#10;--&gt; Ajout d'icones spécifiques pour les catégories &amp; portions pour les différiencier visuellement&#10;--&gt; Polices et texte adaptés pour un meilleur rendu (les catégories en gras et pas les portions)&#10;--&gt; Meilleur rendu visuel pour les popup d'ajout de catégorie et portion&#10;&#10;Etc etc  je me souviens pas de tout ^^">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/Application/Models/documentGenerator.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/Application/Models/portion.java" />
+    <list default="true" id="7dafa4de-0fd5-45c5-af46-166b43897725" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/test.db" afterPath="$PROJECT_DIR$/db/test.db" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/Application/SQLite/bdd.class" afterPath="$PROJECT_DIR$/target/classes/Application/SQLite/bdd.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/Application/main.class" afterPath="$PROJECT_DIR$/target/classes/Application/main.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/data.sql" afterPath="$PROJECT_DIR$/db/data.sql" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Application/App.java" afterPath="$PROJECT_DIR$/src/main/java/Application/App.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Application/Models/categorie.java" afterPath="$PROJECT_DIR$/src/main/java/Application/Models/categorie.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Application/Models/documentGenerator.java" afterPath="$PROJECT_DIR$/src/main/java/Application/Models/documentGenerator.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Application/SQLite/bdd.java" afterPath="$PROJECT_DIR$/src/main/java/Application/SQLite/bdd.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Application/Views/Tree.java" afterPath="$PROJECT_DIR$/src/main/java/Application/Views/Tree.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Application/Views/categoryControl.java" afterPath="$PROJECT_DIR$/src/main/java/Application/Views/categoryControl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Application/main.java" afterPath="$PROJECT_DIR$/src/main/java/Application/main.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -38,8 +30,8 @@
       <file leaf-file-name="bdd.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Application/SQLite/bdd.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="171" column="32" selection-start-line="171" selection-start-column="32" selection-end-line="171" selection-end-column="32" />
+            <state relative-caret-position="223">
+              <caret line="185" column="5" selection-start-line="185" selection-start-column="5" selection-end-line="185" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#bdd#0;class#bdd#0" expanded="false" />
@@ -49,7 +41,7 @@
                 <element signature="method#disconnect#0;class#bdd#0" expanded="false" />
                 <element signature="docComment;method#getResultOf#0;class#bdd#0" expanded="false" />
                 <element signature="method#getResultOf#0;class#bdd#0" expanded="false" />
-                <element signature="method#remplirDB#0;class#bdd#0" expanded="false" />
+                <element signature="method#saveDB#0;class#bdd#0" expanded="false" />
                 <element signature="method#showAllCategories#0;class#bdd#0" expanded="false" />
                 <element signature="method#removePortion#0;class#bdd#0" expanded="false" />
                 <element signature="method#removeCategorie#0;class#bdd#0" expanded="false" />
@@ -59,23 +51,24 @@
                 <element signature="method#getCategories#0;class#bdd#0" expanded="false" />
                 <element signature="method#getPortions#0;class#bdd#0" expanded="false" />
                 <element signature="method#getId#0;class#bdd#0" expanded="false" />
-                <marker date="1480725129624" expanded="true" signature="3795:3848" ph="INSERT INTO categorie... " />
-                <marker date="1480725129624" expanded="true" signature="4484:4538" ph="INSERT INTO portion... " />
-                <marker date="1480725129624" expanded="true" signature="5077:5100" ph="Select * fro... categorie" />
-                <marker date="1480725129624" expanded="true" signature="6242:6274" ph="DELETE FROM " />
-                <marker date="1480725129624" expanded="true" signature="6938:6977" ph="DELETE FROM " />
-                <marker date="1480725129624" expanded="true" signature="7664:7704" ph="Select * fro... categorie" />
-                <marker date="1480725129624" expanded="true" signature="8593:8633" ph="Select * fro... categorie" />
-                <marker date="1480725129624" expanded="true" signature="9360:9393" ph="Select * fro... portion" />
-                <marker date="1480725129624" expanded="true" signature="10192:10215" ph="Select * fro... categorie" />
-                <marker date="1480725129624" expanded="true" signature="10879:10900" ph="Select * fro... portion" />
-                <marker date="1480725129624" expanded="true" signature="11671:11711" ph="Select * fro... categorie" />
+                <marker date="1480769773031" expanded="false" signature="3855:4559" ph="{...}" />
+                <marker date="1480769773031" expanded="true" signature="4044:4097" ph="INSERT INTO categorie... " />
+                <marker date="1480769773031" expanded="true" signature="4733:4787" ph="INSERT INTO portion... " />
+                <marker date="1480769773031" expanded="true" signature="5326:5349" ph="Select * fro... categorie" />
+                <marker date="1480769773031" expanded="true" signature="6491:6523" ph="DELETE FROM " />
+                <marker date="1480769773031" expanded="true" signature="7187:7226" ph="DELETE FROM " />
+                <marker date="1480769773031" expanded="true" signature="7913:7953" ph="Select * fro... categorie" />
+                <marker date="1480769773031" expanded="true" signature="8842:8882" ph="Select * fro... categorie" />
+                <marker date="1480769773031" expanded="true" signature="9609:9642" ph="Select * fro... portion" />
+                <marker date="1480769773031" expanded="true" signature="10441:10464" ph="Select * fro... categorie" />
+                <marker date="1480769773031" expanded="true" signature="11128:11149" ph="Select * fro... portion" />
+                <marker date="1480769773031" expanded="true" signature="11920:11960" ph="Select * fro... categorie" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Application/main.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="68">
@@ -88,7 +81,7 @@
       <file leaf-file-name="App.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Application/App.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="117">
+            <state relative-caret-position="952">
               <caret line="268" column="26" selection-start-line="268" selection-start-column="23" selection-end-line="268" selection-end-column="26" />
               <folding>
                 <element signature="method#buildWindow#0;class#App#0" expanded="false" />
@@ -105,12 +98,10 @@
       <file leaf-file-name="documentGenerator.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Application/Models/documentGenerator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="304">
-              <caret line="45" column="46" selection-start-line="45" selection-start-column="46" selection-end-line="45" selection-end-column="46" />
+            <state relative-caret-position="457">
+              <caret line="53" column="13" selection-start-line="53" selection-start-column="8" selection-end-line="53" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2119#2572#0" expanded="true" />
-                <element signature="e#2571#2572#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -119,7 +110,7 @@
       <file leaf-file-name="Tree.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Application/Views/Tree.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
+            <state relative-caret-position="1717">
               <caret line="218" column="18" selection-start-line="218" selection-start-column="18" selection-end-line="218" selection-end-column="18" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -141,9 +132,7 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#2448#0" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -151,32 +140,24 @@
       <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="952">
+            <state relative-caret-position="1156">
               <caret line="68" column="33" selection-start-line="68" selection-start-column="33" selection-end-line="68" selection-end-column="33" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="categoryControl.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="categoryControl.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/Application/Views/categoryControl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="114">
-              <caret line="128" column="31" selection-start-line="128" selection-start-column="31" selection-end-line="128" selection-end-column="31" />
+            <state relative-caret-position="149">
+              <caret line="182" column="54" selection-start-line="182" selection-start-column="54" selection-end-line="182" selection-end-column="54" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#categoryControl#0;class#categoryControl#0" expanded="false" />
                 <element signature="method#validateAddCat#0;class#categoryControl#0" expanded="false" />
-                <element signature="e#4421#4422#0" expanded="true" />
-                <element signature="e#4462#4463#0" expanded="true" />
-                <element signature="e#4518#4519#0" expanded="true" />
-                <element signature="e#4559#4560#0" expanded="true" />
-                <element signature="e#4615#4616#0" expanded="true" />
-                <element signature="e#4656#4657#0" expanded="true" />
                 <element signature="method#buildPanelAddCat#0;class#categoryControl#0" expanded="false" />
-                <element signature="method#buildPanelAddPor#0;class#categoryControl#0" expanded="false" />
                 <element signature="method#newCat#0;class#categoryControl#0" expanded="false" />
-                <element signature="method#newPor#0;class#categoryControl#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -185,7 +166,7 @@
       <file leaf-file-name="portion.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Application/Models/portion.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="124">
+            <state relative-caret-position="340">
               <caret line="20" column="27" selection-start-line="20" selection-start-column="27" selection-end-line="20" selection-end-column="27" />
               <folding>
                 <element signature="e#916#917#0" expanded="true" />
@@ -198,7 +179,7 @@
       <file leaf-file-name="data.sql" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/db/data.sql">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="456">
+            <state relative-caret-position="476">
               <caret line="28" column="59" selection-start-line="28" selection-start-column="59" selection-end-line="28" selection-end-column="59" />
               <folding />
             </state>
@@ -242,12 +223,12 @@
         <option value="$PROJECT_DIR$/src/main/java/Application/Models/TreeWithMultiDiscontiguousSelections.java" />
         <option value="$PROJECT_DIR$/src/main/java/Application/main.java" />
         <option value="$PROJECT_DIR$/db/data.sql" />
-        <option value="$PROJECT_DIR$/src/main/java/Application/SQLite/bdd.java" />
         <option value="$PROJECT_DIR$/src/main/java/Application/Models/portion.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Application/Views/categoryControl.java" />
         <option value="$PROJECT_DIR$/src/main/java/Application/App.java" />
         <option value="$PROJECT_DIR$/src/main/java/Application/Views/Tree.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Application/SQLite/bdd.java" />
         <option value="$PROJECT_DIR$/src/main/java/Application/Models/documentGenerator.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Application/Views/categoryControl.java" />
       </list>
     </option>
   </component>
@@ -362,6 +343,44 @@
               <option name="myItemId" value="main" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Application" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="projet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Projet_JavaIUT" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Application" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SQLite" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -379,8 +398,8 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="Scratches" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -932,7 +951,8 @@
       <workItem from="1480473403646" duration="690000" />
       <workItem from="1480506893470" duration="26596000" />
       <workItem from="1480593115209" duration="34848000" />
-      <workItem from="1480645714902" duration="18075000" />
+      <workItem from="1480645714902" duration="18126000" />
+      <workItem from="1480768427485" duration="1967000" />
     </task>
     <task id="LOCAL-00001" summary="Ajout structure projet + catégorie. SQL Fonctionne">
       <created>1479897374492</created>
@@ -955,11 +975,18 @@
       <option name="project" value="LOCAL" />
       <updated>1480542654996</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Grande avancée du projet !!!&#10;&#10;--&gt; Création de la classe portion&#10;--&gt; Chargement des portions depuis la BDD au lancement de l'appli&#10;--&gt; Ajout/Suppression des portions&#10;--&gt; Création de la classe documentGenerator : les bases de la génération d'un document sont en place&#10;--&gt; &#10;&#10;Améliorations&#10;--&gt; Prise en charge de la selection multiple sur l'arbre&#10;--&gt; La génération de document n'est permise que lorsque tous les éléments sélectionés sont des portions de texte&#10;&#10;Optimisations&#10;--&gt; Fix des quelques nullPointerExceptions quand aucun noeud est sélectionné&#10;--&gt; Optimisation des requêtes BDD (moins d'appels)&#10;--&gt; Factorisation du code&#10;--&gt; Amélioration du  contrôle d'intégrité des données&#10;&#10;Refonte de l'interface&#10;&#10;--&gt; Changement de dispostion des éléments&#10;--&gt; Le contenu de la fenêtre prend désormais tout l'espace disponible&#10;--&gt; Ajout des icones sur les boutons &#10;--&gt; Ajout d'icones spécifiques pour les catégories &amp; portions pour les différiencier visuellement&#10;--&gt; Polices et texte adaptés pour un meilleur rendu (les catégories en gras et pas les portions)&#10;--&gt; Meilleur rendu visuel pour les popup d'ajout de catégorie et portion&#10;&#10;Etc etc  je me souviens pas de tout ^^">
+      <created>1480728352606</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1480728352606</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="102694000" />
+    <option name="totallyTimeSpent" value="104712000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -967,19 +994,18 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3280757" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3280757" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32854864" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31388012" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31388012" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21449487" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3280757" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -999,6 +1025,7 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="MaxCompute Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3280757" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Running Info" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Running Result" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -1065,7 +1092,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="61" />
+      <option name="time" value="64" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1095,7 +1122,7 @@
             <element signature="method#disconnect#0;class#bdd#0" expanded="false" />
             <element signature="docComment;method#getResultOf#0;class#bdd#0" expanded="false" />
             <element signature="method#getResultOf#0;class#bdd#0" expanded="false" />
-            <element signature="method#remplirDB#0;class#bdd#0" expanded="false" />
+            <element signature="method#saveDB#0;class#bdd#0" expanded="false" />
             <element signature="method#showAllCategories#0;class#bdd#0" expanded="false" />
             <element signature="method#removePortion#0;class#bdd#0" expanded="false" />
             <element signature="method#removeCategorie#0;class#bdd#0" expanded="false" />
@@ -1105,17 +1132,18 @@
             <element signature="method#getCategories#0;class#bdd#0" expanded="false" />
             <element signature="method#getPortions#0;class#bdd#0" expanded="false" />
             <element signature="method#getId#0;class#bdd#0" expanded="false" />
-            <marker date="1480725129624" expanded="true" signature="3795:3848" ph="INSERT INTO categorie... " />
-            <marker date="1480725129624" expanded="true" signature="4484:4538" ph="INSERT INTO portion... " />
-            <marker date="1480725129624" expanded="true" signature="5077:5100" ph="Select * fro... categorie" />
-            <marker date="1480725129624" expanded="true" signature="6242:6274" ph="DELETE FROM " />
-            <marker date="1480725129624" expanded="true" signature="6938:6977" ph="DELETE FROM " />
-            <marker date="1480725129624" expanded="true" signature="7664:7704" ph="Select * fro... categorie" />
-            <marker date="1480725129624" expanded="true" signature="8593:8633" ph="Select * fro... categorie" />
-            <marker date="1480725129624" expanded="true" signature="9360:9393" ph="Select * fro... portion" />
-            <marker date="1480725129624" expanded="true" signature="10192:10215" ph="Select * fro... categorie" />
-            <marker date="1480725129624" expanded="true" signature="10879:10900" ph="Select * fro... portion" />
-            <marker date="1480725129624" expanded="true" signature="11671:11711" ph="Select * fro... categorie" />
+            <marker date="1480769773031" expanded="false" signature="3855:4559" ph="{...}" />
+            <marker date="1480769773031" expanded="true" signature="4044:4097" ph="INSERT INTO categorie... " />
+            <marker date="1480769773031" expanded="true" signature="4733:4787" ph="INSERT INTO portion... " />
+            <marker date="1480769773031" expanded="true" signature="5326:5349" ph="Select * fro... categorie" />
+            <marker date="1480769773031" expanded="true" signature="6491:6523" ph="DELETE FROM " />
+            <marker date="1480769773031" expanded="true" signature="7187:7226" ph="DELETE FROM " />
+            <marker date="1480769773031" expanded="true" signature="7913:7953" ph="Select * fro... categorie" />
+            <marker date="1480769773031" expanded="true" signature="8842:8882" ph="Select * fro... categorie" />
+            <marker date="1480769773031" expanded="true" signature="9609:9642" ph="Select * fro... portion" />
+            <marker date="1480769773031" expanded="true" signature="10441:10464" ph="Select * fro... categorie" />
+            <marker date="1480769773031" expanded="true" signature="11128:11149" ph="Select * fro... portion" />
+            <marker date="1480769773031" expanded="true" signature="11920:11960" ph="Select * fro... categorie" />
           </folding>
         </state>
       </provider>
@@ -1165,7 +1193,7 @@
             <element signature="method#disconnect#0;class#bdd#0" expanded="false" />
             <element signature="docComment;method#getResultOf#0;class#bdd#0" expanded="false" />
             <element signature="method#getResultOf#0;class#bdd#0" expanded="false" />
-            <element signature="method#remplirDB#0;class#bdd#0" expanded="false" />
+            <element signature="method#saveDB#0;class#bdd#0" expanded="false" />
             <element signature="method#showAllCategories#0;class#bdd#0" expanded="false" />
             <element signature="method#removePortion#0;class#bdd#0" expanded="false" />
             <element signature="method#removeCategorie#0;class#bdd#0" expanded="false" />
@@ -1175,17 +1203,18 @@
             <element signature="method#getCategories#0;class#bdd#0" expanded="false" />
             <element signature="method#getPortions#0;class#bdd#0" expanded="false" />
             <element signature="method#getId#0;class#bdd#0" expanded="false" />
-            <marker date="1480725129624" expanded="true" signature="3795:3848" ph="INSERT INTO categorie... " />
-            <marker date="1480725129624" expanded="true" signature="4484:4538" ph="INSERT INTO portion... " />
-            <marker date="1480725129624" expanded="true" signature="5077:5100" ph="Select * fro... categorie" />
-            <marker date="1480725129624" expanded="true" signature="6242:6274" ph="DELETE FROM " />
-            <marker date="1480725129624" expanded="true" signature="6938:6977" ph="DELETE FROM " />
-            <marker date="1480725129624" expanded="true" signature="7664:7704" ph="Select * fro... categorie" />
-            <marker date="1480725129624" expanded="true" signature="8593:8633" ph="Select * fro... categorie" />
-            <marker date="1480725129624" expanded="true" signature="9360:9393" ph="Select * fro... portion" />
-            <marker date="1480725129624" expanded="true" signature="10192:10215" ph="Select * fro... categorie" />
-            <marker date="1480725129624" expanded="true" signature="10879:10900" ph="Select * fro... portion" />
-            <marker date="1480725129624" expanded="true" signature="11671:11711" ph="Select * fro... categorie" />
+            <marker date="1480769773031" expanded="false" signature="3855:4559" ph="{...}" />
+            <marker date="1480769773031" expanded="true" signature="4044:4097" ph="INSERT INTO categorie... " />
+            <marker date="1480769773031" expanded="true" signature="4733:4787" ph="INSERT INTO portion... " />
+            <marker date="1480769773031" expanded="true" signature="5326:5349" ph="Select * fro... categorie" />
+            <marker date="1480769773031" expanded="true" signature="6491:6523" ph="DELETE FROM " />
+            <marker date="1480769773031" expanded="true" signature="7187:7226" ph="DELETE FROM " />
+            <marker date="1480769773031" expanded="true" signature="7913:7953" ph="Select * fro... categorie" />
+            <marker date="1480769773031" expanded="true" signature="8842:8882" ph="Select * fro... categorie" />
+            <marker date="1480769773031" expanded="true" signature="9609:9642" ph="Select * fro... portion" />
+            <marker date="1480769773031" expanded="true" signature="10441:10464" ph="Select * fro... categorie" />
+            <marker date="1480769773031" expanded="true" signature="11128:11149" ph="Select * fro... portion" />
+            <marker date="1480769773031" expanded="true" signature="11920:11960" ph="Select * fro... categorie" />
           </folding>
         </state>
       </provider>
@@ -1237,7 +1266,7 @@
             <element signature="method#disconnect#0;class#bdd#0" expanded="false" />
             <element signature="docComment;method#getResultOf#0;class#bdd#0" expanded="false" />
             <element signature="method#getResultOf#0;class#bdd#0" expanded="false" />
-            <element signature="method#remplirDB#0;class#bdd#0" expanded="false" />
+            <element signature="method#saveDB#0;class#bdd#0" expanded="false" />
             <element signature="method#showAllCategories#0;class#bdd#0" expanded="false" />
             <element signature="method#removePortion#0;class#bdd#0" expanded="false" />
             <element signature="method#removeCategorie#0;class#bdd#0" expanded="false" />
@@ -1247,17 +1276,18 @@
             <element signature="method#getCategories#0;class#bdd#0" expanded="false" />
             <element signature="method#getPortions#0;class#bdd#0" expanded="false" />
             <element signature="method#getId#0;class#bdd#0" expanded="false" />
-            <marker date="1480725129624" expanded="true" signature="3795:3848" ph="INSERT INTO categorie... " />
-            <marker date="1480725129624" expanded="true" signature="4484:4538" ph="INSERT INTO portion... " />
-            <marker date="1480725129624" expanded="true" signature="5077:5100" ph="Select * fro... categorie" />
-            <marker date="1480725129624" expanded="true" signature="6242:6274" ph="DELETE FROM " />
-            <marker date="1480725129624" expanded="true" signature="6938:6977" ph="DELETE FROM " />
-            <marker date="1480725129624" expanded="true" signature="7664:7704" ph="Select * fro... categorie" />
-            <marker date="1480725129624" expanded="true" signature="8593:8633" ph="Select * fro... categorie" />
-            <marker date="1480725129624" expanded="true" signature="9360:9393" ph="Select * fro... portion" />
-            <marker date="1480725129624" expanded="true" signature="10192:10215" ph="Select * fro... categorie" />
-            <marker date="1480725129624" expanded="true" signature="10879:10900" ph="Select * fro... portion" />
-            <marker date="1480725129624" expanded="true" signature="11671:11711" ph="Select * fro... categorie" />
+            <marker date="1480769773031" expanded="false" signature="3855:4559" ph="{...}" />
+            <marker date="1480769773031" expanded="true" signature="4044:4097" ph="INSERT INTO categorie... " />
+            <marker date="1480769773031" expanded="true" signature="4733:4787" ph="INSERT INTO portion... " />
+            <marker date="1480769773031" expanded="true" signature="5326:5349" ph="Select * fro... categorie" />
+            <marker date="1480769773031" expanded="true" signature="6491:6523" ph="DELETE FROM " />
+            <marker date="1480769773031" expanded="true" signature="7187:7226" ph="DELETE FROM " />
+            <marker date="1480769773031" expanded="true" signature="7913:7953" ph="Select * fro... categorie" />
+            <marker date="1480769773031" expanded="true" signature="8842:8882" ph="Select * fro... categorie" />
+            <marker date="1480769773031" expanded="true" signature="9609:9642" ph="Select * fro... portion" />
+            <marker date="1480769773031" expanded="true" signature="10441:10464" ph="Select * fro... categorie" />
+            <marker date="1480769773031" expanded="true" signature="11128:11149" ph="Select * fro... portion" />
+            <marker date="1480769773031" expanded="true" signature="11920:11960" ph="Select * fro... categorie" />
           </folding>
         </state>
       </provider>
@@ -1327,7 +1357,7 @@
             <element signature="method#disconnect#0;class#bdd#0" expanded="false" />
             <element signature="docComment;method#getResultOf#0;class#bdd#0" expanded="false" />
             <element signature="method#getResultOf#0;class#bdd#0" expanded="false" />
-            <element signature="method#remplirDB#0;class#bdd#0" expanded="false" />
+            <element signature="method#saveDB#0;class#bdd#0" expanded="false" />
             <element signature="method#showAllCategories#0;class#bdd#0" expanded="false" />
             <element signature="method#removePortion#0;class#bdd#0" expanded="false" />
             <element signature="method#removeCategorie#0;class#bdd#0" expanded="false" />
@@ -1337,17 +1367,18 @@
             <element signature="method#getCategories#0;class#bdd#0" expanded="false" />
             <element signature="method#getPortions#0;class#bdd#0" expanded="false" />
             <element signature="method#getId#0;class#bdd#0" expanded="false" />
-            <marker date="1480725129624" expanded="true" signature="3795:3848" ph="INSERT INTO categorie... " />
-            <marker date="1480725129624" expanded="true" signature="4484:4538" ph="INSERT INTO portion... " />
-            <marker date="1480725129624" expanded="true" signature="5077:5100" ph="Select * fro... categorie" />
-            <marker date="1480725129624" expanded="true" signature="6242:6274" ph="DELETE FROM " />
-            <marker date="1480725129624" expanded="true" signature="6938:6977" ph="DELETE FROM " />
-            <marker date="1480725129624" expanded="true" signature="7664:7704" ph="Select * fro... categorie" />
-            <marker date="1480725129624" expanded="true" signature="8593:8633" ph="Select * fro... categorie" />
-            <marker date="1480725129624" expanded="true" signature="9360:9393" ph="Select * fro... portion" />
-            <marker date="1480725129624" expanded="true" signature="10192:10215" ph="Select * fro... categorie" />
-            <marker date="1480725129624" expanded="true" signature="10879:10900" ph="Select * fro... portion" />
-            <marker date="1480725129624" expanded="true" signature="11671:11711" ph="Select * fro... categorie" />
+            <marker date="1480769773031" expanded="false" signature="3855:4559" ph="{...}" />
+            <marker date="1480769773031" expanded="true" signature="4044:4097" ph="INSERT INTO categorie... " />
+            <marker date="1480769773031" expanded="true" signature="4733:4787" ph="INSERT INTO portion... " />
+            <marker date="1480769773031" expanded="true" signature="5326:5349" ph="Select * fro... categorie" />
+            <marker date="1480769773031" expanded="true" signature="6491:6523" ph="DELETE FROM " />
+            <marker date="1480769773031" expanded="true" signature="7187:7226" ph="DELETE FROM " />
+            <marker date="1480769773031" expanded="true" signature="7913:7953" ph="Select * fro... categorie" />
+            <marker date="1480769773031" expanded="true" signature="8842:8882" ph="Select * fro... categorie" />
+            <marker date="1480769773031" expanded="true" signature="9609:9642" ph="Select * fro... portion" />
+            <marker date="1480769773031" expanded="true" signature="10441:10464" ph="Select * fro... categorie" />
+            <marker date="1480769773031" expanded="true" signature="11128:11149" ph="Select * fro... portion" />
+            <marker date="1480769773031" expanded="true" signature="11920:11960" ph="Select * fro... categorie" />
           </folding>
         </state>
       </provider>
@@ -1434,7 +1465,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/Application/img/portion.png" />
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="952">
+        <state relative-caret-position="1156">
           <caret line="68" column="33" selection-start-line="68" selection-start-column="33" selection-end-line="68" selection-end-column="33" />
           <folding />
         </state>
@@ -1444,9 +1475,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#2448#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1454,109 +1483,20 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-212">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#11251#0" expanded="true" />
-            <element signature="method#bdd#0;class#bdd#0" expanded="false" />
-            <element signature="method#connect#0;class#bdd#0" expanded="false" />
-            <element signature="method#disconnect#0;class#bdd#0" expanded="false" />
-            <element signature="method#getResultOf#0;class#bdd#0" expanded="false" />
-            <element signature="method#updateValue#0;class#bdd#0" expanded="false" />
-            <element signature="method#remplirDB#0;class#bdd#0" expanded="false" />
-            <element signature="method#addCategorie#0;class#bdd#0" expanded="false" />
-            <element signature="method#showAllCategories#0;class#bdd#0" expanded="false" />
-            <element signature="method#removePortion#0;class#bdd#0" expanded="false" />
-            <element signature="method#removeCategorie#0;class#bdd#0" expanded="false" />
-            <element signature="method#showCategorie#0;class#bdd#0" expanded="false" />
-            <element signature="method#existCategorie#0;class#bdd#0" expanded="false" />
-            <element signature="method#existPortion#0;class#bdd#0" expanded="false" />
-            <element signature="method#getCategories#0;class#bdd#0" expanded="false" />
-            <element signature="method#getPortions#0;class#bdd#0" expanded="false" />
-            <element signature="method#getId#0;class#bdd#0" expanded="false" />
-            <marker date="1480725737873" expanded="true" signature="3281:3334" ph="INSERT INTO categorie... " />
-            <marker date="1480725737873" expanded="true" signature="4369:4392" ph="Select * fro... categorie" />
-            <marker date="1480725737873" expanded="true" signature="5453:5485" ph="DELETE FROM " />
-            <marker date="1480725737873" expanded="true" signature="6022:6061" ph="DELETE FROM " />
-            <marker date="1480725737873" expanded="true" signature="6624:6664" ph="Select * fro... categorie" />
-            <marker date="1480725737873" expanded="true" signature="7502:7542" ph="Select * fro... categorie" />
-            <marker date="1480725737873" expanded="true" signature="8724:8757" ph="Select * fro... portion" />
-            <marker date="1480725737873" expanded="true" signature="9985:10008" ph="Select * fro... categorie" />
-            <marker date="1480725737873" expanded="true" signature="10666:10687" ph="Select * fro... portion" />
-            <marker date="1480725737873" expanded="true" signature="11411:11451" ph="Select * fro... categorie" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/db/data.sql">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="456">
+        <state relative-caret-position="476">
           <caret line="28" column="59" selection-start-line="28" selection-start-column="59" selection-end-line="28" selection-end-column="59" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Application/SQLite/bdd.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="171" column="32" selection-start-line="171" selection-start-column="32" selection-end-line="171" selection-end-column="32" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#bdd#0;class#bdd#0" expanded="false" />
-            <element signature="docComment;method#connect#0;class#bdd#0" expanded="false" />
-            <element signature="method#connect#0;class#bdd#0" expanded="false" />
-            <element signature="docComment;method#disconnect#0;class#bdd#0" expanded="false" />
-            <element signature="method#disconnect#0;class#bdd#0" expanded="false" />
-            <element signature="docComment;method#getResultOf#0;class#bdd#0" expanded="false" />
-            <element signature="method#getResultOf#0;class#bdd#0" expanded="false" />
-            <element signature="method#remplirDB#0;class#bdd#0" expanded="false" />
-            <element signature="method#showAllCategories#0;class#bdd#0" expanded="false" />
-            <element signature="method#removePortion#0;class#bdd#0" expanded="false" />
-            <element signature="method#removeCategorie#0;class#bdd#0" expanded="false" />
-            <element signature="method#showCategorie#0;class#bdd#0" expanded="false" />
-            <element signature="method#existCategorie#0;class#bdd#0" expanded="false" />
-            <element signature="method#existPortion#0;class#bdd#0" expanded="false" />
-            <element signature="method#getCategories#0;class#bdd#0" expanded="false" />
-            <element signature="method#getPortions#0;class#bdd#0" expanded="false" />
-            <element signature="method#getId#0;class#bdd#0" expanded="false" />
-            <marker date="1480725129624" expanded="true" signature="3795:3848" ph="INSERT INTO categorie... " />
-            <marker date="1480725129624" expanded="true" signature="4484:4538" ph="INSERT INTO portion... " />
-            <marker date="1480725129624" expanded="true" signature="5077:5100" ph="Select * fro... categorie" />
-            <marker date="1480725129624" expanded="true" signature="6242:6274" ph="DELETE FROM " />
-            <marker date="1480725129624" expanded="true" signature="6938:6977" ph="DELETE FROM " />
-            <marker date="1480725129624" expanded="true" signature="7664:7704" ph="Select * fro... categorie" />
-            <marker date="1480725129624" expanded="true" signature="8593:8633" ph="Select * fro... categorie" />
-            <marker date="1480725129624" expanded="true" signature="9360:9393" ph="Select * fro... portion" />
-            <marker date="1480725129624" expanded="true" signature="10192:10215" ph="Select * fro... categorie" />
-            <marker date="1480725129624" expanded="true" signature="10879:10900" ph="Select * fro... portion" />
-            <marker date="1480725129624" expanded="true" signature="11671:11711" ph="Select * fro... categorie" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Application/Views/categoryControl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="128" column="31" selection-start-line="128" selection-start-column="31" selection-end-line="128" selection-end-column="31" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#categoryControl#0;class#categoryControl#0" expanded="false" />
-            <element signature="method#validateAddCat#0;class#categoryControl#0" expanded="false" />
-            <element signature="e#4421#4422#0" expanded="true" />
-            <element signature="e#4462#4463#0" expanded="true" />
-            <element signature="e#4518#4519#0" expanded="true" />
-            <element signature="e#4559#4560#0" expanded="true" />
-            <element signature="e#4615#4616#0" expanded="true" />
-            <element signature="e#4656#4657#0" expanded="true" />
-            <element signature="method#buildPanelAddCat#0;class#categoryControl#0" expanded="false" />
-            <element signature="method#buildPanelAddPor#0;class#categoryControl#0" expanded="false" />
-            <element signature="method#newCat#0;class#categoryControl#0" expanded="false" />
-            <element signature="method#newPor#0;class#categoryControl#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Application/App.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="117">
+        <state relative-caret-position="952">
           <caret line="268" column="26" selection-start-line="268" selection-start-column="23" selection-end-line="268" selection-end-column="26" />
           <folding>
             <element signature="method#buildWindow#0;class#App#0" expanded="false" />
@@ -1571,7 +1511,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Application/Views/Tree.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
+        <state relative-caret-position="1717">
           <caret line="218" column="18" selection-start-line="218" selection-start-column="18" selection-end-line="218" selection-end-column="18" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1587,21 +1527,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Application/Models/documentGenerator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="45" column="46" selection-start-line="45" selection-start-column="46" selection-end-line="45" selection-end-column="46" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2119#2572#0" expanded="true" />
-            <element signature="e#2571#2572#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Application/Models/portion.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="124">
+        <state relative-caret-position="340">
           <caret line="20" column="27" selection-start-line="20" selection-start-column="27" selection-end-line="20" selection-end-column="27" />
           <folding>
             <element signature="e#916#917#0" expanded="true" />
@@ -1615,6 +1543,69 @@
         <state relative-caret-position="68">
           <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Application/SQLite/bdd.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="223">
+          <caret line="185" column="5" selection-start-line="185" selection-start-column="5" selection-end-line="185" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#bdd#0;class#bdd#0" expanded="false" />
+            <element signature="docComment;method#connect#0;class#bdd#0" expanded="false" />
+            <element signature="method#connect#0;class#bdd#0" expanded="false" />
+            <element signature="docComment;method#disconnect#0;class#bdd#0" expanded="false" />
+            <element signature="method#disconnect#0;class#bdd#0" expanded="false" />
+            <element signature="docComment;method#getResultOf#0;class#bdd#0" expanded="false" />
+            <element signature="method#getResultOf#0;class#bdd#0" expanded="false" />
+            <element signature="method#saveDB#0;class#bdd#0" expanded="false" />
+            <element signature="method#showAllCategories#0;class#bdd#0" expanded="false" />
+            <element signature="method#removePortion#0;class#bdd#0" expanded="false" />
+            <element signature="method#removeCategorie#0;class#bdd#0" expanded="false" />
+            <element signature="method#showCategorie#0;class#bdd#0" expanded="false" />
+            <element signature="method#existCategorie#0;class#bdd#0" expanded="false" />
+            <element signature="method#existPortion#0;class#bdd#0" expanded="false" />
+            <element signature="method#getCategories#0;class#bdd#0" expanded="false" />
+            <element signature="method#getPortions#0;class#bdd#0" expanded="false" />
+            <element signature="method#getId#0;class#bdd#0" expanded="false" />
+            <marker date="1480769773031" expanded="false" signature="3855:4559" ph="{...}" />
+            <marker date="1480769773031" expanded="true" signature="4044:4097" ph="INSERT INTO categorie... " />
+            <marker date="1480769773031" expanded="true" signature="4733:4787" ph="INSERT INTO portion... " />
+            <marker date="1480769773031" expanded="true" signature="5326:5349" ph="Select * fro... categorie" />
+            <marker date="1480769773031" expanded="true" signature="6491:6523" ph="DELETE FROM " />
+            <marker date="1480769773031" expanded="true" signature="7187:7226" ph="DELETE FROM " />
+            <marker date="1480769773031" expanded="true" signature="7913:7953" ph="Select * fro... categorie" />
+            <marker date="1480769773031" expanded="true" signature="8842:8882" ph="Select * fro... categorie" />
+            <marker date="1480769773031" expanded="true" signature="9609:9642" ph="Select * fro... portion" />
+            <marker date="1480769773031" expanded="true" signature="10441:10464" ph="Select * fro... categorie" />
+            <marker date="1480769773031" expanded="true" signature="11128:11149" ph="Select * fro... portion" />
+            <marker date="1480769773031" expanded="true" signature="11920:11960" ph="Select * fro... categorie" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Application/Models/documentGenerator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="457">
+          <caret line="53" column="13" selection-start-line="53" selection-start-column="8" selection-end-line="53" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Application/Views/categoryControl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="149">
+          <caret line="182" column="54" selection-start-line="182" selection-start-column="54" selection-end-line="182" selection-end-column="54" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#categoryControl#0;class#categoryControl#0" expanded="false" />
+            <element signature="method#validateAddCat#0;class#categoryControl#0" expanded="false" />
+            <element signature="method#buildPanelAddCat#0;class#categoryControl#0" expanded="false" />
+            <element signature="method#newCat#0;class#categoryControl#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -180,7 +180,7 @@ public class categoryControl {
         validatePor.setIcon(icon);
         validatePor.setEnabled(false);//because it's empty
         GridBagConstraints c = new GridBagConstraints();
-        portionText.setPreferredSize(new Dimension(500, 200));
+        portionText.setPreferredSize(new Dimension(580, 400));
         //catName.setMinimumSize(new Dimension(50, 400));
         c.fill = GridBagConstraints.BOTH;
         c.gridx = 0;
@@ -216,8 +216,8 @@ public class categoryControl {
 
         d.add(jpAddCat,gbc);
         setDialog(d);
-        d.setLocationRelativeTo(frame);
         d.pack();
+        d.setLocationRelativeTo(frame);
         d.setResizable(true);
         d.setVisible(true);
     }
@@ -258,8 +258,8 @@ public class categoryControl {
         d.add(jpAddPor,gbc);
         setDialog(d);
         //d.add(jpAddPor);
-        d.setLocationRelativeTo(frame);
         d.pack();
+        d.setLocationRelativeTo(frame);
         d.setResizable(true);
         d.setVisible(true);
     }
