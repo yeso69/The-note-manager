@@ -187,10 +187,10 @@ public class Tree {
 
 
     private class MyRenderer extends DefaultTreeCellRenderer {
-        ImageIcon portionIcon = createImageIcon("img/p.png",20);;
-        ImageIcon catOpenIcon = createImageIcon("img/folder-open.png",25);
-        ImageIcon catClosedIcon = createImageIcon("img/folder-close.png",25);
-        ImageIcon rootIcon = createImageIcon("img/house.png",25);
+        ImageIcon portionIcon = createImageIcon("/img/p.png",20);;
+        ImageIcon catOpenIcon = createImageIcon("/img/folder-open.png",25);
+        ImageIcon catClosedIcon = createImageIcon("/img/folder-close.png",25);
+        ImageIcon rootIcon = createImageIcon("/img/house.png",25);
 
         public MyRenderer() {
             if (portionIcon != null && catOpenIcon != null) {

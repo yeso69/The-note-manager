@@ -75,11 +75,11 @@ public class App {
         search = new JLabel("Recherche");
         delete = new JButton("Supprimer");
         GridBagConstraints c = new GridBagConstraints();
-        ImageIcon catIcon = Tree.createImageIcon("img/folder-close.png",25);;
-        ImageIcon porIcon = Tree.createImageIcon("img/p.png",25);;
-        ImageIcon editIcon = Tree.createImageIcon("img/edit.png",25);;
-        ImageIcon fileIcon = Tree.createImageIcon("img/file.png",25);
-        ImageIcon removeIcon = Tree.createImageIcon("img/remove.png",25);
+        ImageIcon catIcon = Tree.createImageIcon("/img/folder-close.png",25);;
+        ImageIcon porIcon = Tree.createImageIcon("/img/p.png",25);;
+        ImageIcon editIcon = Tree.createImageIcon("/img/edit.png",25);;
+        ImageIcon fileIcon = Tree.createImageIcon("/img/file.png",25);
+        ImageIcon removeIcon = Tree.createImageIcon("/img/remove.png",25);
         addCategory.setIcon(catIcon);
         addPortion.setIcon(porIcon);
         generateDoc.setIcon(fileIcon);

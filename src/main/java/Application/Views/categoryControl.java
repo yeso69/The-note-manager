@@ -176,12 +176,13 @@ public class categoryControl {
         portionText = new JTextArea();
         porTitle = new JLabel("Contenu de la portion de texte");
         validatePor = new JButton("Ajouter la portion de texte");
+
         ImageIcon icon = Tree.createImageIcon("img/p.png",20);
         validatePor.setIcon(icon);
         validatePor.setEnabled(false);//because it's empty
         GridBagConstraints c = new GridBagConstraints();
         portionText.setPreferredSize(new Dimension(580, 400));
-        //catName.setMinimumSize(new Dimension(50, 400));
+
         c.fill = GridBagConstraints.BOTH;
         c.gridx = 0;
         c.gridy = 0;
