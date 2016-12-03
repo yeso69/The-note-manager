@@ -1,6 +1,7 @@
 package Application.SQLite;
 
 import Application.Models.categorie;
+import Application.Models.portion;
 
 import java.io.*;
 import java.sql.*;
@@ -168,12 +169,26 @@ public class bdd
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            System.out.println("Ajout de la catégorie : "+cat.getLibelle());
+            System.out.println("Ajout en BDD de la catégorie : "+cat.getLibelle());
         }else
         {
             System.out.println("La catégorie existe déjà !");
         }
 
+    }
+
+    public void addPortion(portion por)
+    {
+            try {
+                PreparedStatement preparedStatement = connection
+                        .prepareStatement("INSERT INTO portion (message,id_categorie) VALUES(?,?)");
+                preparedStatement.setString(1, por.getText());
+                preparedStatement.setInt(2, por.getIdCat());
+                preparedStatement.executeUpdate();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            System.out.println("Ajout en BDD de la portion : "+por.toString());
     }
 
     public void showAllCategories()
@@ -202,6 +217,27 @@ public class bdd
         catch(Exception e)
         {
             e.printStackTrace();
+        }
+    }
+
+    public void removePortion(int id)
+    {
+        if(!existPortion(id))
+        {
+            System.out.println("La portion avec l'id "+id+" n'existe pas !");
+        }
+        else
+        {
+            try {
+                PreparedStatement preparedStatement = connection
+                        .prepareStatement("DELETE FROM portion WHERE id = ?");
+                preparedStatement.setInt(1, id);
+                preparedStatement.executeUpdate();
+            } catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            System.out.println("Supression de la portion ayant pour id: "+id);
         }
     }
 
@@ -283,6 +319,31 @@ public class bdd
         return res;
     }
 
+    public boolean existPortion(int id)
+    {
+        boolean res = false;
+        try {
+
+            java.sql.PreparedStatement pstatement = connection.prepareStatement("Select * from portion WHERE id= ?");
+            pstatement.setInt(1,id);
+
+            try (ResultSet rs = pstatement.executeQuery()) {
+                // Only expecting a single result
+                if (rs.next()) {
+                    boolean found = rs.getBoolean(1); // "found" column
+                    if (found) {
+                        res = true;
+                    } else {
+                        res = false;
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
+
     public ArrayList<categorie> getCategories() {
         java.sql.ResultSet rs = null;
         ArrayList<categorie> cats = new ArrayList<categorie>();
@@ -300,6 +361,25 @@ public class bdd
             e.printStackTrace();
         }
         return cats;
+    }
+
+    public ArrayList<portion> getPortions() {
+        java.sql.ResultSet rs = null;
+        ArrayList<portion> portions = new ArrayList<portion>();
+        try {
+            java.sql.PreparedStatement pstatement = connection.prepareStatement("Select * from portion");
+            rs = pstatement.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt(1);
+                String text = rs.getString(2);
+                int idCat = rs.getInt(3);
+                portions.add(new portion(id, text, idCat));
+            }
+            rs.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return portions;
     }
 
     public int getId(String lib){
@@ -327,4 +407,6 @@ public class bdd
         }
         return id;
     }
+
+
 }
