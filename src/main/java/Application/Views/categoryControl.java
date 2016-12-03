@@ -151,7 +151,7 @@ public class categoryControl {
         catName = new JTextField();
         catTitle = new JLabel("Libéllé de la catégorie");
         validateCat = new JButton("Ajouter la catégorie");
-        ImageIcon icon = Tree.createImageIcon("img/folder-close.png",20);
+        ImageIcon icon = Tree.createImageIcon("/img/folder-close.png",20);
         validateCat.setIcon(icon);
         validateCat.setEnabled(false);//because it's empty
         GridBagConstraints c = new GridBagConstraints();
@@ -177,7 +177,7 @@ public class categoryControl {
         porTitle = new JLabel("Contenu de la portion de texte");
         validatePor = new JButton("Ajouter la portion de texte");
 
-        ImageIcon icon = Tree.createImageIcon("img/p.png",20);
+        ImageIcon icon = Tree.createImageIcon("/img/p.png",20);
         validatePor.setIcon(icon);
         validatePor.setEnabled(false);//because it's empty
         GridBagConstraints c = new GridBagConstraints();

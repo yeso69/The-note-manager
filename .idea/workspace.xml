@@ -3,10 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="7dafa4de-0fd5-45c5-af46-166b43897725" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/test.db" afterPath="$PROJECT_DIR$/db/test.db" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/Application/SQLite/bdd.class" afterPath="$PROJECT_DIR$/target/classes/Application/SQLite/bdd.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Application/App.java" afterPath="$PROJECT_DIR$/src/main/java/Application/App.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Application/Views/Tree.java" afterPath="$PROJECT_DIR$/src/main/java/Application/Views/Tree.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Application/Views/categoryControl.java" afterPath="$PROJECT_DIR$/src/main/java/Application/Views/categoryControl.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -79,11 +76,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="App.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="App.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Application/App.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="185">
-              <caret line="81" column="54" selection-start-line="81" selection-start-column="54" selection-end-line="81" selection-end-column="54" />
+            <state relative-caret-position="117">
+              <caret line="78" column="58" selection-start-line="78" selection-start-column="55" selection-end-line="78" selection-end-column="58" />
               <folding>
                 <element signature="method#buildWindow#0;class#App#0" expanded="false" />
                 <element signature="method#treeListeners#0;class#App#0" expanded="false" />
@@ -140,18 +137,17 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="categoryControl.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="categoryControl.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/Application/Views/categoryControl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="765">
-              <caret line="173" column="35" selection-start-line="173" selection-start-column="35" selection-end-line="173" selection-end-column="35" />
+            <state relative-caret-position="219">
+              <caret line="153" column="48" selection-start-line="153" selection-start-column="48" selection-end-line="153" selection-end-column="48" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#categoryControl#0;class#categoryControl#0" expanded="false" />
                 <element signature="method#validateAddPor#0;class#categoryControl#0" expanded="false" />
                 <element signature="method#validateAddCat#0;class#categoryControl#0" expanded="false" />
                 <element signature="method#setTextListeners#0;class#categoryControl#0" expanded="false" />
-                <element signature="method#buildPanelAddCat#0;class#categoryControl#0" expanded="false" />
                 <element signature="method#buildPanelAddPor#0;class#categoryControl#0" expanded="false" />
                 <element signature="method#newCat#0;class#categoryControl#0" expanded="false" />
                 <element signature="method#newPor#0;class#categoryControl#0" expanded="false" />
@@ -223,9 +219,9 @@
         <option value="$PROJECT_DIR$/src/main/java/Application/Models/portion.java" />
         <option value="$PROJECT_DIR$/src/main/java/Application/SQLite/bdd.java" />
         <option value="$PROJECT_DIR$/src/main/java/Application/Models/documentGenerator.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Application/Views/categoryControl.java" />
         <option value="$PROJECT_DIR$/src/main/java/Application/Views/Tree.java" />
         <option value="$PROJECT_DIR$/src/main/java/Application/App.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Application/Views/categoryControl.java" />
       </list>
     </option>
   </component>
@@ -972,7 +968,7 @@
       <workItem from="1480768427485" duration="2644000" />
       <workItem from="1480773698534" duration="202000" />
       <workItem from="1480781863050" duration="1755000" />
-      <workItem from="1480796375576" duration="600000" />
+      <workItem from="1480796375576" duration="964000" />
     </task>
     <task id="LOCAL-00001" summary="Ajout structure projet + catégorie. SQL Fonctionne">
       <created>1479897374492</created>
@@ -1009,11 +1005,18 @@
       <option name="project" value="LOCAL" />
       <updated>1480770455407</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="--&gt; Correction du bug d'affichage des icones,">
+      <created>1480797106620</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1480797106620</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="107946000" />
+    <option name="totallyTimeSpent" value="108310000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -1116,7 +1119,8 @@
     <MESSAGE value="Création de l' interface graphique principale&#10;&#10;Class Tree permet de construire l'arborescance des catégories ainsi que sa gestion&#10;&#10;--&gt; Création de l'arbre des catégorie en relation avec la BDD&#10;--&gt; Fonctionalité d'ajout de catégorie en graphique + BDD&#10;--&gt; Fonctionalité de suppression en graphique +BDD&#10;&#10;Contrôle  de l'intégrité des données: &#10;--&gt; Impossible d'ajouter plus de 4 niveaux de profondeur (bouton ajouter desactivé)&#10;--&gt; Le bouton supprimé n'est activé que lorsqu'un élément est selectionné (sauf la racine)&#10;--&gt; Impossible d'ajouter une catégorie vide (bouton désactivé)&#10;--&gt; La suppression d'une catégorie rattache ses enfants à sa catégorie parent" />
     <MESSAGE value="Grande avancée du projet !!!&#10;&#10;--&gt; Création de la classe portion&#10;--&gt; Chargement des portions depuis la BDD au lancement de l'appli&#10;--&gt; Ajout/Suppression des portions&#10;--&gt; Création de la classe documentGenerator : les bases de la génération d'un document sont en place&#10;--&gt; &#10;&#10;Améliorations&#10;--&gt; Prise en charge de la selection multiple sur l'arbre&#10;--&gt; La génération de document n'est permise que lorsque tous les éléments sélectionés sont des portions de texte&#10;&#10;Optimisations&#10;--&gt; Fix des quelques nullPointerExceptions quand aucun noeud est sélectionné&#10;--&gt; Optimisation des requêtes BDD (moins d'appels)&#10;--&gt; Factorisation du code&#10;--&gt; Amélioration du  contrôle d'intégrité des données&#10;&#10;Refonte de l'interface&#10;&#10;--&gt; Changement de dispostion des éléments&#10;--&gt; Le contenu de la fenêtre prend désormais tout l'espace disponible&#10;--&gt; Ajout des icones sur les boutons &#10;--&gt; Ajout d'icones spécifiques pour les catégories &amp; portions pour les différiencier visuellement&#10;--&gt; Polices et texte adaptés pour un meilleur rendu (les catégories en gras et pas les portions)&#10;--&gt; Meilleur rendu visuel pour les popup d'ajout de catégorie et portion&#10;&#10;Etc etc  je me souviens pas de tout ^^" />
     <MESSAGE value="--&gt; Affichage centré des fenetres d'ajout de catégorie/portion" />
-    <option name="LAST_COMMIT_MESSAGE" value="--&gt; Affichage centré des fenetres d'ajout de catégorie/portion" />
+    <MESSAGE value="--&gt; Correction du bug d'affichage des icones," />
+    <option name="LAST_COMMIT_MESSAGE" value="--&gt; Correction du bug d'affichage des icones," />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1477,6 +1481,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1571,42 +1576,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Application/Views/categoryControl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="765">
-          <caret line="173" column="35" selection-start-line="173" selection-start-column="35" selection-end-line="173" selection-end-column="35" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#categoryControl#0;class#categoryControl#0" expanded="false" />
-            <element signature="method#validateAddPor#0;class#categoryControl#0" expanded="false" />
-            <element signature="method#validateAddCat#0;class#categoryControl#0" expanded="false" />
-            <element signature="method#setTextListeners#0;class#categoryControl#0" expanded="false" />
-            <element signature="method#buildPanelAddCat#0;class#categoryControl#0" expanded="false" />
-            <element signature="method#buildPanelAddPor#0;class#categoryControl#0" expanded="false" />
-            <element signature="method#newCat#0;class#categoryControl#0" expanded="false" />
-            <element signature="method#newPor#0;class#categoryControl#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/test.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Application/Models/documentGenerator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="10" column="3" selection-start-line="10" selection-start-column="3" selection-end-line="10" selection-end-column="3" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#documentGenerator#0;class#documentGenerator#0" expanded="false" />
-            <element signature="method#buildWindow#0;class#documentGenerator#0" expanded="false" />
-            <element signature="method#buildInterface#0;class#documentGenerator#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1630,14 +1604,44 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Application/App.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
-          <caret line="81" column="54" selection-start-line="81" selection-start-column="54" selection-end-line="81" selection-end-column="54" />
+        <state relative-caret-position="117">
+          <caret line="78" column="58" selection-start-line="78" selection-start-column="55" selection-end-line="78" selection-end-column="58" />
           <folding>
             <element signature="method#buildWindow#0;class#App#0" expanded="false" />
             <element signature="method#treeListeners#0;class#App#0" expanded="false" />
             <element signature="method#addCategoryListener#0;class#App#0" expanded="false" />
             <element signature="method#deleteListener#0;class#App#0" expanded="false" />
             <element signature="method#generateDocumentListener#0;class#App#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Application/Models/documentGenerator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="10" column="3" selection-start-line="10" selection-start-column="3" selection-end-line="10" selection-end-column="3" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#documentGenerator#0;class#documentGenerator#0" expanded="false" />
+            <element signature="method#buildWindow#0;class#documentGenerator#0" expanded="false" />
+            <element signature="method#buildInterface#0;class#documentGenerator#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Application/Views/categoryControl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="219">
+          <caret line="153" column="48" selection-start-line="153" selection-start-column="48" selection-end-line="153" selection-end-column="48" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#categoryControl#0;class#categoryControl#0" expanded="false" />
+            <element signature="method#validateAddPor#0;class#categoryControl#0" expanded="false" />
+            <element signature="method#validateAddCat#0;class#categoryControl#0" expanded="false" />
+            <element signature="method#setTextListeners#0;class#categoryControl#0" expanded="false" />
+            <element signature="method#buildPanelAddPor#0;class#categoryControl#0" expanded="false" />
+            <element signature="method#newCat#0;class#categoryControl#0" expanded="false" />
+            <element signature="method#newPor#0;class#categoryControl#0" expanded="false" />
           </folding>
         </state>
       </provider>
