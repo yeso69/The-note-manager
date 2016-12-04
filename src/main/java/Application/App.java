@@ -52,14 +52,16 @@ public class App {
 
 
         catControl = new categoryControl(db,catTree);
-
+        frame.setMinimumSize(new Dimension(600,400));
+        frame.pack();
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 
     private void buildWindow() {
         frame = new JFrame("OSZ gen");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(600, 600);
+        //frame.setSize(600, 500);
         //this.setResizable(false);
         frame.setLocationRelativeTo(null);
     }
@@ -77,19 +79,20 @@ public class App {
         GridBagConstraints c = new GridBagConstraints();
         ImageIcon catIcon = Tree.createImageIcon("/img/folder-close.png",25);;
         ImageIcon porIcon = Tree.createImageIcon("/img/p.png",25);;
+        ImageIcon editIcon = Tree.createImageIcon("/img/edit.png",25);;
         ImageIcon fileIcon = Tree.createImageIcon("/img/file.png",25);
-        ImageIcon removeIcon = Tree.createImageIcon("/img/remove.png",25);
+        ImageIcon removeIcon = Tree.createImageIcon("/img/trash.png",25);
         addCategory.setIcon(catIcon);
         addPortion.setIcon(porIcon);
         generateDoc.setIcon(fileIcon);
         delete.setIcon(removeIcon);
+        generateDoc.setEnabled(false);
 
-        // **** add here:
 
-        //c.weighty = 1.0;
+
+
         c.gridx = 0;
         c.gridy = 0;
-        //jp.add(addCategory, c);
 
 
         //BUTTONS
@@ -100,9 +103,10 @@ public class App {
         pContainer.add(addPortion);
         //pContainer.add(generateDoc);
 
-        generateDoc.setEnabled(false);
-        c.gridy = 3; c.gridx = 0;
-        c.gridwidth = 1; c.gridheight = 1;
+        c.gridy = 3;
+        c.gridx = 0;
+        c.gridwidth = 1;
+        c.gridheight = 1;
         gridBagLayout.setConstraints(pContainer, c);
         jp.add(pContainer,c);
 
@@ -134,24 +138,21 @@ public class App {
         jp.add(delete,c);
         delete.setEnabled(false);
 
-        //FRAME constraints to display WELL
-        frame.setLayout(new GridBagLayout());
+        //FRAME constraints to display WELL with SCROLLBAR
+        JScrollPane scroll = new JScrollPane(jp);
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.anchor=GridBagConstraints.NORTHWEST;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.weightx = 1;
-        gbc.weighty = 1;
+        frame.setLayout(new GridBagLayout());
         gbc.gridx = 0;
-        gbc.gridy= 0;
+        gbc.gridy = 0;
 
-    jp.setForeground(Color.BLUE);
-        frame.add(jp,gbc);
+        gbc.weightx = 1 ;
+        gbc.weighty = 1 ;
 
+        gbc.fill = GridBagConstraints.BOTH ;
+        gbc.anchor=GridBagConstraints.NORTHWEST;
 
-//        frame.setLayout(new GridBagLayout());
-//        GridBagConstraints gbc = new GridBagConstraints();
-//        gbc.anchor=GridBagConstraints.NORTHWEST;
-//        frame.add(jp,gbc);
+        scroll.getVerticalScrollBar().setValue(0);
+        frame.add(scroll,gbc);
     }
 
     private void treeListeners() {

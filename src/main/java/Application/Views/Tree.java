@@ -54,7 +54,7 @@ public class Tree {
         int treeSelectedRows[] = {0};//ROOT IS SELECTED WHEN TREE IS CREATED
         tree.setSelectionRows(treeSelectedRows);
         tree.setCellRenderer(new MyRenderer());
-
+        expandAllNodes(tree, 0, tree.getRowCount());
         //showTree(root);
     }
 
@@ -156,9 +156,7 @@ public class Tree {
 
         int porId = por.getId();
         db.removePortion(porId);//Delete the category
-        root.removeAllChildren();//Remove the old tree model except root we need to keep
-        buildTree();//Build The tree with the updated ids
-        model.reload(root);//refresh the tree
+        refresh();
     }
 
     public void delCatNode(DefaultMutableTreeNode catNode){
@@ -178,6 +176,7 @@ public class Tree {
         root.removeAllChildren();//Remove the old tree model except root we need to keep
         buildTree();//Build The tree with the updated ids
         model.reload(root);//refresh the tree
+        expandAllNodes(tree,0,tree.getRowCount());
     }
 
     private DefaultMutableTreeNode addChilds(categorie cat, ArrayList<categorie> cats, ArrayList<portion> portions, DefaultMutableTreeNode papa, int level) {
@@ -273,6 +272,16 @@ public class Tree {
             }
         }
 
+    }
+
+    private void expandAllNodes(JTree tree, int startingIndex, int rowCount){
+        for(int i=startingIndex;i<rowCount;++i){
+            tree.expandRow(i);
+        }
+
+        if(tree.getRowCount()!=rowCount){
+            expandAllNodes(tree, rowCount, tree.getRowCount());
+        }
     }
 
     private class MyRenderer extends DefaultTreeCellRenderer {
