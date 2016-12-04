@@ -13,6 +13,11 @@ public class portion {
         this.text = text;
         this.idCat = idCat;
     }
+    @Override
+    public portion clone(){
+        return new portion(this.id,this.text,this.idCat);
+    }
+
 
 
     @Override //function used by the Jtree to set a node title

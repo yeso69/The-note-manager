@@ -72,12 +72,13 @@ public class categoryControl {
             public void actionPerformed(ActionEvent e)
             {
                 newCat = catName.getText();
-                if (db.existCategorie(newCat)){
+                if (db.existCategorie(newCat)){ //Vérification de l'unicité du libélé
                     JOptionPane.showMessageDialog(null,
                             "Une catégorie du même nom existe déjà. Veuillez en saisir une autre.", "Création impossible",
                             JOptionPane.ERROR_MESSAGE);
+                    System.out.println("Existe déja !");
                 }
-                if(!db.existCategorie(newCat)){//Vérification de l'unicité du libélé
+                else {
                     int idParent = 0;
                     if(!parentTitle.equals("")){
                         idParent = db.getId(parentTitle);
@@ -85,15 +86,11 @@ public class categoryControl {
                     System.out.println("ID du futur papa "+idParent);
                     categorie cat = new categorie(0,newCat,idParent);
                     db.addCategorie(cat);//Add the new category to the db
-                    cat.setId(db.getId(newCat));//getting and setting the real id from db after insertion
-                    tree.addCatNode(parentTitle, cat);//Add the new category to the tree
-                    //db.showAllCategories();
+                    tree.refresh();
                     d.dispose();//Close dialog
                     catName.setText("");//clear textfield
                 }
-                else{
-                    System.out.println("Existe déja !");
-                }
+
             }
         });
 

@@ -77,7 +77,6 @@ public class App {
         GridBagConstraints c = new GridBagConstraints();
         ImageIcon catIcon = Tree.createImageIcon("/img/folder-close.png",25);;
         ImageIcon porIcon = Tree.createImageIcon("/img/p.png",25);;
-        ImageIcon editIcon = Tree.createImageIcon("/img/edit.png",25);;
         ImageIcon fileIcon = Tree.createImageIcon("/img/file.png",25);
         ImageIcon removeIcon = Tree.createImageIcon("/img/remove.png",25);
         addCategory.setIcon(catIcon);
@@ -125,8 +124,9 @@ public class App {
 
 
 
-        catTree = new Tree(db);
+        catTree = new Tree(db,null,null,null);
         tree = catTree.getTree();
+        System.out.println(tree.toString());
         c.gridy++;
         jp.add(tree, c);
 
@@ -219,21 +219,24 @@ public class App {
                     System.out.println("Plusieurs noeuds selectionés !");
                     addCategory.setEnabled(false);
                     addPortion.setEnabled(false);
+
                     //CREATING ARRAYLIST OF ALL SELECTED NODES
-                    boolean allPortions = true;
+                    boolean rootIn = false;
                     for(int i =0; i<treePaths.length;i++){
-                        //System.out.println(treePaths[i].getPathComponent(i));
                         DefaultMutableTreeNode node = (DefaultMutableTreeNode)treePaths[i].getLastPathComponent();
-                        //CHECKING IF ALL NODES ARE PORTIONS OR NOT
-                        if(node.getUserObject() instanceof portion == false){
-                            allPortions = false;
+                        //CHECKING IF root is in the selected nodes
+                        if(node.isRoot()){
                             generateDoc.setEnabled(false);
+                            rootIn=true;
+                            break;
                         }
                         System.out.println(node.getUserObject());
                     }
-                    if(allPortions){
+                    if(!rootIn){
                         generateDoc.setEnabled(true);
                     }
+                    //HERE ALL SELECTED NODES ARE CATS AND PORTIONS (not root)
+
 
                 }
 
@@ -300,13 +303,29 @@ public class App {
                 //Getting paths of all selected nodes
                 TreePath[] treePaths = tree.getSelectionPaths();
                 ArrayList<DefaultMutableTreeNode> nodes = new ArrayList<DefaultMutableTreeNode>();
+                ArrayList<categorie> cats = new ArrayList<categorie>();
+                ArrayList<portion> portions = new ArrayList<portion>();
+
+                //temporary variables
+                categorie cat;
+                portion por;
                 for(int i =0; i<treePaths.length;i++){
                     //System.out.println(treePaths[i].getPathComponent(i));
                     DefaultMutableTreeNode node = (DefaultMutableTreeNode)treePaths[i].getLastPathComponent();
-                    System.out.println(node.getUserObject());
-                    nodes.add(node);
+                    if(node.getUserObject() instanceof categorie){
+                        cat = (categorie)node.getUserObject();
+                        ///cat = cat.clone();//we clone the categorie because we will modify it on doc genation
+                        cats.add(cat);
+                    }
+                    else if(node.getUserObject() instanceof portion){
+                            por = (portion) node.getUserObject();
+                            ///cat = cat.clone();//we clone the categorie because we will modify it on doc genation
+                            portions.add(por);
+                            //System.out.println("Portion "+por+"!!!!!!!!!!!!!!!!!!!!!!!");
+                    }
+
                 }
-                new documentGenerator(nodes, frame);
+                new documentGenerator(cats,portions, frame);
             }
         });
     }

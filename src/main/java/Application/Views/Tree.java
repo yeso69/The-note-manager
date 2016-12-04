@@ -18,22 +18,44 @@ import java.util.Iterator;
 public class Tree {
 
     protected DefaultMutableTreeNode root;
-    protected bdd db;
+    protected bdd db = null;
     protected JTree tree;
     protected Font fontCat;
     protected Font fontPortion;
+    ArrayList<categorie> cats = null;
+    ArrayList<portion> portions = null;
+    protected ArrayList<categorie> bastardCats;
+    protected ArrayList<portion> bastardPors;
 
-    public Tree(bdd bdd) {
+
+    public Tree(bdd bdd, ArrayList<categorie> cats, ArrayList<portion> portions,DefaultMutableTreeNode root) {
         this.db = bdd;
+
+        if (this.db != null){//Si la bdd a été donnée on recupère les noeuds depuis la BDD
+            this.cats = db.getCategories();
+            this.portions = db.getPortions();
+            buildTree();
+        }
+        else{
+            this.root = root;
+            this.portions = portions;
+            this.cats = cats;
+            buildTree(this.cats,this.portions,this.root);
+            addBastardsToRoot();
+            System.out.println();
+        }
+
         setDesign();
-        buildTree();
-        tree = new JTree(root);
+        tree = new JTree(this.root);
+
         setListener();
         //On permet la selection multiple de noeuds pour la génération de documents
         tree.getSelectionModel().setSelectionMode(TreeSelectionModel.DISCONTIGUOUS_TREE_SELECTION);
         int treeSelectedRows[] = {0};//ROOT IS SELECTED WHEN TREE IS CREATED
         tree.setSelectionRows(treeSelectedRows);
         tree.setCellRenderer(new MyRenderer());
+
+        //showTree(root);
     }
 
     /** Returns an ImageIcon, or null if the path was invalid. */
@@ -51,6 +73,12 @@ public class Tree {
             return null;
         }
 
+    }
+
+    public void showTree(DefaultMutableTreeNode node){
+        for (int i=0; i< node.getChildCount();i++){
+            System.out.println("Noeud "+node.toString()+"Pere de "+node.getChildAt(i).toString());
+        }
     }
 
     public JTree getTree(){
@@ -76,7 +104,11 @@ public class Tree {
             root = new DefaultMutableTreeNode(racine);
         }
         addChilds(racine, cats, portions, root, 1);
+    }
 
+    private void buildTree(ArrayList<categorie> cats, ArrayList<portion> portions, DefaultMutableTreeNode root){
+        categorie racine =(categorie)root.getUserObject();
+        addChilds(racine, cats, portions, root, 1);
 
     }
 
@@ -104,7 +136,7 @@ public class Tree {
     //Function that determines if node is portion or category and treat with delPortion and delCat
     public void deleteNode(DefaultMutableTreeNode node) {
         if (JOptionPane.showConfirmDialog(null, "Voulez-vous vraiment supprimer cet élément ?", "Suppression",
-        JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
             // yes option
             //if node is a category call category delete function
             if (node.getUserObject() instanceof categorie) {
@@ -154,27 +186,34 @@ public class Tree {
             DefaultMutableTreeNode child; //child node
             categorie currentCat;
             portion currentPortion;
+            boolean bastard = true;
 
-            for(Iterator<portion> iter2 = portions.iterator(); iter2.hasNext();){
-                currentPortion = iter2.next();
-                if(currentPortion.getIdCat() == id){
+
+            for(Iterator<portion> iter = portions.iterator(); iter.hasNext();){
+                currentPortion = iter.next();
+                if(currentPortion.getIdCat() == id){//If cat of this portion is found
                     //Creating the new node for this portion
                     child = new DefaultMutableTreeNode(currentPortion, false);//false because it does not allow children
                     child.setUserObject(currentPortion);
-                    //child.
+                    System.out.println("Neoud: "+currentPortion+" Fils de: "+currentPortion.getIdCat());
                     papa.add(child);
+//                    bastardPors.remove(currentPortion);
                 }
             }
 
+
             //Adding category childs of papa
-            for (Iterator<categorie> iter = cats.iterator(); iter.hasNext(); ) {
-                currentCat = iter.next();
+            for (Iterator<categorie> iter2 = cats.iterator(); iter2.hasNext();) {
+                currentCat = iter2.next();
                 if (currentCat.getId_parent() == id) {//when child is found
+//                    if(bastardCats!=null)
+//                        bastardCats.remove(currentCat);
                     System.out.println("Pere " + cat.getLibelle() + " ---> Fils " + currentCat.getLibelle()+" Level "+level);
                     child = new DefaultMutableTreeNode(currentCat.getLibelle());
                     child.setUserObject(currentCat);
                     child = addChilds(currentCat, cats, portions, child, level+1);
                     papa.add(child);//Adding the child and its childs to the parents papa
+
                 }
 
             }
@@ -185,6 +224,56 @@ public class Tree {
         return papa;
     }
 
+    public void addBastardsToRoot(){
+
+        //ADDING BASTARD CATEGORIES TO ROOT
+        int currentId;
+        int parentId;
+        boolean bastardCat;
+        for(int i=0;i<cats.size();i++){
+            parentId = cats.get(i).getId_parent();
+            currentId = cats.get(i).getId();
+            bastardCat = true;
+            for(int j=0;j<cats.size();j++){
+                if(parentId == cats.get(j).getId()) {
+                    bastardCat = false;
+                }
+            }
+            if (bastardCat){
+                if(parentId != 0) {//If root is parent it's already in the tree
+                    DefaultMutableTreeNode newNode = new DefaultMutableTreeNode(cats.get(i));
+                    addChilds(cats.get(i),cats, portions,newNode,3);
+                    root.add(newNode);
+                }
+            }
+        }
+
+
+        System.out.println();
+        boolean isBastard;
+
+        //ADDING BASTARD PORTIONS TO ROOT
+        for(int i=0;i<portions.size();i++){
+            isBastard = true;
+            if( portions.get(i).getIdCat() == 0) {
+                isBastard = false;
+            }
+            else {
+                for (int j = 0; j < cats.size(); j++) {
+                    if (portions.get(i).getIdCat() == cats.get(j).getId()) {
+                        isBastard = false;
+                    }
+                }
+            }
+
+            if(isBastard){
+                //System.out.println("La portion BATARDE "+portions.get(i)+" est ajouté à la racine !!");
+                root.add(new DefaultMutableTreeNode(portions.get(i)));
+
+            }
+        }
+
+    }
 
     private class MyRenderer extends DefaultTreeCellRenderer {
         ImageIcon portionIcon = createImageIcon("/img/p.png",20);;
@@ -224,7 +313,6 @@ public class Tree {
         }
 
     }
-
 
 }
 

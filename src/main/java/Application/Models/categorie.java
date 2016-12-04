@@ -8,7 +8,7 @@ import java.util.Enumeration;
 /**
  * Created by peter on 22/11/16.
  */
-public class categorie{
+public class categorie implements Cloneable{
     private Integer id;
     private String libelle;
     private Integer id_parent;
@@ -19,6 +19,15 @@ public class categorie{
         this.id_parent = id_parent;
     }
 
+//    //Clone constructor for doc generation
+//    public categorie(categorie cat) {
+//        this.dummy = another.dummy; // you can access
+//    }
+
+    @Override
+    public categorie clone(){
+        return new categorie(this.id,this.libelle,this.id_parent);
+    }
 
     @Override
     public String toString() {
