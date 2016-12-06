@@ -176,7 +176,7 @@ public class App {
 
                             System.out.println(((categorie) selectedNode.getUserObject()).getLibelle());
                             if (selectedNode.getLevel() - 1 == 4) {//Si un élément de profondeur max est selectionné on désactive l'ajout
-                                addCategory.setEnabled(false);
+                                //addCategory.setEnabled(false);
                             } else {
                                 addCategory.setEnabled(true);//sinon on peut (quand on veut)
                             }
@@ -199,7 +199,7 @@ public class App {
                     else if (root.getDepth() - 1 == 4) {//Cas ou on ne doit plus pouvoir rajouter d'enfants plus profond (niveau 4 de profondeur)
                         if (selectedNode != null) {//Dans le cas ou rien n'est encore sélectioné on ajoute à la racine
                             if (selectedNode.getLevel() - 1 == 4) {//Si un élément de profondeur max est selectionné
-                                addCategory.setEnabled(false);
+                                //addCategory.setEnabled(false);
                             } else {
                                 addCategory.setEnabled(true);
                             }
