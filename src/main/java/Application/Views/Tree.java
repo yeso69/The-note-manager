@@ -194,7 +194,7 @@ public class Tree {
     }
 
     private DefaultMutableTreeNode addChilds(categorie cat, ArrayList<categorie> cats, ArrayList<portion> portions, DefaultMutableTreeNode papa, int level) {
-        if (level <= 4) { // 4 levels only
+        //if (level <= 4) { // 4 levels only
             int id = cat.getId(); //id of current node
             DefaultMutableTreeNode child; //child node
             categorie currentCat;
@@ -232,7 +232,7 @@ public class Tree {
             }
 
 
-        }//end of if level<4
+        //}//end of if level<4
 
         return papa;
     }
