@@ -35,11 +35,13 @@ public class App {
     private JPanel jp;
     private categoryControl catControl;
     Tree catTree;
+    ArrayList<DefaultMutableTreeNode> selectedNodes;
 
     bdd db;
 
     public App(bdd db) {
         this.db = db;
+        selectedNodes = new ArrayList<>();
         buildWindow();
         buildInterface();
 
@@ -60,10 +62,12 @@ public class App {
 
     private void buildWindow() {
         frame = new JFrame("OSZ gen");
+        //frame.setLayout(new GridBagLayout());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //frame.setSize(600, 500);
+        frame.setMinimumSize(new Dimension(600, 400));
         //this.setResizable(false);
         frame.setLocationRelativeTo(null);
+
     }
 
     //Building windows
@@ -86,73 +90,61 @@ public class App {
         addPortion.setIcon(porIcon);
         generateDoc.setIcon(fileIcon);
         delete.setIcon(removeIcon);
+        delete.setEnabled(false);
         generateDoc.setEnabled(false);
 
+        frame.setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.anchor = GridBagConstraints.NORTHWEST;
+        gbc.fill= GridBagConstraints.BOTH;
+        gbc.gridx=0;
+        gbc.gridy=0;
+        gbc.weightx=1;//To take all available space !XTRA IMPORTANT!
+        gbc.weighty=1;
+        frame.getContentPane().add(jp,gbc);
 
 
 
-        c.gridx = 0;
-        c.gridy = 0;
-
-
-        //BUTTONS
+        //ADDING TOP BUTTON TO THE TOP OF JFRAME
         JPanel pContainer = new JPanel();
         FlowLayout fl = new FlowLayout();
         pContainer.setLayout(fl);
         pContainer.add(addCategory);
         pContainer.add(addPortion);
-        //pContainer.add(generateDoc);
+        //pContainer.setBackground(Color.BLACK);
 
-        c.gridy = 3;
+        c.gridy = 0;
         c.gridx = 0;
+        c.weightx=1;
+        c.weighty=1;
+        c.anchor = GridBagConstraints.NORTHWEST;
         c.gridwidth = 1;
         c.gridheight = 1;
-        gridBagLayout.setConstraints(pContainer, c);
         jp.add(pContainer,c);
 
-
-        c.weightx = 1.0;
         c.gridx++;
         c.anchor = GridBagConstraints.NORTHEAST;
         jp.add(generateDoc,c);
 
-        c.anchor = GridBagConstraints.NORTHWEST;
-        c.gridy++;
-        c.gridx--;
-        c.gridwidth = 2;//takes two cells
-        jp.add(search,c);
 
-        c.gridy++;
-        c.fill = GridBagConstraints.BOTH;
-        jp.add(searchBar, c);
-
-
-
+        //ADDIND TREE IN A SCROLL PANE
         catTree = new Tree(db,null,null,null);
         tree = catTree.getTree();
-        System.out.println(tree.toString());
-        c.gridy++;
-        jp.add(tree, c);
-
-        c.gridy++;
-        jp.add(delete,c);
-        delete.setEnabled(false);
-
-        //FRAME constraints to display WELL with SCROLLBAR
-        JScrollPane scroll = new JScrollPane(jp);
-        GridBagConstraints gbc = new GridBagConstraints();
-        frame.setLayout(new GridBagLayout());
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-
-        gbc.weightx = 1 ;
-        gbc.weighty = 1 ;
-
-        gbc.fill = GridBagConstraints.BOTH ;
-        gbc.anchor=GridBagConstraints.NORTHWEST;
-
+        //System.out.println(tree.toString());
+        JScrollPane scroll = new JScrollPane(tree);
         scroll.getVerticalScrollBar().setValue(0);
-        frame.add(scroll,gbc);
+        c.gridy=0;
+        c.gridx=0;
+        c.gridwidth=2;
+        c.insets = new Insets(50, 0, 0, 0);
+        c.anchor=GridBagConstraints.NORTHWEST;
+        c.fill = GridBagConstraints.BOTH;
+
+        //ADDING SCROLL PANE AND DELETE BUTTON ON PANEL CONTAINER
+        JPanel main = new JPanel(new BorderLayout());
+        main.add(scroll,BorderLayout.CENTER);
+        main.add(delete,BorderLayout.SOUTH);
+        jp.add(main, c);
     }
 
     private void treeListeners() {
@@ -223,14 +215,19 @@ public class App {
 
                     //CREATING ARRAYLIST OF ALL SELECTED NODES
                     boolean rootIn = false;
+                    selectedNodes.clear();
+                    DefaultMutableTreeNode node;
                     for(int i =0; i<treePaths.length;i++){
-                        DefaultMutableTreeNode node = (DefaultMutableTreeNode)treePaths[i].getLastPathComponent();
+                        node = (DefaultMutableTreeNode)treePaths[i].getLastPathComponent();
+
                         //CHECKING IF root is in the selected nodes
                         if(node.isRoot()){
                             generateDoc.setEnabled(false);
                             rootIn=true;
-                            break;
+                        }else{
+                            selectedNodes.add(node);
                         }
+
                         System.out.println(node.getUserObject());
                     }
                     if(!rootIn){
@@ -283,11 +280,34 @@ public class App {
         {
             public void actionPerformed(ActionEvent e)
             {
-                DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
-                if(selectedNode!=null){
-                    catTree.deleteNode(selectedNode);
+
+
+                //Getting paths of all selected nodes
+                TreePath[] treePaths = tree.getSelectionPaths();
+
+                if(treePaths == null){
+                    return;
                 }
-                delete.setEnabled(false);
+                //------------------------- SINGLE NODE SELECTED
+                else if(treePaths.length == 1){//if only one node is selected
+                    DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
+                    if(selectedNode!=null){
+                        catTree.deleteNode(selectedNode);
+                    }
+                    delete.setEnabled(false);
+                }
+                //------------------------- MULTIPLE NODES SELECTED
+                else if(treePaths.length > 1){
+                    //OPEN ARE YOU SURE POPUP
+                    if (JOptionPane.showConfirmDialog(null, "Voulez-vous vraiment supprimer ces éléments ?", "Suppression", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                        // yes option
+                        catTree.deleteNodes(selectedNodes);
+                    }
+
+
+
+                }
+
             }
         });
     }

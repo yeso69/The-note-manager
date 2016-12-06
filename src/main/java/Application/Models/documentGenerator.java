@@ -46,15 +46,20 @@ public class documentGenerator {
         generateDocListener();
         comboboxListener();
         radiobuttonsListener();
+        onClose();
+
+        //frame.pack();
+
         frame.setVisible(true);
         mainFrame.setVisible(false);
-        onClose();
+
     }
 
     private void buildWindow(){
         frame = new JFrame("Génération de document");
-        frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);// pour eviter que l'appli se ferme quand on ferme la generation de doc
-        frame.setSize(600, 600);
+        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);// pour eviter que l'appli se ferme quand on ferme la generation de doc
+        //frame.setMinimumSize(new Dimension(600, 400));
+        frame.setMinimumSize(new Dimension(600,400));
         frame.setLocationRelativeTo(null);
     }
 
@@ -67,7 +72,8 @@ public class documentGenerator {
     }
 
     private void buildInterface(){
-        JPanel pan = new JPanel(new GridBagLayout());
+        JPanel panTop = new JPanel(new GridBagLayout());
+        JPanel panBottom = new JPanel(new GridBagLayout());
         title = new JLabel("Titre du document");
         docTitle= new JTextField();
         generate = new JButton("Générer le fichier");
@@ -92,17 +98,22 @@ public class documentGenerator {
         c.gridy = 0;
         c.weightx = 1;
         c.weighty = 1;
+        c.anchor = GridBagConstraints.CENTER;
+
+
+
+        panTop.add(title,c);
         c.fill = GridBagConstraints.HORIZONTAL;
-
-        pan.add(title,c);
-
         c.gridy++;
-        pan.add(docTitle,c);
-
-        c.gridy++;
-        pan.add(tree.getTree(),c);
+        panTop.add(docTitle,c);
 
 
+        c.gridx = 0;
+        c.gridy = 0;
+        c.weightx = 1;
+        c.weighty = 1;
+
+        c.fill = GridBagConstraints.HORIZONTAL;
         group.add(txt);
         group.add(html);
         txt.setSelected(true);
@@ -113,20 +124,24 @@ public class documentGenerator {
         fileFormat.add(html);
 
         c.gridy++;
-        pan.add(fileFormat,c);
+        panBottom.add(fileFormat,c);
 
         c.gridy++;
-        pan.add(new JLabel("Theme HTML (CSS)"),c);
+        panBottom.add(new JLabel("Theme HTML (CSS)"),c);
 
         c.gridy++;
-        pan.add(cssList,c);
+        panBottom.add(cssList,c);
 
         c.gridy++;
-        pan.add(generate,c);
+        panBottom.add(generate,c);
 
-        c.anchor = GridBagConstraints.NORTH;
-        frame.setLayout(new GridBagLayout());
-        frame.add(pan,c);
+        JScrollPane scroll = new JScrollPane(tree.getTree());
+        scroll.getVerticalScrollBar().setValue(0);
+
+        frame.setLayout(new BorderLayout());
+        frame.add(panTop,BorderLayout.NORTH);
+        frame.add(scroll,BorderLayout.CENTER);
+        frame.add(panBottom, BorderLayout.SOUTH);
     }
 
     private void writeFile(String path){
@@ -149,13 +164,18 @@ public class documentGenerator {
             }
         }
         try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter(file.getAbsoluteFile()));
+            BufferedWriter bw = new BufferedWriter(new FileWriter(file.getAbsoluteFile(),false));
 
-            String str = new String();
-            if(txt.isSelected())
-                str = generateFileContent(str,root,"");
-            else{
-                str+="<!DOCTYPE html>\n" +
+            String top = new String();
+            String content = new String();
+            String bottom = new String();
+            String document = new String();
+            if(txt.isSelected()) {
+                document = generateFileContent(top, root, "");
+                //replace all line separators by \n
+                document.replaceAll(System.getProperty("line.separator"), "\n");
+            } else{
+                top="<!DOCTYPE html>\n" +
                         "<html lang=\"en\">\n" +
                         "  <head>\n" +
                         "    <meta charset=\"utf-8\">\n" +
@@ -163,9 +183,13 @@ public class documentGenerator {
                         "    <link rel=\"stylesheet\" href=\"style.css\">\n" +
                         "  </head>\n" +
                         "  <body>";
-                str = generateHtmlFileContent(str,root,1);
-                str+="  </body>\n" +
+                content = generateHtmlFileContent(top,root,1);
+                bottom ="  </body>\n" +
                         "</html>";
+
+                document = top+content+bottom;
+
+                //str = str.replace(/(?:\r\n|\r|\n)/g, '<br />');
 
                 //CSS copy to the same destination
                 css myCss = (css) cssList.getSelectedItem();
@@ -175,7 +199,7 @@ public class documentGenerator {
                 File cssFile = new File(cssURL.getPath(), myCss.fileName);
                 myCss.copy(cssFile,new File(path,"style.css"));
             }
-            bw.write(str);
+            bw.write(document);
 
             bw.close();
             JOptionPane.showMessageDialog(new JFrame(), "Vous trouverez le fichier dans la destination spécifiée.", "Création du document terminée",
@@ -189,15 +213,16 @@ public class documentGenerator {
     private String generateHtmlFileContent(String str, DefaultMutableTreeNode node, int level) {
         for (int i=0; i< node.getChildCount();i++){
             DefaultMutableTreeNode currentNode = (DefaultMutableTreeNode)node.getChildAt(i);
+            String tmp = new String();
             if(currentNode.getUserObject() instanceof categorie) {
                 categorie cat = (categorie)currentNode.getUserObject();
-                str+="<br/>";
                 str += "<h"+level+">"+cat.getLibelle()+"</h"+level+">";//currentNode.getLevel()
                 str = generateHtmlFileContent(str,currentNode,level+1);
             }
             else if(currentNode.getUserObject() instanceof portion){
                 portion por = (portion) currentNode.getUserObject();
-                str+="<p>"+por.getText()+"</p>"+System.getProperty("line.separator");;
+                tmp = por.getText().replaceAll("(\\r|\\n|\\r\\n)+",  "<br />"+System.getProperty("line.separator"));
+                str+="<p>"+tmp+"</p>"+System.getProperty("line.separator");
             }
         }
         return str;
@@ -244,8 +269,11 @@ public class documentGenerator {
         generate.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 JFileChooser fileChooser = new JFileChooser(frame);
-                if(fileChooser.getSelectedPath()!= null)//if user chose a destination
+                if(fileChooser.getSelectedPath()!= null) {//if user chose a destination
                     writeFile(fileChooser.getSelectedPath());
+                    frame.dispose();
+                    mainFrame.setVisible(true);
+                }
 
             }
         });

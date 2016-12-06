@@ -50,6 +50,7 @@ public class categoryControl {
             public void actionPerformed(ActionEvent e)
             {
                 newPor = portionText.getText();
+                newPor.replaceAll(System.getProperty("line.separator"), "\n");
                 int idCat = selectedCat.getId();
                 System.out.println("ID du futur papa "+idCat);
                 portion por = new portion(0, newPor,idCat);
@@ -144,54 +145,41 @@ public class categoryControl {
     }
 
     private void buildPanelAddCat(){
-        jpAddCat = new JPanel(new GridBagLayout());
+        jpAddCat = new JPanel(new BorderLayout());
         catName = new JTextField();
         catTitle = new JLabel("Libéllé de la catégorie");
         validateCat = new JButton("Ajouter la catégorie");
-        ImageIcon icon = Tree.createImageIcon("/img/folder-close.png",20);
+        ImageIcon icon = Tree.createImageIcon("/img/folder-close.png",25);
         validateCat.setIcon(icon);
         validateCat.setEnabled(false);//because it's empty
         GridBagConstraints c = new GridBagConstraints();
         catName.setPreferredSize(new Dimension(600, 20));
-        //catName.setMinimumSize(new Dimension(50, 400));
-        c.fill = GridBagConstraints.BOTH;
-        c.gridx = 0;
-        c.gridy = 0;
-        c.weightx = 1;
-        c.weighty = 1;
-        jpAddCat.add(catTitle, c);
 
-        c.gridy++;
-        jpAddCat.add(catName, c);
+        jpAddCat.add(catTitle, BorderLayout.NORTH);
 
-        c.gridy++;
-        jpAddCat.add(validateCat, c);
+        jpAddCat.add(catName, BorderLayout.CENTER);
+
+        jpAddCat.add(validateCat, BorderLayout.SOUTH);
     }
 
     private void buildPanelAddPor(){
-        jpAddPor = new JPanel(new GridBagLayout());
+        jpAddPor = new JPanel(new BorderLayout());
         portionText = new JTextArea();
         porTitle = new JLabel("Contenu de la portion de texte");
         validatePor = new JButton("Ajouter la portion de texte");
 
-        ImageIcon icon = Tree.createImageIcon("/img/p.png",20);
+
+        ImageIcon icon = Tree.createImageIcon("/img/p.png",25);
         validatePor.setIcon(icon);
         validatePor.setEnabled(false);//because it's empty
-        GridBagConstraints c = new GridBagConstraints();
-        portionText.setPreferredSize(new Dimension(580, 400));
+        JScrollPane scroll = new JScrollPane(portionText);
 
-        c.fill = GridBagConstraints.BOTH;
-        c.gridx = 0;
-        c.gridy = 0;
-        c.weightx = 1;
-        c.weighty = 1;
-        jpAddPor.add(porTitle, c);
 
-        c.gridy++;
-        jpAddPor.add(portionText, c);
+        jpAddPor.add(porTitle, BorderLayout.NORTH);
 
-        c.gridy++;
-        jpAddPor.add(validatePor, c);
+        jpAddPor.add(scroll, BorderLayout.CENTER);
+
+        jpAddPor.add(validatePor, BorderLayout.SOUTH);
     }
 
     public void newCat(DefaultMutableTreeNode selectedNode, JFrame frame){//Shows Jdialog to enter new Category
@@ -237,6 +225,7 @@ public class categoryControl {
     public void newPor(DefaultMutableTreeNode selectedNode, JFrame frame) {
         this.selectedCat = (categorie) selectedNode.getUserObject();
         JDialog d = new JDialog(frame, "Nouvelle Portion de texte", true);
+        d.setMinimumSize(new Dimension(400, 400));
         if(selectedNode!=null){
             setParentTitle(selectedNode.toString());
         }else{

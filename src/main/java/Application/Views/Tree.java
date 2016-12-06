@@ -141,10 +141,26 @@ public class Tree {
             //if node is a category call category delete function
             if (node.getUserObject() instanceof categorie) {
                 delCatNode(node);
+                refresh();
             } else if (node.getUserObject() instanceof portion) {
                 delPortionNode(node);
+                refresh();
             }
         }
+    }
+
+    public void deleteNodes(ArrayList<DefaultMutableTreeNode> delNodes) {
+           // DELETE ALL NODES
+            DefaultMutableTreeNode node;
+            for(int i =0;i<delNodes.size();i++) {
+                node=delNodes.get(i);
+                if (node.getUserObject() instanceof categorie) {
+                    delCatNode(node);
+                } else if (node.getUserObject() instanceof portion) {
+                    delPortionNode(node);
+                }
+            }
+            refresh();
     }
 
     public void delPortionNode(DefaultMutableTreeNode node){
@@ -156,7 +172,6 @@ public class Tree {
 
         int porId = por.getId();
         db.removePortion(porId);//Delete the category
-        refresh();
     }
 
     public void delCatNode(DefaultMutableTreeNode catNode){
@@ -168,7 +183,6 @@ public class Tree {
         db.updateValue("UPDATE categorie SET id_parent="+parentId+" WHERE id_parent="+delId+";");
         db.updateValue("UPDATE portion SET id_categorie="+parentId+" WHERE id_categorie="+delId+";");
         db.removeCategorie(delCat.getLibelle());//Delete the category
-        refresh();
     }
 
     public void refresh(){
