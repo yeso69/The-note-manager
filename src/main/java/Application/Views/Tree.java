@@ -42,7 +42,6 @@ public class Tree {
             this.cats = cats;
             buildTree(this.cats,this.portions,this.root);
             addBastardsToRoot();
-            System.out.println();
         }
 
         setDesign();
@@ -61,7 +60,6 @@ public class Tree {
     /** Returns an ImageIcon, or null if the path was invalid. */
     public static ImageIcon createImageIcon(String path, int size) {
         java.net.URL imgURL = App.class.getResource(path);//important let App
-        System.out.println("ressource: "+ App.class.getResource(""));
         if (imgURL != null) {
             ImageIcon icon = new ImageIcon(imgURL);
             Image img = icon.getImage() ;
@@ -126,7 +124,6 @@ public class Tree {
         while (e.hasMoreElements()) {//Sinon parcours des noeuds jusqu'à trouver le père
             DefaultMutableTreeNode node = e.nextElement();
             if (node.toString().equalsIgnoreCase(parent)) {//When the right node parent is found
-                System.out.println("Bon noeud trouve n"+node.toString());
                 node.add(newNode);
             }
         }
@@ -164,7 +161,6 @@ public class Tree {
     }
 
     public void delPortionNode(DefaultMutableTreeNode node){
-        System.out.println("DelPortion");
         //Gérer l'ajout et la supression des portions
 
         DefaultTreeModel model = (DefaultTreeModel)tree.getModel();
@@ -193,6 +189,12 @@ public class Tree {
         expandAllNodes(tree,0,tree.getRowCount());
     }
 
+    public void reloadTreeOnly(){
+        DefaultTreeModel model = (DefaultTreeModel)tree.getModel();
+        model.reload(root);//refresh the tree
+        expandAllNodes(tree,0,tree.getRowCount());
+    }
+
     private DefaultMutableTreeNode addChilds(categorie cat, ArrayList<categorie> cats, ArrayList<portion> portions, DefaultMutableTreeNode papa, int level) {
         //if (level <= 4) { // 4 levels only
             int id = cat.getId(); //id of current node
@@ -208,9 +210,7 @@ public class Tree {
                     //Creating the new node for this portion
                     child = new DefaultMutableTreeNode(currentPortion, false);//false because it does not allow children
                     child.setUserObject(currentPortion);
-                    System.out.println("Neoud: "+currentPortion+" Fils de: "+currentPortion.getIdCat());
                     papa.add(child);
-//                    bastardPors.remove(currentPortion);
                 }
             }
 
@@ -221,7 +221,6 @@ public class Tree {
                 if (currentCat.getId_parent() == id) {//when child is found
 //                    if(bastardCats!=null)
 //                        bastardCats.remove(currentCat);
-                    System.out.println("Pere " + cat.getLibelle() + " ---> Fils " + currentCat.getLibelle()+" Level "+level);
                     child = new DefaultMutableTreeNode(currentCat.getLibelle());
                     child.setUserObject(currentCat);
                     child = addChilds(currentCat, cats, portions, child, level+1);
@@ -261,8 +260,6 @@ public class Tree {
             }
         }
 
-
-        System.out.println();
         boolean isBastard;
 
         //ADDING BASTARD PORTIONS TO ROOT
@@ -280,7 +277,6 @@ public class Tree {
             }
 
             if(isBastard){
-                //System.out.println("La portion BATARDE "+portions.get(i)+" est ajouté à la racine !!");
                 root.add(new DefaultMutableTreeNode(portions.get(i)));
 
             }
@@ -307,8 +303,6 @@ public class Tree {
         public MyRenderer() {
             if (portionIcon != null && catOpenIcon != null) {
                 //IT is OK
-            } else {
-                System.err.println("Tutorial icon missing; using default.");
             }
         }
 
@@ -325,10 +319,8 @@ public class Tree {
                 if(node.isLeaf()){
                     setIcon(catOpenIcon);
                 }
-                //System.out.println(("Style appliqué à la catégorie"+node.toString()));
             } else if(node.getUserObject() instanceof portion){
                 setIcon(portionIcon);
-                //System.out.println("Style appliqué à la portion"+node.toString());
                 setFont(fontPortion);
             }
 
@@ -336,6 +328,55 @@ public class Tree {
         }
 
     }
+
+    public void moveNode(boolean up){//true = UP false=DOWN
+        DefaultTreeModel model = (DefaultTreeModel)tree.getModel();
+        DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
+        DefaultMutableTreeNode previousNode = selectedNode.getPreviousSibling();
+        DefaultMutableTreeNode nextNode = selectedNode.getNextSibling();
+        DefaultMutableTreeNode parent = (DefaultMutableTreeNode) selectedNode.getParent();
+        DefaultMutableTreeNode ancestor = (DefaultMutableTreeNode) parent.getParent();
+
+        if(parent.isRoot())
+            return;
+
+        if(up == true && previousNode != null){//-----------------> UP
+            if(selectedNode.getUserObject() instanceof categorie){//-----> CAT
+                if(previousNode.getUserObject() instanceof  categorie) {
+                    parent.insert(selectedNode,parent.getIndex(selectedNode)-1);
+                    reloadTreeOnly();
+                }
+            }
+            else if (selectedNode.getUserObject() instanceof portion){
+                if(previousNode.getUserObject() instanceof portion){
+                    portion tmp1 = (portion)previousNode.getUserObject();
+                    portion tmp2 = (portion)selectedNode.getUserObject();
+                    previousNode.setUserObject(tmp2);
+                    selectedNode.setUserObject(tmp1);
+                    reloadTreeOnly();
+                }
+            }
+        }
+        else if(up == false && nextNode != null){//------------ DOWN
+            if(selectedNode.getUserObject() instanceof categorie){//-----> CAT
+                if(nextNode.getUserObject() instanceof  categorie) {
+                    parent.insert(selectedNode,parent.getIndex(selectedNode)+1);
+                    reloadTreeOnly();
+                }
+            }
+            else if (selectedNode.getUserObject() instanceof portion){
+                if(nextNode.getUserObject() instanceof portion){
+                    portion tmp1 = (portion)nextNode.getUserObject();
+                    portion tmp2 = (portion)selectedNode.getUserObject();
+                    nextNode.setUserObject(tmp2);
+                    selectedNode.setUserObject(tmp1);
+                    reloadTreeOnly();
+                }
+            }
+        }
+    }
+
+
 
 }
 

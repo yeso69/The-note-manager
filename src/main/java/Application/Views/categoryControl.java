@@ -52,7 +52,6 @@ public class categoryControl {
                 newPor = portionText.getText();
                 newPor.replaceAll(System.getProperty("line.separator"), "\n");
                 int idCat = selectedCat.getId();
-                System.out.println("ID du futur papa "+idCat);
                 portion por = new portion(0, newPor,idCat);
                 db.addPortion(por);//Add the new category to the db
                 tree.refresh();
@@ -84,7 +83,6 @@ public class categoryControl {
                     if(!parentTitle.equals("")){
                         idParent = db.getId(parentTitle);
                     }
-                    System.out.println("ID du futur papa "+idParent);
                     categorie cat = new categorie(0,newCat,idParent);
                     db.addCategorie(cat);//Add the new category to the db
                     tree.refresh();

@@ -6,7 +6,10 @@ import Application.Views.Tree;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.TreePath;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,6 +28,8 @@ public class documentGenerator {
     JLabel title;
     JTextField docTitle;
     JButton generate;
+    JButton up;
+    JButton down;
     ArrayList<categorie> cats;
     ArrayList<portion> portions;
     Tree tree;
@@ -47,6 +52,8 @@ public class documentGenerator {
         comboboxListener();
         radiobuttonsListener();
         onClose();
+        treeListeners();
+        upDownListener();
 
         //frame.pack();
 
@@ -77,6 +84,8 @@ public class documentGenerator {
         title = new JLabel("Titre du document");
         docTitle= new JTextField();
         generate = new JButton("Générer le fichier");
+        up = new JButton();
+        down = new JButton();
         txt = new JRadioButton("Text");
         html = new JRadioButton("HTML");
         group = new ButtonGroup();
@@ -89,6 +98,11 @@ public class documentGenerator {
         ImageIcon fileIcon = Tree.createImageIcon("/img/file.png",30);
         ImageIcon htmlIcon = Tree.createImageIcon("/img/html.png",35);
         ImageIcon checkIcon = Tree.createImageIcon("/img/check.png",30);
+        ImageIcon upIcon = Tree.createImageIcon("/img/up.png",20);
+        ImageIcon downIcon = Tree.createImageIcon("/img/down.png",20);
+        up.setIcon(upIcon);
+        down.setIcon(downIcon);
+
         generate.setIcon(checkIcon);
         generate.setEnabled(false);
 
@@ -98,14 +112,24 @@ public class documentGenerator {
         c.gridy = 0;
         c.weightx = 1;
         c.weighty = 1;
+        c.gridwidth=2;
         c.anchor = GridBagConstraints.CENTER;
-
-
 
         panTop.add(title,c);
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridy++;
         panTop.add(docTitle,c);
+
+        c.gridy++;
+        c.gridwidth=1;
+        c.anchor = GridBagConstraints.NORTHEAST;
+
+        c.gridx = 0;
+        panTop.add(up,c);
+
+        c.gridx++;
+        panTop.add(down,c);
+
 
 
         c.gridx = 0;
@@ -145,7 +169,6 @@ public class documentGenerator {
     }
 
     private void writeFile(String path){
-        System.out.println("writeFile");
         File file;
         if(html.isSelected()) {
             file = new File(path, docTitle.getText()+".html");
@@ -156,7 +179,6 @@ public class documentGenerator {
         if (!file.exists()) {
             try {
                 file.createNewFile();
-                System.out.println("Le fichier n'existe pas et a été créer");
             } catch (IOException e) {
                 e.printStackTrace();
                 JOptionPane.showMessageDialog(new JFrame(), "Un fichier du même nom existe déjà à cet emplacement.", "Impossible de créer le fichier",
@@ -176,14 +198,14 @@ public class documentGenerator {
                 document.replaceAll(System.getProperty("line.separator"), "\n");
             } else{
                 top="<!DOCTYPE html>\n" +
-                        "<html lang=\"en\">\n" +
+                        "<html lang=\"fr\">\n" +
                         "  <head>\n" +
                         "    <meta charset=\"utf-8\">\n" +
                         "    <title>"+docTitle.getText()+"</title>\n" +
                         "    <link rel=\"stylesheet\" href=\"style.css\">\n" +
                         "  </head>\n" +
                         "  <body>";
-                content = generateHtmlFileContent(top,root,1);
+                content = generateHtmlFileContent(new String(),root,1);
                 bottom ="  </body>\n" +
                         "</html>";
 
@@ -194,8 +216,8 @@ public class documentGenerator {
                 //CSS copy to the same destination
                 css myCss = (css) cssList.getSelectedItem();
                 java.net.URL cssURL = App.class.getResource(myCss.path);//important let App
-                System.out.println("Dossier ressources"+App.class.getResource(""));
-                System.out.println("Mon css: "+myCss.path+myCss.fileName);
+                //System.out.println("Dossier ressources"+App.class.getResource(""));
+                //System.out.println("Mon css: "+myCss.path+myCss.fileName);
                 File cssFile = new File(cssURL.getPath(), myCss.fileName);
                 myCss.copy(cssFile,new File(path,"style.css"));
             }
@@ -216,7 +238,7 @@ public class documentGenerator {
             String tmp = new String();
             if(currentNode.getUserObject() instanceof categorie) {
                 categorie cat = (categorie)currentNode.getUserObject();
-                str += "<h"+level+">"+cat.getLibelle()+"</h"+level+">";//currentNode.getLevel()
+                str += "<h"+level+">"+cat.getLibelle()+"</h"+level+">"+System.getProperty("line.separator");
                 str = generateHtmlFileContent(str,currentNode,level+1);
             }
             else if(currentNode.getUserObject() instanceof portion){
@@ -279,7 +301,19 @@ public class documentGenerator {
         });
     }
 
+    public void upDownListener() {
+        up.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                tree.moveNode(true);
+            }
+        });
 
+        down.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                tree.moveNode(false);
+            }
+        });
+    }
 
     public void textListener(){
         docTitle.getDocument().addDocumentListener(new DocumentListener() {
@@ -309,7 +343,6 @@ public class documentGenerator {
         cssList.addActionListener (new ActionListener () {
             public void actionPerformed(ActionEvent e) {
                 css myCss = (css)cssList.getSelectedItem();
-                System.out.println("CE CSS EST SELECTED "+myCss);
             }
         });
     }
@@ -330,5 +363,33 @@ public class documentGenerator {
         });
     }
 
+    private void treeListeners() {
+        // JTREE ----> Quand un élément de l'arbre est sélectionner
+        TreeSelectionListener treeSelectionListener = new TreeSelectionListener() {
+
+            @Override
+            public void valueChanged(TreeSelectionEvent treeSelectionEvent) {
+                JTree treeSource = (JTree) treeSelectionEvent.getSource();
+                //Getting paths of all selected nodes
+                TreePath[] treePaths = treeSource.getSelectionPaths();
+
+                if(treePaths == null){
+                    return;
+                }
+
+                //we get selected node + root
+                DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) jTree.getLastSelectedPathComponent();
+                DefaultMutableTreeNode root = (DefaultMutableTreeNode) jTree.getModel().getRoot();
+
+                if (selectedNode != null) {//if something is selected we can delete
+                    if (selectedNode.isRoot()) {
+                        up.setEnabled(false);
+                        down.setEnabled(false);
+                    }
+                }
+
+            }
+        };
+    }
 
 }

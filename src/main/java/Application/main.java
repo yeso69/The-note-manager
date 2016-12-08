@@ -24,9 +24,7 @@ public class main {
         bdd mabdd = new bdd("test.db");
         mabdd.connect();
         mabdd.remplirDB();
-        //Frame frame = new Frame(mabdd);
         App fen = new App(mabdd);
-        //new TreeWithMultiDiscontiguousSelections();
         mabdd.showAllCategories();
         view vue = new view();
         vue.menuPrincipal();

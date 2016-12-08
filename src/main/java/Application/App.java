@@ -19,6 +19,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+import java.util.Enumeration;
 
 /**
  * Created by Yeso on 29/11/2016.
@@ -130,7 +131,6 @@ public class App {
         //ADDIND TREE IN A SCROLL PANE
         catTree = new Tree(db,null,null,null);
         tree = catTree.getTree();
-        //System.out.println(tree.toString());
         JScrollPane scroll = new JScrollPane(tree);
         scroll.getVerticalScrollBar().setValue(0);
         c.gridy=0;
@@ -156,7 +156,6 @@ public class App {
                 JTree treeSource = (JTree) treeSelectionEvent.getSource();
                 //Getting paths of all selected nodes
                 TreePath[] treePaths = treeSource.getSelectionPaths();
-                //System.out.println("NB selected Nodes: "+treePaths.length);
 
                 if(treePaths == null){
                     return;
@@ -164,6 +163,7 @@ public class App {
                 //------------------------- SINGLE NODE SELECTED
                 else if(treePaths.length == 1){//if only one node is selected
                     System.out.println("Une seule noeud selectioné !");
+
                     //we get selected node + root
                     DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
                     DefaultMutableTreeNode root = (DefaultMutableTreeNode) tree.getModel().getRoot();
@@ -314,9 +314,6 @@ public class App {
 
     public void generateDocumentListener(){
 
-
-        //System.out.println("NB selected Nodes: "+treePaths.length);
-
         generateDoc.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
@@ -331,7 +328,6 @@ public class App {
                 categorie cat;
                 portion por;
                 for(int i =0; i<treePaths.length;i++){
-                    //System.out.println(treePaths[i].getPathComponent(i));
                     DefaultMutableTreeNode node = (DefaultMutableTreeNode)treePaths[i].getLastPathComponent();
                     if(node.getUserObject() instanceof categorie){
                         cat = (categorie)node.getUserObject();
@@ -340,9 +336,7 @@ public class App {
                     }
                     else if(node.getUserObject() instanceof portion){
                             por = (portion) node.getUserObject();
-                            ///cat = cat.clone();//we clone the categorie because we will modify it on doc genation
                             portions.add(por);
-                            //System.out.println("Portion "+por+"!!!!!!!!!!!!!!!!!!!!!!!");
                     }
 
                 }
