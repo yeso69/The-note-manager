@@ -74,8 +74,8 @@ public class documentGenerator {
         categorie racine = new categorie(0,"Contenu",0);
         this.root = new DefaultMutableTreeNode(racine);
         tree = new Tree(null,cats,portions,root);
-        //tree.addBastardsToRoot();
         tree.showTree(root);
+        jTree = tree.getTree();
     }
 
     private void buildInterface(){
@@ -192,6 +192,7 @@ public class documentGenerator {
             String content = new String();
             String bottom = new String();
             String document = new String();
+
             if(txt.isSelected()) {
                 document = generateFileContent(top, root, "");
                 //replace all line separators by \n
@@ -249,8 +250,6 @@ public class documentGenerator {
         }
         return str;
     }
-
-
 
     private String generateFileContent(String str, DefaultMutableTreeNode node, String level){
         int catCount =0;
@@ -369,6 +368,7 @@ public class documentGenerator {
 
             @Override
             public void valueChanged(TreeSelectionEvent treeSelectionEvent) {
+                System.out.println("Dans listener");
                 JTree treeSource = (JTree) treeSelectionEvent.getSource();
                 //Getting paths of all selected nodes
                 TreePath[] treePaths = treeSource.getSelectionPaths();
@@ -386,10 +386,15 @@ public class documentGenerator {
                         up.setEnabled(false);
                         down.setEnabled(false);
                     }
+                    else{
+                        up.setEnabled(true);
+                        down.setEnabled(true);
+                    }
                 }
 
             }
         };
+        jTree.addTreeSelectionListener(treeSelectionListener);
     }
 
 }

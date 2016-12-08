@@ -31,9 +31,11 @@ public class App {
     private JButton addPortion;
     private JButton generateDoc;
     private JTextField searchBar;
+    JTextField keyword;
     private JTree tree;
     private JLabel search;
     private JPanel jp;
+    private JPanel pkey;
     private categoryControl catControl;
     Tree catTree;
     ArrayList<DefaultMutableTreeNode> selectedNodes;
@@ -71,7 +73,6 @@ public class App {
 
     }
 
-    //Building windows
     private void buildInterface() {
         GridBagLayout gridBagLayout = new GridBagLayout();
         jp = new JPanel(gridBagLayout);
@@ -81,6 +82,8 @@ public class App {
         searchBar = new JTextField();
         search = new JLabel("Recherche");
         delete = new JButton("Supprimer");
+        pkey = new JPanel();
+
         GridBagConstraints c = new GridBagConstraints();
         ImageIcon catIcon = Tree.createImageIcon("/img/folder-close.png",25);;
         ImageIcon porIcon = Tree.createImageIcon("/img/p.png",25);;
@@ -103,8 +106,6 @@ public class App {
         gbc.weightx=1;//To take all available space !XTRA IMPORTANT!
         gbc.weighty=1;
         frame.getContentPane().add(jp,gbc);
-
-
 
         //ADDING TOP BUTTON TO THE TOP OF JFRAME
         JPanel pContainer = new JPanel();
@@ -132,6 +133,7 @@ public class App {
         catTree = new Tree(db,null,null,null);
         tree = catTree.getTree();
         JScrollPane scroll = new JScrollPane(tree);
+        JScrollPane keyScroll = new JScrollPane(pkey);
         scroll.getVerticalScrollBar().setValue(0);
         c.gridy=0;
         c.gridx=0;
@@ -139,10 +141,14 @@ public class App {
         c.insets = new Insets(50, 0, 0, 0);
         c.anchor=GridBagConstraints.NORTHWEST;
         c.fill = GridBagConstraints.BOTH;
+        JPanel pCenter = new JPanel(new BorderLayout());
+        pkey.setMinimumSize(new Dimension(400,400));
+        pCenter.add(scroll,BorderLayout.CENTER);
+        pCenter.add(pkey, BorderLayout.EAST);
 
         //ADDING SCROLL PANE AND DELETE BUTTON ON PANEL CONTAINER
         JPanel main = new JPanel(new BorderLayout());
-        main.add(scroll,BorderLayout.CENTER);
+        main.add(pCenter,BorderLayout.CENTER);
         main.add(delete,BorderLayout.SOUTH);
         jp.add(main, c);
     }
@@ -303,11 +309,7 @@ public class App {
                         // yes option
                         catTree.deleteNodes(selectedNodes);
                     }
-
-
-
                 }
-
             }
         });
     }

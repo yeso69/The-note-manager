@@ -330,14 +330,12 @@ public class Tree {
     }
 
     public void moveNode(boolean up){//true = UP false=DOWN
-        DefaultTreeModel model = (DefaultTreeModel)tree.getModel();
         DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
         DefaultMutableTreeNode previousNode = selectedNode.getPreviousSibling();
         DefaultMutableTreeNode nextNode = selectedNode.getNextSibling();
         DefaultMutableTreeNode parent = (DefaultMutableTreeNode) selectedNode.getParent();
-        DefaultMutableTreeNode ancestor = (DefaultMutableTreeNode) parent.getParent();
 
-        if(parent.isRoot())
+        if(selectedNode == null)
             return;
 
         if(up == true && previousNode != null){//-----------------> UP

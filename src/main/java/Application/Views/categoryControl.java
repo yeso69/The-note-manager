@@ -62,8 +62,6 @@ public class categoryControl {
         });
 }
 
-
-
     public void validateAddCat(){
         //Quand on valide l'ajout d'une catégorie
         validateCat.addActionListener(new ActionListener()
@@ -213,9 +211,11 @@ public class categoryControl {
     public void setTree(Tree tree){
         this.tree = tree;
     }
+
     public JPanel getJpAddCat() {
         return jpAddCat;
     }
+
     public void setDialog(JDialog jd){
         this.d =jd;
     }
