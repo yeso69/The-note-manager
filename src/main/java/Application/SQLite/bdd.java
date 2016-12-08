@@ -189,9 +189,10 @@ public class bdd
     {
             try {
                 PreparedStatement preparedStatement = connection
-                        .prepareStatement("INSERT INTO portion (message,id_categorie) VALUES(?,?)");
+                        .prepareStatement("INSERT INTO portion (message,id_categorie,keywords) VALUES(?,?,?)");
                 preparedStatement.setString(1, por.getText());
                 preparedStatement.setInt(2, por.getIdCat());
+                preparedStatement.setString(3, por.getKeywords());
                 preparedStatement.executeUpdate();
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -381,7 +382,8 @@ public class bdd
                 int id = rs.getInt(1);
                 String text = rs.getString(2);
                 int idCat = rs.getInt(3);
-                portions.add(new portion(id, text, idCat));
+                String keywords = rs.getString(4);
+                portions.add(new portion(id, text, idCat, keywords));
             }
             rs.close();
         } catch (Exception e) {

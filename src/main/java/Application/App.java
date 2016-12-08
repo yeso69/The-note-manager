@@ -12,14 +12,10 @@ import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreePath;
-import javax.swing.tree.TreeSelectionModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.util.ArrayList;
-import java.util.Enumeration;
 
 /**
  * Created by Yeso on 29/11/2016.
@@ -30,13 +26,21 @@ public class App {
     private JButton delete;
     private JButton addPortion;
     private JButton generateDoc;
+    private JButton saveChanges;
+    private JButton deleteKeywords;
     private JTextField searchBar;
-    JTextField keyword;
+    private JTextField newKeyword;
+    JTextArea contenuPortion;
     private JTree tree;
     private JLabel search;
     private JPanel jp;
+    private JPanel rightPanel;
+    private JPanel pCenter;
     private JPanel pkey;
+    private JPanel keywordsPanel;
     private categoryControl catControl;
+    JScrollPane rightScroll;
+    JScrollPane treeScroll;
     Tree catTree;
     ArrayList<DefaultMutableTreeNode> selectedNodes;
 
@@ -76,13 +80,21 @@ public class App {
     private void buildInterface() {
         GridBagLayout gridBagLayout = new GridBagLayout();
         jp = new JPanel(gridBagLayout);
+        keywordsPanel = new JPanel();//will be built dynamicaly
+        rightPanel = new JPanel(new BorderLayout());
         addCategory = new JButton("Ajouter Categorie");
         addPortion = new JButton("Ajouter Portion");
         generateDoc = new JButton("Générer un document");
+        saveChanges = new JButton("Sauvegarder");
+        deleteKeywords = new JButton(Tree.createImageIcon("/img/trash.png",25));
         searchBar = new JTextField();
+        newKeyword = new JTextField("");
         search = new JLabel("Recherche");
         delete = new JButton("Supprimer");
-        pkey = new JPanel();
+
+        //KEYWORD PANEL
+        pkey = new JPanel(new BorderLayout());
+        //rightPanel.setMinimumSize(new Dimension(900,0));
 
         GridBagConstraints c = new GridBagConstraints();
         ImageIcon catIcon = Tree.createImageIcon("/img/folder-close.png",25);;
@@ -90,6 +102,7 @@ public class App {
         ImageIcon editIcon = Tree.createImageIcon("/img/edit.png",25);;
         ImageIcon fileIcon = Tree.createImageIcon("/img/file.png",25);
         ImageIcon removeIcon = Tree.createImageIcon("/img/trash.png",25);
+        saveChanges.setIcon(Tree.createImageIcon("/img/save.png",25));
         addCategory.setIcon(catIcon);
         addPortion.setIcon(porIcon);
         generateDoc.setIcon(fileIcon);
@@ -108,12 +121,11 @@ public class App {
         frame.getContentPane().add(jp,gbc);
 
         //ADDING TOP BUTTON TO THE TOP OF JFRAME
-        JPanel pContainer = new JPanel();
+        JPanel addContainer = new JPanel();
         FlowLayout fl = new FlowLayout();
-        pContainer.setLayout(fl);
-        pContainer.add(addCategory);
-        pContainer.add(addPortion);
-        //pContainer.setBackground(Color.BLACK);
+        addContainer.setLayout(fl);
+        addContainer.add(addCategory);
+        addContainer.add(addPortion);
 
         c.gridy = 0;
         c.gridx = 0;
@@ -122,7 +134,7 @@ public class App {
         c.anchor = GridBagConstraints.NORTHWEST;
         c.gridwidth = 1;
         c.gridheight = 1;
-        jp.add(pContainer,c);
+        jp.add(addContainer,c);
 
         c.gridx++;
         c.anchor = GridBagConstraints.NORTHEAST;
@@ -132,24 +144,65 @@ public class App {
         //ADDIND TREE IN A SCROLL PANE
         catTree = new Tree(db,null,null,null);
         tree = catTree.getTree();
-        JScrollPane scroll = new JScrollPane(tree);
-        JScrollPane keyScroll = new JScrollPane(pkey);
-        scroll.getVerticalScrollBar().setValue(0);
+        JPanel leftPanel = new JPanel(new BorderLayout());
+        treeScroll = new JScrollPane(tree);
+        leftPanel.add(treeScroll, BorderLayout.CENTER);
+        leftPanel.add(delete,BorderLayout.SOUTH);
+
+
+
+        //KEYWORDS PANEL
+        JPanel keywordsTop = new JPanel(new BorderLayout());
+        JLabel addKeywordLabel = new JLabel("Ajouter un mot-clé");
+        JLabel motsCles = new JLabel("Mots-clés");
+        keywordsTop.add(addKeywordLabel,BorderLayout.NORTH);
+        keywordsTop.add(newKeyword,BorderLayout.CENTER);
+        keywordsTop.add(motsCles,BorderLayout.SOUTH);
+        pkey.add(keywordsTop,BorderLayout.NORTH);
+
+        //CONTENT PANEL
+        JLabel contenu = new JLabel("Contenu");
+        contenuPortion = new JTextArea();
+       //contenuPortion.setMinimumSize(new Dimension(400,400));
+        JPanel editPortionPanel = new JPanel(new GridBagLayout());
+        c.anchor = GridBagConstraints.NORTHWEST;
+        c.fill = GridBagConstraints.BOTH;
+        editPortionPanel.add(contenu,c);
+        c.gridy++;
+        editPortionPanel.add(contenuPortion,c);
+
+        JPanel editButtonsPanel = new JPanel(new BorderLayout());
+        editButtonsPanel.add(deleteKeywords, BorderLayout.EAST);
+        editButtonsPanel.add(saveChanges, BorderLayout.CENTER);
+
+        rightPanel.add(editPortionPanel,BorderLayout.NORTH);
+        rightPanel.add(pkey,BorderLayout.CENTER);
+        rightPanel.add(editButtonsPanel,BorderLayout.SOUTH);
+        rightScroll = new JScrollPane(rightPanel);
+
+        treeScroll.getVerticalScrollBar().setValue(0);
+        rightScroll.getHorizontalScrollBar().setValue(0);
         c.gridy=0;
         c.gridx=0;
-        c.gridwidth=2;
-        c.insets = new Insets(50, 0, 0, 0);
+
         c.anchor=GridBagConstraints.NORTHWEST;
         c.fill = GridBagConstraints.BOTH;
-        JPanel pCenter = new JPanel(new BorderLayout());
-        pkey.setMinimumSize(new Dimension(400,400));
-        pCenter.add(scroll,BorderLayout.CENTER);
-        pCenter.add(pkey, BorderLayout.EAST);
 
-        //ADDING SCROLL PANE AND DELETE BUTTON ON PANEL CONTAINER
+        //PANEL CENTER WITH --> TREE AND KEYWORD PANELS IN IT
+        pCenter = new JPanel(new GridBagLayout());
+        pCenter.add(leftPanel,c);
+        c.gridx++;
+        pCenter.add(rightScroll, c);
+        c.gridx--;
+
+
+        c.gridwidth=2;
+        c.insets = new Insets(50, 0, 0, 0);
+
+        //ADDING CENTER PANEL AND DELETE BUTTON ON PANEL CONTAINER (FlowLayout)
         JPanel main = new JPanel(new BorderLayout());
         main.add(pCenter,BorderLayout.CENTER);
-        main.add(delete,BorderLayout.SOUTH);
+        //main.add(delete,BorderLayout.SOUTH);
         jp.add(main, c);
     }
 
@@ -166,7 +219,7 @@ public class App {
                 if(treePaths == null){
                     return;
                 }
-                //------------------------- SINGLE NODE SELECTED
+                //---------------------------------------------------------- SINGLE NODE SELECTED
                 else if(treePaths.length == 1){//if only one node is selected
                     System.out.println("Une seule noeud selectioné !");
 
@@ -179,7 +232,8 @@ public class App {
                         if(selectedNode.getUserObject() instanceof categorie){
                             addPortion.setEnabled(true);
                             generateDoc.setEnabled(false);
-
+                            pkey.setVisible(false);
+                            contenuPortion.setText(selectedNode.getUserObject().toString());
                             System.out.println(((categorie) selectedNode.getUserObject()).getLibelle());
                             if (selectedNode.getLevel() - 1 == 4) {//Si un élément de profondeur max est selectionné on désactive l'ajout
                                 //addCategory.setEnabled(false);
@@ -188,10 +242,13 @@ public class App {
                             }
                         }
                         else if(selectedNode.getUserObject() instanceof portion){
+                            pkey.setVisible(true);
                             System.out.println(((portion) selectedNode.getUserObject()).getText());
                             addCategory.setEnabled(false);
                             addPortion.setEnabled(false);
                             generateDoc.setEnabled(true);
+                            showKeyWords((portion)selectedNode.getUserObject());
+                            contenuPortion.setText(((portion) selectedNode.getUserObject()).getText());
                         }
                         else{
 
@@ -213,7 +270,7 @@ public class App {
                     }
                 }
 
-                //------------------------- MULTIPLE NODES SELECTED
+                //------------------------------------------------------------------ MULTIPLE NODES SELECTED
                 else if(treePaths.length > 1){
                     System.out.println("Plusieurs noeuds selectionés !");
                     addCategory.setEnabled(false);
@@ -249,6 +306,17 @@ public class App {
 
         };
         tree.addTreeSelectionListener(treeSelectionListener);
+    }
+
+    private void showKeyWords(portion por) {
+        newKeyword.setText("tkt");
+        pkey.remove(keywordsPanel);
+        keywordsPanel = por.getKeywordsPanel();
+        pkey.add(keywordsPanel, BorderLayout.CENTER);
+        //JOptionPane.showMessageDialog(frame, keywordsPanel);
+        pkey.setEnabled(true);
+        pkey.repaint();
+        pkey.revalidate();
     }
 
     public void addCategoryListener() {

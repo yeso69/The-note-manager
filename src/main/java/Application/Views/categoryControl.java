@@ -52,7 +52,7 @@ public class categoryControl {
                 newPor = portionText.getText();
                 newPor.replaceAll(System.getProperty("line.separator"), "\n");
                 int idCat = selectedCat.getId();
-                portion por = new portion(0, newPor,idCat);
+                portion por = new portion(0, newPor,idCat, "keywords");
                 db.addPortion(por);//Add the new category to the db
                 tree.refresh();
                 d.dispose();//Close dialog
