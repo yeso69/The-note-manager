@@ -12,12 +12,12 @@ CREATE TABLE portion (
  ID integer PRIMARY KEY AUTOINCREMENT,
  message text NOT NULL,
  id_categorie integer NOT NULL CONSTRAINT fk_categorie REFERENCES categorie(id),
- keywords text NOT NULL
+ keywords text
 );
 
-INSERT INTO portion VALUES ('1','1ere portion de ouf style FDGDFG DFGDFGDF DFGDFGDFG DFGGDFG DFGTDFGDFG GDFGDFG DFGGDFFSDFSDFSDFSDFSDFSDFSDFSDFSDFSDFSDFSDFSDG', '1', "motclé1,keyword1");
-INSERT INTO portion VALUES ('2','2eme portion',  '1', "motclé1,keyword1");
-INSERT INTO portion VALUES ('3','3eme portion', '2', "Vida,loca,espagna,playa,fiesta,corrida,muchachos,hermanos,revolucion");
+INSERT INTO portion VALUES ('1','1ere portion', '1', "motclé1,keyword1");
+INSERT INTO portion VALUES ('2','2eme ration',  '1', "frite,fondue,lasagnes,coucous,pinpong,frites");
+INSERT INTO portion VALUES ('3','España amigos ! :D', '2', "Vida,loca,espagna,playa,fiesta,corrida,muchachos,hermanos,revolucion,cabron");
 INSERT INTO portion VALUES ('4','4eme portion', '2', "aller,marcher,courir,avancer,tout droit,couscous?,couloir, pk ????");
 INSERT INTO portion VALUES ('5','5eme portion', '3', "stop,fin,fini,end,trottoir");
 INSERT INTO portion VALUES ('6','6eme portion', '3', "motclé1,keyword1");

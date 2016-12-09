@@ -1,5 +1,7 @@
 package Application.Models;
 
+import Application.Views.categoryControl;
+
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +14,7 @@ public class portion {
     private String text;
     private int idCat;
     private String keywords;
+    List<JCheckBox> checkboxes;
 
     public portion(int id, String text, int idCat, String keywords) {
         this.id = id;
@@ -63,9 +66,11 @@ public class portion {
     public JPanel getKeywordsPanel() {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        List<JCheckBox> checkboxes = new ArrayList<>();
+        checkboxes = new ArrayList<>();
 
         String[] keyTrimed = keywords.split(",");
+        if(keyTrimed.length == 1 && keyTrimed[0].equals(""))//if it's emptu don't show an empty box
+            return panel;
         for(int i =0; i<keyTrimed.length;i++){
             JCheckBox box = new JCheckBox(keyTrimed[i]);
             checkboxes.add(box);
@@ -79,5 +84,51 @@ public class portion {
 
     public String getKeywords() {
         return keywords;
+    }
+
+    public void addKeywords(String keywords){
+        this.keywords+=keywords;
+    }
+
+    public void setKeywords(String keywords) {
+
+    }
+
+    public boolean updateKeywords(boolean add) {//if true we add the selected keywords if false we delete them
+        String updatedKeywords = new String();
+        String keyword = new String();
+
+
+        if(add){//SAVE CHANGES
+            int yesNo=JOptionPane.showConfirmDialog(null, "Les mot-clés non sélectionnés ne seront pas sauvegardé.\nVoulez-vous poursuivre l'enregistrement ?", "Sauvegarde", JOptionPane.YES_NO_OPTION);
+            if(yesNo==0) {//SI OUI
+                for(int i = 0; i<checkboxes.size();i++) {//concat all keyword with "," after each
+
+                    keyword = checkboxes.get(i).getText();
+                    System.out.println("Size= "+checkboxes.size()+"Keyword: "+keyword);
+                    if (checkboxes.get(i).isSelected()) {
+                            updatedKeywords += keyword+ ",";
+                    }
+                }
+            }
+            else return false;//IF NO JUST RETURN
+        }
+       else {//DELETE KEYWORDS
+            int yesNo = JOptionPane.showConfirmDialog(null, "Voulez-vous vraiment supprimer tous les mots-clés séléctionés ?", "Supprimer les mots-clés", JOptionPane.YES_NO_OPTION);
+            if (yesNo == 0) {//SI OUI
+                for (int i = 0; i < checkboxes.size(); i++) {
+                    keyword = checkboxes.get(i).getText();
+                    if (!checkboxes.get(i).isSelected())//it's a delete we just keep not selected keywords
+                        updatedKeywords += keyword + ",";
+                }
+            } else return false; //IF NO JUST RETURN
+        }
+        if(updatedKeywords.length()>=1)
+            updatedKeywords = updatedKeywords.substring(0,updatedKeywords.length()-1);//to remove the last ","
+        System.out.println("updated keywords = "+updatedKeywords);
+        //Finally we update the database thanks to the control
+        this.keywords = updatedKeywords;
+        categoryControl.updatePortion(this);
+        return true;
     }
 }

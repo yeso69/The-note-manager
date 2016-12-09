@@ -200,6 +200,27 @@ public class bdd
             System.out.println("Ajout en BDD de la portion : "+por.toString());
     }
 
+    public void updatePortion(portion por)
+    {
+
+        String requete = "UPDATE portion SET message=\'"+por.getText()+"\', keywords=\'"+por.getKeywords()+"\'";
+        requete+= " WHERE id=\'"+por.getId()+"\'";
+        try {
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement("UPDATE portion SET message=?,id_categorie=?,keywords=? WHERE id = ?");
+            preparedStatement.setString(1, por.getText());
+            preparedStatement.setInt(2, por.getIdCat());
+            preparedStatement.setString(3, por.getKeywords());
+            preparedStatement.setInt(4,por.getId());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        System.out.println("Ajout en BDD de la portion : "+por.toString());
+    }
+
+
+
     public void showAllCategories()
     {
         java.sql.ResultSet rs = null;
@@ -391,6 +412,48 @@ public class bdd
         }
         return portions;
     }
+
+    public ArrayList<portion> getPortions(String[] kWords) {
+
+
+//
+//        kWords.replace("!", "!!")
+//                .replace("%", "!%")
+//                .replace("_", "!_")
+//                .replace("[", "![");
+//        PreparedStatement pstmt = con.prepareStatement(
+//                "SELECT * FROM analysis WHERE notes LIKE ? ESCAPE '!'");
+//        pstmt.setString(1, notes + "%");
+
+        java.sql.ResultSet rs = null;
+        ArrayList<portion> portions = new ArrayList<portion>();
+
+            for(int i=0; i<kWords.length;i++){
+                try {
+                    kWords[i] = kWords[i].replace("!", "!!")
+                            .replace("%", "!%")
+                            .replace("_", "!_")
+                            .replace("[", "![");
+
+                    java.sql.PreparedStatement pstatement = connection.prepareStatement("Select * from portion where keywords like ? ESCAPE '!'");
+                    pstatement.setString(1,"%"+kWords[i]+"%");
+                    rs = pstatement.executeQuery();
+                    while (rs.next()) {
+                        int id = rs.getInt(1);
+                        String text = rs.getString(2);
+                        int idCat = 0;
+                        String keywords = rs.getString(4);
+                        portions.add(new portion(id, text, idCat, keywords));
+                        rs.close();
+                    }
+                }catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+        return portions;
+    }
+
 
     public int getId(String lib){
         int id = 0;

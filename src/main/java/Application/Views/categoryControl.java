@@ -11,6 +11,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 /**
  * Created by Yeso on 29/11/2016.
@@ -24,7 +25,7 @@ public class categoryControl {
     JButton validateCat;
     JButton validatePor;
     JDialog d;
-    bdd db;
+    static bdd db;
     Tree tree;
     String parentTitle;
     private JTextArea portionText;
@@ -247,5 +248,20 @@ public class categoryControl {
         d.setLocationRelativeTo(frame);
         d.setResizable(true);
         d.setVisible(true);
+    }
+
+    public static void updatePortion(portion por){
+//        String requete = "UPDATE portion SET message=\'"+por.getText()+"\', keywords=\'"+por.getKeywords()+"\'";
+//        requete+= " WHERE id=\'"+por.getId()+"\'";
+//        System.out.println("REQUETE __>"+requete);
+//        db.updateValue(requete);
+        db.updatePortion(por);
+    }
+
+    public ArrayList<portion> getPortionWithKeywords(String search) {
+        String[] keywords = search.split(" ");
+        ArrayList<portion> pors = new ArrayList<>();
+        pors = db.getPortions(keywords);
+        return pors;
     }
 }

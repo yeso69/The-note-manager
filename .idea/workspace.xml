@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7dafa4de-0fd5-45c5-af46-166b43897725" name="Default" comment="">
+    <list default="true" id="7dafa4de-0fd5-45c5-af46-166b43897725" name="Default" comment="----&gt; Plein de trucs">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/test.db" afterPath="$PROJECT_DIR$/db/test.db" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/img/Thumbs.db" afterPath="$PROJECT_DIR$/src/main/resources/img/Thumbs.db" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/img/p.png" afterPath="$PROJECT_DIR$/src/main/resources/img/p.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/Application/SQLite/bdd.class" afterPath="$PROJECT_DIR$/target/classes/Application/SQLite/bdd.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/data.sql" afterPath="$PROJECT_DIR$/db/data.sql" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Application/App.java" afterPath="$PROJECT_DIR$/src/main/java/Application/App.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Application/Models/portion.java" afterPath="$PROJECT_DIR$/src/main/java/Application/Models/portion.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Application/SQLite/bdd.java" afterPath="$PROJECT_DIR$/src/main/java/Application/SQLite/bdd.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Application/Views/Tree.java" afterPath="$PROJECT_DIR$/src/main/java/Application/Views/Tree.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Application/Views/categoryControl.java" afterPath="$PROJECT_DIR$/src/main/java/Application/Views/categoryControl.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -35,30 +38,61 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="bdd.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="bdd.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/Application/SQLite/bdd.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="191" column="93" selection-start-line="191" selection-start-column="93" selection-end-line="191" selection-end-column="93" />
+            <state relative-caret-position="418">
+              <caret line="445" column="0" selection-start-line="445" selection-start-column="0" selection-end-line="445" selection-end-column="0" />
               <folding>
-                <element signature="method#removeCategorie#0;class#bdd#0" expanded="false" />
+                <element signature="method#remplirDB#0;class#bdd#0" expanded="false" />
+                <element signature="method#saveDB#0;class#bdd#0" expanded="false" />
+                <element signature="method#addCategorie#0;class#bdd#0" expanded="false" />
+                <element signature="method#addPortion#0;class#bdd#0" expanded="false" />
+                <element signature="method#updatePortion#0;class#bdd#0" expanded="false" />
+                <element signature="method#showAllCategories#0;class#bdd#0" expanded="false" />
+                <element signature="method#removePortion#0;class#bdd#0" expanded="false" />
                 <element signature="method#showCategorie#0;class#bdd#0" expanded="false" />
                 <element signature="method#existCategorie#0;class#bdd#0" expanded="false" />
                 <element signature="method#existPortion#0;class#bdd#0" expanded="false" />
                 <element signature="method#getCategories#0;class#bdd#0" expanded="false" />
+                <element signature="method#getPortions#0;class#bdd#0" expanded="false" />
                 <element signature="method#getId#0;class#bdd#0" expanded="false" />
-                <marker date="1481228398263" expanded="true" signature="4044:4097" ph="INSERT INTO categorie... " />
-                <marker date="1481228398263" expanded="true" signature="4733:4798" ph="INSERT INTO portion... " />
-                <marker date="1481228398263" expanded="true" signature="5404:5427" ph="Select * fro... categorie" />
-                <marker date="1481228398263" expanded="true" signature="6569:6601" ph="DELETE FROM " />
-                <marker date="1481228398263" expanded="true" signature="7265:7304" ph="DELETE FROM " />
-                <marker date="1481228398263" expanded="true" signature="7991:8031" ph="Select * fro... categorie" />
-                <marker date="1481228398263" expanded="true" signature="8920:8960" ph="Select * fro... categorie" />
-                <marker date="1481228398263" expanded="true" signature="9687:9720" ph="Select * fro... portion" />
-                <marker date="1481228398263" expanded="true" signature="10519:10542" ph="Select * fro... categorie" />
-                <marker date="1481228398263" expanded="true" signature="11206:11227" ph="Select * fro... portion" />
-                <marker date="1481228398263" expanded="true" signature="12059:12099" ph="Select * fro... categorie" />
+                <marker date="1481273799872" expanded="true" signature="4044:4097" ph="INSERT INTO categorie... " />
+                <marker date="1481273799872" expanded="true" signature="4733:4798" ph="INSERT INTO portion... " />
+                <marker date="1481273799872" expanded="true" signature="5549:5616" ph="UPDATE porti... " />
+                <marker date="1481273799872" expanded="true" signature="6245:6268" ph="Select * fro... categorie" />
+                <marker date="1481273799872" expanded="true" signature="7410:7442" ph="DELETE FROM " />
+                <marker date="1481273799872" expanded="true" signature="8106:8145" ph="DELETE FROM " />
+                <marker date="1481273799872" expanded="true" signature="8832:8872" ph="Select * fro... categorie" />
+                <marker date="1481273799872" expanded="true" signature="9761:9801" ph="Select * fro... categorie" />
+                <marker date="1481273799872" expanded="true" signature="10528:10561" ph="Select * fro... portion" />
+                <marker date="1481273799872" expanded="true" signature="11360:11383" ph="Select * fro... categorie" />
+                <marker date="1481273799872" expanded="true" signature="12047:12068" ph="Select * fro... portion" />
+                <marker date="1481273799872" expanded="true" signature="13404:13445" ph="Select * fro... portion" />
+                <marker date="1481273799872" expanded="true" signature="13404:13447" ph="Select * fro... portion" />
+                <marker date="1481273799872" expanded="true" signature="13404:13458" ph="Select * fro... portion" />
+                <marker date="1481273799872" expanded="true" signature="14457:14497" ph="Select * fro... categorie" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FileInputStream.java" pinned="false" current-in-tab="false">
+        <entry file="jar://C:/Program Files/Java/jdk1.8.0_112/src.zip!/java/io/FileInputStream.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="743">
+              <caret line="218" column="23" selection-start-line="218" selection-start-column="23" selection-end-line="218" selection-end-column="23" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Object.java" pinned="false" current-in-tab="false">
+        <entry file="jar://C:/Program Files/Java/jdk1.8.0_112/src.zip!/java/lang/Object.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="80">
+              <caret line="381" column="29" selection-start-line="381" selection-start-column="29" selection-end-line="381" selection-end-column="29" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -66,11 +100,12 @@
       <file leaf-file-name="portion.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Application/Models/portion.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="159">
-              <caret line="79" column="33" selection-start-line="79" selection-start-column="33" selection-end-line="79" selection-end-column="33" />
+            <state relative-caret-position="410">
+              <caret line="130" column="21" selection-start-line="130" selection-start-column="21" selection-end-line="130" selection-end-column="21" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2029#2030#0" expanded="true" />
+                <element signature="method#portion#0;class#portion#0" expanded="false" />
+                <element signature="method#toString#0;class#portion#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -79,18 +114,41 @@
       <file leaf-file-name="categoryControl.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Application/Views/categoryControl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="43" column="34" selection-start-line="43" selection-start-column="34" selection-end-line="43" selection-end-column="34" />
+            <state relative-caret-position="113">
+              <caret line="183" column="45" selection-start-line="183" selection-start-column="8" selection-end-line="183" selection-end-column="67" />
               <folding>
                 <element signature="docComment;class#categoryControl#0" expanded="false" />
                 <element signature="method#categoryControl#0;class#categoryControl#0" expanded="false" />
                 <element signature="method#validateAddPor#0;class#categoryControl#0" expanded="false" />
+                <element signature="class#1182:1783" expanded="false" />
                 <element signature="method#validateAddCat#0;class#categoryControl#0" expanded="false" />
                 <element signature="method#setTextListeners#0;class#categoryControl#0" expanded="false" />
                 <element signature="method#buildPanelAddCat#0;class#categoryControl#0" expanded="false" />
                 <element signature="method#buildPanelAddPor#0;class#categoryControl#0" expanded="false" />
-                <element signature="method#newCat#0;class#categoryControl#0" expanded="false" />
                 <element signature="method#newPor#0;class#categoryControl#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="documentGenerator.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Application/Models/documentGenerator.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="113">
+              <caret line="183" column="45" selection-start-line="183" selection-start-column="39" selection-end-line="183" selection-end-column="45" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#documentGenerator#0;class#documentGenerator#0" expanded="false" />
+                <element signature="method#buildWindow#0;class#documentGenerator#0" expanded="false" />
+                <element signature="method#buildTree#0;class#documentGenerator#0" expanded="false" />
+                <element signature="method#buildInterface#0;class#documentGenerator#0" expanded="false" />
+                <element signature="method#generateHtmlFileContent#0;class#documentGenerator#0" expanded="false" />
+                <element signature="method#generateFileContent#0;class#documentGenerator#0" expanded="false" />
+                <element signature="method#generateDocListener#0;class#documentGenerator#0" expanded="false" />
+                <element signature="method#upDownListener#0;class#documentGenerator#0" expanded="false" />
+                <element signature="method#textListener#0;class#documentGenerator#0" expanded="false" />
+                <element signature="method#comboboxListener#0;class#documentGenerator#0" expanded="false" />
+                <element signature="method#radiobuttonsListener#0;class#documentGenerator#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -99,8 +157,8 @@
       <file leaf-file-name="Tree.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Application/Views/Tree.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1343">
-              <caret line="374" column="5" selection-start-line="374" selection-start-column="5" selection-end-line="374" selection-end-column="5" />
+            <state relative-caret-position="316">
+              <caret line="27" column="45" selection-start-line="27" selection-start-column="45" selection-end-line="27" selection-end-column="45" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#Tree#0;class#Tree#0" expanded="false" />
@@ -108,13 +166,12 @@
                 <element signature="method#setListener#0;class#Tree#0" expanded="false" />
                 <element signature="method#setDesign#0;class#Tree#0" expanded="false" />
                 <element signature="method#buildTree#0;class#Tree#0" expanded="false" />
-                <element signature="method#buildTree#1;class#Tree#0" expanded="false" />
                 <element signature="method#addCatNode#0;class#Tree#0" expanded="false" />
                 <element signature="method#deleteNode#0;class#Tree#0" expanded="false" />
                 <element signature="method#deleteNodes#0;class#Tree#0" expanded="false" />
-                <element signature="method#delPortionNode#0;class#Tree#0" expanded="false" />
                 <element signature="method#delCatNode#0;class#Tree#0" expanded="false" />
                 <element signature="method#refresh#0;class#Tree#0" expanded="false" />
+                <element signature="method#reloadTreeOnly#0;class#Tree#0" expanded="false" />
                 <element signature="method#addChilds#0;class#Tree#0" expanded="false" />
                 <element signature="method#addBastardsToRoot#0;class#Tree#0" expanded="false" />
                 <element signature="method#expandAllNodes#0;class#Tree#0" expanded="false" />
@@ -125,46 +182,29 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="categorie.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Application/Models/categorie.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="629">
-              <caret line="58" column="5" selection-start-line="58" selection-start-column="5" selection-end-line="58" selection-end-column="5" />
-              <folding>
-                <element signature="method#categorie#0;class#categorie#0" expanded="false" />
-                <element signature="e#831#832#0" expanded="true" />
-                <element signature="e#866#867#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="App.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="App.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Application/App.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1020">
-              <caret line="104" column="67" selection-start-line="104" selection-start-column="67" selection-end-line="104" selection-end-column="67" />
+            <state relative-caret-position="318">
+              <caret line="483" column="25" selection-start-line="483" selection-start-column="25" selection-end-line="483" selection-end-column="26" />
               <folding>
+                <element signature="imports" expanded="true" />
                 <element signature="docComment;class#App#0" expanded="false" />
                 <element signature="method#App#0;class#App#0" expanded="false" />
                 <element signature="method#buildWindow#0;class#App#0" expanded="false" />
+                <element signature="method#buildInterface#0;class#App#0" expanded="false" />
                 <element signature="method#treeListeners#0;class#App#0" expanded="false" />
                 <element signature="method#showKeyWords#0;class#App#0" expanded="false" />
                 <element signature="method#addCategoryListener#0;class#App#0" expanded="false" />
+                <element signature="method#saveChangesListener#0;class#App#0" expanded="false" />
+                <element signature="method#deleteKeywordsListener#0;class#App#0" expanded="false" />
+                <element signature="method#newKeywordsListener#0;class#App#0" expanded="false" />
+                <element signature="method#searchListener#0;class#App#0" expanded="false" />
                 <element signature="method#addPortionListener#0;class#App#0" expanded="false" />
                 <element signature="method#deleteListener#0;class#App#0" expanded="false" />
+                <element signature="method#componentListener#0;class#App#0" expanded="false" />
                 <element signature="method#generateDocumentListener#0;class#App#0" expanded="false" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="data.sql" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/db/data.sql">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="21" column="80" selection-start-line="21" selection-start-column="80" selection-end-line="21" selection-end-column="80" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -218,11 +258,11 @@
         <option value="$PROJECT_DIR$/src/main/java/Application/main.java" />
         <option value="$PROJECT_DIR$/src/main/java/Application/Models/SimpleLayers.java" />
         <option value="$PROJECT_DIR$/src/main/java/Application/Views/Tree.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Application/Models/documentGenerator.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Application/Views/categoryControl.java" />
-        <option value="$PROJECT_DIR$/db/data.sql" />
         <option value="$PROJECT_DIR$/src/main/java/Application/Models/portion.java" />
+        <option value="$PROJECT_DIR$/db/data.sql" />
+        <option value="$PROJECT_DIR$/src/main/java/Application/Views/categoryControl.java" />
         <option value="$PROJECT_DIR$/src/main/java/Application/SQLite/bdd.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Application/Models/documentGenerator.java" />
         <option value="$PROJECT_DIR$/src/main/java/Application/App.java" />
       </list>
     </option>
@@ -299,6 +339,8 @@
     </navigator>
     <panes>
       <pane id="Scratches" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -317,7 +359,151 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Projet_JavaIUT" />
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="&lt; 1.8 &gt;" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="projet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="&lt; 1.8 &gt;" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rt.jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="projet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="&lt; 1.8 &gt;" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rt.jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="javax" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="projet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="&lt; 1.8 &gt;" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rt.jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="javax" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="swing" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="projet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="&lt; 1.8 &gt;" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rt.jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="projet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="&lt; 1.8 &gt;" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rt.jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lang" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="projet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="&lt; 1.8 &gt;" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rt.jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="io" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -328,50 +514,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Projet_JavaIUT" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="target" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="projet" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Projet_JavaIUT" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="target" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="classes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="projet" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Projet_JavaIUT" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="target" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="classes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="img" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -390,36 +532,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="img" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="projet" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Projet_JavaIUT" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -459,14 +571,102 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Application" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="projet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Projet_JavaIUT" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Application" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SQLite" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="projet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Projet_JavaIUT" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Application" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Models" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="projet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Projet_JavaIUT" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="db" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1068,7 +1268,8 @@
       <workItem from="1481128015464" duration="1264000" />
       <workItem from="1481153498093" duration="4287000" />
       <workItem from="1481189944838" duration="18666000" />
-      <workItem from="1481227544267" duration="5455000" />
+      <workItem from="1481227544267" duration="39046000" />
+      <workItem from="1481271779707" duration="7163000" />
     </task>
     <task id="LOCAL-00001" summary="Ajout structure projet + catégorie. SQL Fonctionne">
       <created>1479897374492</created>
@@ -1161,11 +1362,18 @@
       <option name="project" value="LOCAL" />
       <updated>1481193428294</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="--&gt; Ajout des mots clés aux portions en bdd&#10;--&gt; Ajout du panneau latéral droit d'édition&#10;--&gt; Création de l'interface d'édition avec prise en charge des mots clés">
+      <created>1481235156958</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1481235156958</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="237791000" />
+    <option name="totallyTimeSpent" value="278545000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -1178,7 +1386,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3280757" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.47634068" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33280757" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32744783" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1188,7 +1396,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.7066246" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.48107255" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1276,11 +1484,33 @@
     <MESSAGE value="Modification : Possibilité d'ajout de catégorie avec profondeur infinie." />
     <MESSAGE value="--&gt; Boutons up et down créer pour choisir l'ordre des cat/portions du meme niveau&#10;L'affichage des boutons n'est pas dans sa version finale&#10;&#10;Remove de pas mal de sout" />
     <MESSAGE value="--&gt; Boutons up et down désactiver sur root / plus de nullpointer si rien n'est selectioné" />
-    <option name="LAST_COMMIT_MESSAGE" value="--&gt; Boutons up et down désactiver sur root / plus de nullpointer si rien n'est selectioné" />
+    <MESSAGE value="--&gt; Ajout des mots clés aux portions en bdd&#10;--&gt; Ajout du panneau latéral droit d'édition&#10;--&gt; Création de l'interface d'édition avec prise en charge des mots clés" />
+    <MESSAGE value="----&gt; Plein de trucs" />
+    <option name="LAST_COMMIT_MESSAGE" value="----&gt; Plein de trucs" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="129" />
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Application/SQLite/bdd.java</url>
+          <line>445</line>
+          <properties />
+          <option name="timeStamp" value="149" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Application/App.java</url>
+          <line>491</line>
+          <properties />
+          <option name="timeStamp" value="152" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Application/App.java</url>
+          <line>495</line>
+          <properties />
+          <option name="timeStamp" value="153" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="154" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
@@ -1294,41 +1524,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/Application/SQLite/bdd.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Application/Models/categorie.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="20" column="5" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
-          <folding>
-            <element signature="method#categorie#0;class#categorie#0" expanded="false" />
-            <element signature="e#831#832#0" expanded="true" />
-            <element signature="e#866#867#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="12" column="36" selection-start-line="12" selection-start-column="36" selection-end-line="12" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Application/main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="15" column="42" selection-start-line="15" selection-start-column="42" selection-end-line="15" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/db/data.sql">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
@@ -1348,9 +1543,22 @@
         <state relative-caret-position="324">
           <caret line="20" column="5" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
           <folding>
+            <element signature="imports" expanded="false" />
             <element signature="method#categorie#0;class#categorie#0" expanded="false" />
-            <element signature="e#831#832#0" expanded="true" />
-            <element signature="e#866#867#0" expanded="true" />
+            <element signature="e#712#713#0" expanded="false" />
+            <element signature="e#785#786#0" expanded="false" />
+            <element signature="e#831#832#0" expanded="false" />
+            <element signature="e#866#867#0" expanded="false" />
+            <element signature="e#892#893#0" expanded="false" />
+            <element signature="e#917#918#0" expanded="false" />
+            <element signature="e#954#955#0" expanded="false" />
+            <element signature="e#982#983#0" expanded="false" />
+            <element signature="e#1016#1017#0" expanded="false" />
+            <element signature="e#1046#1047#0" expanded="false" />
+            <element signature="e#1092#1093#0" expanded="false" />
+            <element signature="e#1130#1131#0" expanded="false" />
+            <element signature="e#1163#1164#0" expanded="false" />
+            <element signature="e#1195#1196#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1392,9 +1600,22 @@
         <state relative-caret-position="90">
           <caret line="5" column="22" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
           <folding>
+            <element signature="imports" expanded="false" />
             <element signature="method#categorie#0;class#categorie#0" expanded="false" />
-            <element signature="e#831#832#0" expanded="true" />
-            <element signature="e#866#867#0" expanded="true" />
+            <element signature="e#712#713#0" expanded="false" />
+            <element signature="e#785#786#0" expanded="false" />
+            <element signature="e#831#832#0" expanded="false" />
+            <element signature="e#866#867#0" expanded="false" />
+            <element signature="e#892#893#0" expanded="false" />
+            <element signature="e#917#918#0" expanded="false" />
+            <element signature="e#954#955#0" expanded="false" />
+            <element signature="e#982#983#0" expanded="false" />
+            <element signature="e#1016#1017#0" expanded="false" />
+            <element signature="e#1046#1047#0" expanded="false" />
+            <element signature="e#1092#1093#0" expanded="false" />
+            <element signature="e#1130#1131#0" expanded="false" />
+            <element signature="e#1163#1164#0" expanded="false" />
+            <element signature="e#1195#1196#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1517,20 +1738,120 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Application/Models/categorie.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="629">
+          <caret line="58" column="5" selection-start-line="58" selection-start-column="5" selection-end-line="58" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="method#categorie#0;class#categorie#0" expanded="false" />
+            <element signature="e#712#713#0" expanded="false" />
+            <element signature="e#785#786#0" expanded="false" />
+            <element signature="e#831#832#0" expanded="false" />
+            <element signature="e#866#867#0" expanded="false" />
+            <element signature="e#892#893#0" expanded="false" />
+            <element signature="e#917#918#0" expanded="false" />
+            <element signature="e#954#955#0" expanded="false" />
+            <element signature="e#982#983#0" expanded="false" />
+            <element signature="e#1016#1017#0" expanded="false" />
+            <element signature="e#1046#1047#0" expanded="false" />
+            <element signature="e#1092#1093#0" expanded="false" />
+            <element signature="e#1130#1131#0" expanded="false" />
+            <element signature="e#1163#1164#0" expanded="false" />
+            <element signature="e#1195#1196#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db/data.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="178">
+          <caret line="24" column="73" selection-start-line="24" selection-start-column="73" selection-end-line="24" selection-end-column="73" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_112/src.zip!/javax/swing/JTree.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="164">
+          <caret line="145" column="13" selection-start-line="145" selection-start-column="13" selection-end-line="145" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_112/src.zip!/javax/swing/JTextField.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="720" column="0" selection-start-line="720" selection-start-column="0" selection-end-line="720" selection-end-column="0" />
+          <folding>
+            <element signature="e#26025#26026#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Application/App.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="318">
+          <caret line="483" column="25" selection-start-line="483" selection-start-column="25" selection-end-line="483" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="docComment;class#App#0" expanded="false" />
+            <element signature="method#App#0;class#App#0" expanded="false" />
+            <element signature="method#buildWindow#0;class#App#0" expanded="false" />
+            <element signature="method#buildInterface#0;class#App#0" expanded="false" />
+            <element signature="method#treeListeners#0;class#App#0" expanded="false" />
+            <element signature="method#showKeyWords#0;class#App#0" expanded="false" />
+            <element signature="method#addCategoryListener#0;class#App#0" expanded="false" />
+            <element signature="method#saveChangesListener#0;class#App#0" expanded="false" />
+            <element signature="method#deleteKeywordsListener#0;class#App#0" expanded="false" />
+            <element signature="method#newKeywordsListener#0;class#App#0" expanded="false" />
+            <element signature="method#searchListener#0;class#App#0" expanded="false" />
+            <element signature="method#addPortionListener#0;class#App#0" expanded="false" />
+            <element signature="method#deleteListener#0;class#App#0" expanded="false" />
+            <element signature="method#componentListener#0;class#App#0" expanded="false" />
+            <element signature="method#generateDocumentListener#0;class#App#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Application/Views/Tree.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="316">
+          <caret line="27" column="45" selection-start-line="27" selection-start-column="45" selection-end-line="27" selection-end-column="45" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#Tree#0;class#Tree#0" expanded="false" />
+            <element signature="method#createImageIcon#0;class#Tree#0" expanded="false" />
+            <element signature="method#setListener#0;class#Tree#0" expanded="false" />
+            <element signature="method#setDesign#0;class#Tree#0" expanded="false" />
+            <element signature="method#buildTree#0;class#Tree#0" expanded="false" />
+            <element signature="method#addCatNode#0;class#Tree#0" expanded="false" />
+            <element signature="method#deleteNode#0;class#Tree#0" expanded="false" />
+            <element signature="method#deleteNodes#0;class#Tree#0" expanded="false" />
+            <element signature="method#delCatNode#0;class#Tree#0" expanded="false" />
+            <element signature="method#refresh#0;class#Tree#0" expanded="false" />
+            <element signature="method#reloadTreeOnly#0;class#Tree#0" expanded="false" />
+            <element signature="method#addChilds#0;class#Tree#0" expanded="false" />
+            <element signature="method#addBastardsToRoot#0;class#Tree#0" expanded="false" />
+            <element signature="method#expandAllNodes#0;class#Tree#0" expanded="false" />
+            <element signature="class#MyRenderer#0;class#Tree#0" expanded="false" />
+            <element signature="method#moveNode#0;class#Tree#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Application/Models/documentGenerator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-143">
-          <caret line="170" column="39" selection-start-line="170" selection-start-column="39" selection-end-line="170" selection-end-column="39" />
+        <state relative-caret-position="113">
+          <caret line="183" column="45" selection-start-line="183" selection-start-column="39" selection-end-line="183" selection-end-column="45" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#documentGenerator#0;class#documentGenerator#0" expanded="false" />
             <element signature="method#buildWindow#0;class#documentGenerator#0" expanded="false" />
             <element signature="method#buildTree#0;class#documentGenerator#0" expanded="false" />
             <element signature="method#buildInterface#0;class#documentGenerator#0" expanded="false" />
-            <element signature="method#writeFile#0;class#documentGenerator#0" expanded="false" />
             <element signature="method#generateHtmlFileContent#0;class#documentGenerator#0" expanded="false" />
             <element signature="method#generateFileContent#0;class#documentGenerator#0" expanded="false" />
-            <element signature="method#onClose#0;class#documentGenerator#0" expanded="false" />
             <element signature="method#generateDocListener#0;class#documentGenerator#0" expanded="false" />
             <element signature="method#upDownListener#0;class#documentGenerator#0" expanded="false" />
             <element signature="method#textListener#0;class#documentGenerator#0" expanded="false" />
@@ -1542,120 +1863,83 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Application/Views/categoryControl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="43" column="34" selection-start-line="43" selection-start-column="34" selection-end-line="43" selection-end-column="34" />
+        <state relative-caret-position="113">
+          <caret line="183" column="45" selection-start-line="183" selection-start-column="8" selection-end-line="183" selection-end-column="67" />
           <folding>
             <element signature="docComment;class#categoryControl#0" expanded="false" />
             <element signature="method#categoryControl#0;class#categoryControl#0" expanded="false" />
             <element signature="method#validateAddPor#0;class#categoryControl#0" expanded="false" />
+            <element signature="class#1182:1783" expanded="false" />
             <element signature="method#validateAddCat#0;class#categoryControl#0" expanded="false" />
             <element signature="method#setTextListeners#0;class#categoryControl#0" expanded="false" />
             <element signature="method#buildPanelAddCat#0;class#categoryControl#0" expanded="false" />
             <element signature="method#buildPanelAddPor#0;class#categoryControl#0" expanded="false" />
-            <element signature="method#newCat#0;class#categoryControl#0" expanded="false" />
             <element signature="method#newPor#0;class#categoryControl#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Application/Views/Tree.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1343">
-          <caret line="374" column="5" selection-start-line="374" selection-start-column="5" selection-end-line="374" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#Tree#0;class#Tree#0" expanded="false" />
-            <element signature="method#createImageIcon#0;class#Tree#0" expanded="false" />
-            <element signature="method#setListener#0;class#Tree#0" expanded="false" />
-            <element signature="method#setDesign#0;class#Tree#0" expanded="false" />
-            <element signature="method#buildTree#0;class#Tree#0" expanded="false" />
-            <element signature="method#buildTree#1;class#Tree#0" expanded="false" />
-            <element signature="method#addCatNode#0;class#Tree#0" expanded="false" />
-            <element signature="method#deleteNode#0;class#Tree#0" expanded="false" />
-            <element signature="method#deleteNodes#0;class#Tree#0" expanded="false" />
-            <element signature="method#delPortionNode#0;class#Tree#0" expanded="false" />
-            <element signature="method#delCatNode#0;class#Tree#0" expanded="false" />
-            <element signature="method#refresh#0;class#Tree#0" expanded="false" />
-            <element signature="method#addChilds#0;class#Tree#0" expanded="false" />
-            <element signature="method#addBastardsToRoot#0;class#Tree#0" expanded="false" />
-            <element signature="method#expandAllNodes#0;class#Tree#0" expanded="false" />
-            <element signature="class#MyRenderer#0;class#Tree#0" expanded="false" />
-            <element signature="method#moveNode#0;class#Tree#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Application/Models/categorie.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="629">
-          <caret line="58" column="5" selection-start-line="58" selection-start-column="5" selection-end-line="58" selection-end-column="5" />
-          <folding>
-            <element signature="method#categorie#0;class#categorie#0" expanded="false" />
-            <element signature="e#831#832#0" expanded="true" />
-            <element signature="e#866#867#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Application/Models/portion.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="159">
-          <caret line="79" column="33" selection-start-line="79" selection-start-column="33" selection-end-line="79" selection-end-column="33" />
+        <state relative-caret-position="410">
+          <caret line="130" column="21" selection-start-line="130" selection-start-column="21" selection-end-line="130" selection-end-column="21" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2029#2030#0" expanded="true" />
+            <element signature="method#portion#0;class#portion#0" expanded="false" />
+            <element signature="method#toString#0;class#portion#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/db/data.sql">
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_112/src.zip!/java/lang/Object.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="21" column="80" selection-start-line="21" selection-start-column="80" selection-end-line="21" selection-end-column="80" />
+        <state relative-caret-position="80">
+          <caret line="381" column="29" selection-start-line="381" selection-start-column="29" selection-end-line="381" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_112/src.zip!/java/io/FileInputStream.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="743">
+          <caret line="218" column="23" selection-start-line="218" selection-start-column="23" selection-end-line="218" selection-end-column="23" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Application/SQLite/bdd.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="191" column="93" selection-start-line="191" selection-start-column="93" selection-end-line="191" selection-end-column="93" />
+        <state relative-caret-position="418">
+          <caret line="445" column="0" selection-start-line="445" selection-start-column="0" selection-end-line="445" selection-end-column="0" />
           <folding>
-            <element signature="method#removeCategorie#0;class#bdd#0" expanded="false" />
+            <element signature="method#remplirDB#0;class#bdd#0" expanded="false" />
+            <element signature="method#saveDB#0;class#bdd#0" expanded="false" />
+            <element signature="method#addCategorie#0;class#bdd#0" expanded="false" />
+            <element signature="method#addPortion#0;class#bdd#0" expanded="false" />
+            <element signature="method#updatePortion#0;class#bdd#0" expanded="false" />
+            <element signature="method#showAllCategories#0;class#bdd#0" expanded="false" />
+            <element signature="method#removePortion#0;class#bdd#0" expanded="false" />
             <element signature="method#showCategorie#0;class#bdd#0" expanded="false" />
             <element signature="method#existCategorie#0;class#bdd#0" expanded="false" />
             <element signature="method#existPortion#0;class#bdd#0" expanded="false" />
             <element signature="method#getCategories#0;class#bdd#0" expanded="false" />
+            <element signature="method#getPortions#0;class#bdd#0" expanded="false" />
             <element signature="method#getId#0;class#bdd#0" expanded="false" />
-            <marker date="1481228398263" expanded="true" signature="4044:4097" ph="INSERT INTO categorie... " />
-            <marker date="1481228398263" expanded="true" signature="4733:4798" ph="INSERT INTO portion... " />
-            <marker date="1481228398263" expanded="true" signature="5404:5427" ph="Select * fro... categorie" />
-            <marker date="1481228398263" expanded="true" signature="6569:6601" ph="DELETE FROM " />
-            <marker date="1481228398263" expanded="true" signature="7265:7304" ph="DELETE FROM " />
-            <marker date="1481228398263" expanded="true" signature="7991:8031" ph="Select * fro... categorie" />
-            <marker date="1481228398263" expanded="true" signature="8920:8960" ph="Select * fro... categorie" />
-            <marker date="1481228398263" expanded="true" signature="9687:9720" ph="Select * fro... portion" />
-            <marker date="1481228398263" expanded="true" signature="10519:10542" ph="Select * fro... categorie" />
-            <marker date="1481228398263" expanded="true" signature="11206:11227" ph="Select * fro... portion" />
-            <marker date="1481228398263" expanded="true" signature="12059:12099" ph="Select * fro... categorie" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Application/App.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1020">
-          <caret line="104" column="67" selection-start-line="104" selection-start-column="67" selection-end-line="104" selection-end-column="67" />
-          <folding>
-            <element signature="docComment;class#App#0" expanded="false" />
-            <element signature="method#App#0;class#App#0" expanded="false" />
-            <element signature="method#buildWindow#0;class#App#0" expanded="false" />
-            <element signature="method#treeListeners#0;class#App#0" expanded="false" />
-            <element signature="method#showKeyWords#0;class#App#0" expanded="false" />
-            <element signature="method#addCategoryListener#0;class#App#0" expanded="false" />
-            <element signature="method#addPortionListener#0;class#App#0" expanded="false" />
-            <element signature="method#deleteListener#0;class#App#0" expanded="false" />
-            <element signature="method#generateDocumentListener#0;class#App#0" expanded="false" />
+            <marker date="1481273799872" expanded="true" signature="4044:4097" ph="INSERT INTO categorie... " />
+            <marker date="1481273799872" expanded="true" signature="4733:4798" ph="INSERT INTO portion... " />
+            <marker date="1481273799872" expanded="true" signature="5549:5616" ph="UPDATE porti... " />
+            <marker date="1481273799872" expanded="true" signature="6245:6268" ph="Select * fro... categorie" />
+            <marker date="1481273799872" expanded="true" signature="7410:7442" ph="DELETE FROM " />
+            <marker date="1481273799872" expanded="true" signature="8106:8145" ph="DELETE FROM " />
+            <marker date="1481273799872" expanded="true" signature="8832:8872" ph="Select * fro... categorie" />
+            <marker date="1481273799872" expanded="true" signature="9761:9801" ph="Select * fro... categorie" />
+            <marker date="1481273799872" expanded="true" signature="10528:10561" ph="Select * fro... portion" />
+            <marker date="1481273799872" expanded="true" signature="11360:11383" ph="Select * fro... categorie" />
+            <marker date="1481273799872" expanded="true" signature="12047:12068" ph="Select * fro... portion" />
+            <marker date="1481273799872" expanded="true" signature="13404:13445" ph="Select * fro... portion" />
+            <marker date="1481273799872" expanded="true" signature="13404:13447" ph="Select * fro... portion" />
+            <marker date="1481273799872" expanded="true" signature="13404:13458" ph="Select * fro... portion" />
+            <marker date="1481273799872" expanded="true" signature="14457:14497" ph="Select * fro... categorie" />
           </folding>
         </state>
       </provider>

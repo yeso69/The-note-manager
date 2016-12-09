@@ -183,10 +183,12 @@ public class Tree {
 
     public void refresh(){
         DefaultTreeModel model = (DefaultTreeModel)tree.getModel();
+        int[] selected = tree.getSelectionRows();
         root.removeAllChildren();//Remove the old tree model except root we need to keep
         buildTree();//Build The tree with the updated ids
         model.reload(root);//refresh the tree
         expandAllNodes(tree,0,tree.getRowCount());
+        tree.setSelectionRows(selected);
     }
 
     public void reloadTreeOnly(){
@@ -374,8 +376,13 @@ public class Tree {
         }
     }
 
+    public DefaultMutableTreeNode getSelectedNode(){
+        return (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
+    }
 
-
+    public DefaultMutableTreeNode getRoot() {
+        return root;
+    }
 }
 
 

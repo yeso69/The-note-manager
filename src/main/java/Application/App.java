@@ -13,8 +13,7 @@ import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreePath;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.util.ArrayList;
 
 /**
@@ -30,18 +29,27 @@ public class App {
     private JButton deleteKeywords;
     private JTextField searchBar;
     private JTextField newKeyword;
-    JTextArea contenuPortion;
+    private JTextArea contenuPortion;
     private JTree tree;
     private JLabel search;
+    private JLabel portionDeTexte;
+    private JLabel libelleCategorie;
+    JPanel editTitle;
     private JPanel jp;
     private JPanel rightPanel;
     private JPanel pCenter;
     private JPanel pkey;
     private JPanel keywordsPanel;
+    private JPanel panelEdit;
+    JPanel leftPanel;
+    private ArrayList<String> keywords;
     private categoryControl catControl;
     JScrollPane rightScroll;
     JScrollPane treeScroll;
     Tree catTree;
+    Tree searchTree;
+    String keywordsExemple = new String("exemple,de,mots-clés,multiples");
+    String searchExemple = new String("Recherche par mots-clés");
     ArrayList<DefaultMutableTreeNode> selectedNodes;
 
     bdd db;
@@ -58,10 +66,14 @@ public class App {
         addPortionListener();
         deleteListener();
         generateDocumentListener();
-
+        saveChangesListener();
+        deleteKeywordsListener();
+        newKeywordsListener();
+        componentListener();
+        //searchListener();
 
         catControl = new categoryControl(db,catTree);
-        frame.setMinimumSize(new Dimension(600,400));
+        frame.setMinimumSize(new Dimension(700,650));
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
@@ -82,6 +94,8 @@ public class App {
         jp = new JPanel(gridBagLayout);
         keywordsPanel = new JPanel();//will be built dynamicaly
         rightPanel = new JPanel(new BorderLayout());
+        panelEdit = new JPanel(new BorderLayout());
+        editTitle = new JPanel(new BorderLayout());
         addCategory = new JButton("Ajouter Categorie");
         addPortion = new JButton("Ajouter Portion");
         generateDoc = new JButton("Générer un document");
@@ -89,11 +103,18 @@ public class App {
         deleteKeywords = new JButton(Tree.createImageIcon("/img/trash.png",25));
         searchBar = new JTextField();
         newKeyword = new JTextField("");
+        searchBar = new JTextField(searchExemple);
         search = new JLabel("Recherche");
         delete = new JButton("Supprimer");
 
         //KEYWORD PANEL
         pkey = new JPanel(new BorderLayout());
+        //create new Font
+        Font font = new Font("Helvetica", Font.ITALIC,12);
+
+        //set font for JTextField
+        newKeyword.setFont(font);
+        searchBar.setFont(font);
         //rightPanel.setMinimumSize(new Dimension(900,0));
 
         GridBagConstraints c = new GridBagConstraints();
@@ -102,6 +123,8 @@ public class App {
         ImageIcon editIcon = Tree.createImageIcon("/img/edit.png",25);;
         ImageIcon fileIcon = Tree.createImageIcon("/img/file.png",25);
         ImageIcon removeIcon = Tree.createImageIcon("/img/trash.png",25);
+        ImageIcon keywordAddIcon = Tree.createImageIcon("/img/keywordAdd.png",25);
+        ImageIcon keywordIcon = Tree.createImageIcon("/img/keyword.png",25);
         saveChanges.setIcon(Tree.createImageIcon("/img/save.png",25));
         addCategory.setIcon(catIcon);
         addPortion.setIcon(porIcon);
@@ -144,8 +167,9 @@ public class App {
         //ADDIND TREE IN A SCROLL PANE
         catTree = new Tree(db,null,null,null);
         tree = catTree.getTree();
-        JPanel leftPanel = new JPanel(new BorderLayout());
+        leftPanel = new JPanel(new BorderLayout());
         treeScroll = new JScrollPane(tree);
+        leftPanel.add(searchBar,BorderLayout.NORTH);
         leftPanel.add(treeScroll, BorderLayout.CENTER);
         leftPanel.add(delete,BorderLayout.SOUTH);
 
@@ -153,21 +177,32 @@ public class App {
 
         //KEYWORDS PANEL
         JPanel keywordsTop = new JPanel(new BorderLayout());
-        JLabel addKeywordLabel = new JLabel("Ajouter un mot-clé");
+        JLabel addKeywordLabel = new JLabel("Ajouter des mot-clé");
         JLabel motsCles = new JLabel("Mots-clés");
         keywordsTop.add(addKeywordLabel,BorderLayout.NORTH);
         keywordsTop.add(newKeyword,BorderLayout.CENTER);
         keywordsTop.add(motsCles,BorderLayout.SOUTH);
         pkey.add(keywordsTop,BorderLayout.NORTH);
 
-        //CONTENT PANEL
-        JLabel contenu = new JLabel("Contenu");
+        //CONTENT MINI-PANEL
+        portionDeTexte = new JLabel("Portion de texte");
+        portionDeTexte.setIcon(porIcon);
+        portionDeTexte.setVisible(false);
+        libelleCategorie = new JLabel("Libéllé de la catégorie");
+        addKeywordLabel.setIcon(keywordAddIcon);
+        motsCles.setIcon(keywordIcon);
+        libelleCategorie.setIcon(catIcon);
+        editTitle.add(libelleCategorie,BorderLayout.NORTH);
+        editTitle.add(portionDeTexte,BorderLayout.CENTER);
+
+
+        addKeywordLabel.setIcon(keywordAddIcon);
         contenuPortion = new JTextArea();
        //contenuPortion.setMinimumSize(new Dimension(400,400));
         JPanel editPortionPanel = new JPanel(new GridBagLayout());
         c.anchor = GridBagConstraints.NORTHWEST;
         c.fill = GridBagConstraints.BOTH;
-        editPortionPanel.add(contenu,c);
+        editPortionPanel.add(editTitle,c);
         c.gridy++;
         editPortionPanel.add(contenuPortion,c);
 
@@ -177,11 +212,38 @@ public class App {
 
         rightPanel.add(editPortionPanel,BorderLayout.NORTH);
         rightPanel.add(pkey,BorderLayout.CENTER);
-        rightPanel.add(editButtonsPanel,BorderLayout.SOUTH);
         rightScroll = new JScrollPane(rightPanel);
 
         treeScroll.getVerticalScrollBar().setValue(0);
         rightScroll.getHorizontalScrollBar().setValue(0);
+
+
+
+        panelEdit.add(rightScroll,BorderLayout.CENTER);
+        panelEdit.add(editButtonsPanel,BorderLayout.SOUTH);
+
+        panelEdit.setBorder(BorderFactory.createEmptyBorder(
+                0, //top
+                5,     //left
+                5, //bottom
+                5));   //right
+        leftPanel.setBorder(BorderFactory.createEmptyBorder(
+                0, //top
+                5,     //left
+                5, //bottom
+                5));   //right
+
+        pkey.setBorder(BorderFactory.createEmptyBorder(
+                20, //top
+                0,     //left
+                0, //bottom
+                0));   //right
+        motsCles.setBorder(BorderFactory.createEmptyBorder(
+                20, //top
+                0,     //left
+                0, //bottom
+                0));   //right
+
         c.gridy=0;
         c.gridx=0;
 
@@ -189,10 +251,10 @@ public class App {
         c.fill = GridBagConstraints.BOTH;
 
         //PANEL CENTER WITH --> TREE AND KEYWORD PANELS IN IT
-        pCenter = new JPanel(new GridBagLayout());
-        pCenter.add(leftPanel,c);
+        pCenter = new JPanel(new BorderLayout());
+        pCenter.add(leftPanel,BorderLayout.CENTER);
         c.gridx++;
-        pCenter.add(rightScroll, c);
+        pCenter.add(panelEdit, BorderLayout.EAST);
         c.gridx--;
 
 
@@ -224,12 +286,16 @@ public class App {
                     System.out.println("Une seule noeud selectioné !");
 
                     //we get selected node + root
-                    DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
+                    DefaultMutableTreeNode selectedNode = catTree.getSelectedNode();
                     DefaultMutableTreeNode root = (DefaultMutableTreeNode) tree.getModel().getRoot();
 
                     if (selectedNode != null) {//if something is selected we can delete
                         delete.setEnabled(true);
                         if(selectedNode.getUserObject() instanceof categorie){
+                            //SWITCH TITLE TO PORTION
+                            portionDeTexte.setVisible(false);
+                            libelleCategorie.setVisible(true);
+                            editTitle.repaint();
                             addPortion.setEnabled(true);
                             generateDoc.setEnabled(false);
                             pkey.setVisible(false);
@@ -242,6 +308,11 @@ public class App {
                             }
                         }
                         else if(selectedNode.getUserObject() instanceof portion){
+                            //SWITCH TITLE TO PORTION
+                            libelleCategorie.setVisible(false);
+                            portionDeTexte.setVisible(true);
+                           // editTitle.add(portionDeTexte,BorderLayout.NORTH);
+                            editTitle.repaint();
                             pkey.setVisible(true);
                             System.out.println(((portion) selectedNode.getUserObject()).getText());
                             addCategory.setEnabled(false);
@@ -309,21 +380,25 @@ public class App {
     }
 
     private void showKeyWords(portion por) {
-        newKeyword.setText("tkt");
+        newKeyword.setText(keywordsExemple);
         pkey.remove(keywordsPanel);
         keywordsPanel = por.getKeywordsPanel();
         pkey.add(keywordsPanel, BorderLayout.CENTER);
-        //JOptionPane.showMessageDialog(frame, keywordsPanel);
         pkey.setEnabled(true);
         pkey.repaint();
         pkey.revalidate();
+        frame.revalidate();
+        frame.repaint();
+
+
+
     }
 
     public void addCategoryListener() {
         //Quand le bouton Ajouter Catégorie est cliqué on affiche un Jdialog d'ajout
         addCategory.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
+                DefaultMutableTreeNode selectedNode = catTree.getSelectedNode();
                 if (selectedNode == null){//Avoid null pointer exception if nothing is selected
                     return;
                 }
@@ -334,11 +409,117 @@ public class App {
         });
     }
 
+    public void saveChangesListener()
+    {
+        //Quand le bouton Ajouter Catégorie est cliqué on affiche un Jdialog d'ajout
+        saveChanges.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                DefaultMutableTreeNode selectedNode = catTree.getSelectedNode();
+                if (selectedNode == null){//Avoid null pointer exception if nothing is selected
+                    return;
+                }
+                if(selectedNode.getUserObject() instanceof portion) {
+                    portion por = (portion)selectedNode.getUserObject();
+                    por.setText(contenuPortion.getText());
+                    if(por.updateKeywords(true)){//if user validated this save
+                        catTree.refresh();
+                        System.out.println("depth "+selectedNode.getLevel());
+                        //showKeyWords((portion)selectedNode.getUserObject());
+                    }
+                }
+            }
+        });
+    }
+
+
+    public void deleteKeywordsListener()
+    {
+        //Quand le bouton Ajouter Catégorie est cliqué on affiche un Jdialog d'ajout
+        deleteKeywords.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                DefaultMutableTreeNode selectedNode = catTree.getSelectedNode();;
+                if (selectedNode == null){//Avoid null pointer exception if nothing is selected
+                    return;
+                }
+                if(selectedNode.getUserObject() instanceof portion) {
+                    portion por = (portion)selectedNode.getUserObject();
+                    if(por.updateKeywords(false)){//if user validated the deletion
+                        catTree.refresh();
+                        //showKeyWords((portion)selectedNode.getUserObject());
+                    }
+                }
+            }
+        });
+    }
+
+    public void newKeywordsListener() {
+        newKeyword.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e) {
+                portion por = (portion) catTree.getSelectedNode().getUserObject();
+                if(por.getKeywords().length()!=0)
+                    por.addKeywords("," + newKeyword.getText());
+                else
+                    por.addKeywords(newKeyword.getText());
+
+                showKeyWords(por);
+            }
+        });
+
+        newKeyword.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                System.out.println("Focus gained");
+                if(newKeyword.getText().equals(keywordsExemple))
+                    newKeyword.setText("");
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+
+            }
+        });
+    }
+
+    public void searchListener() {
+        searchBar.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e) {
+                String search  = searchBar.getText();
+                if(!search.equals("")){//check if empty don't do anything
+                    panelEdit.setVisible(false);
+                    ArrayList<portion> pors = catControl.getPortionWithKeywords(search);
+                    searchTree = new Tree(null,new ArrayList<categorie>(),pors,new DefaultMutableTreeNode(new categorie(0,"Recherche",0)));
+                    JTree jtreeSearch = searchTree.getTree();
+                    JScrollPane scrollSearchTree = new JScrollPane(jtreeSearch);
+                    leftPanel.remove(treeScroll);
+                    leftPanel.add(scrollSearchTree,BorderLayout.CENTER);
+                    leftPanel.revalidate();
+                    leftPanel.repaint();
+                }
+            }
+        });
+
+        searchBar.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if(searchBar.getText().equals(searchExemple))
+                    searchBar.setText("");
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+
+            }
+
+        });
+    }
+
     public void addPortionListener() {
         //Quand le bouton Ajouter Catégorie est cliqué on affiche un Jdialog d'ajout
         addPortion.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
+                DefaultMutableTreeNode selectedNode = catTree.getSelectedNode();;
                 if(selectedNode ==null){}//avoid nullPointer
                 else if(selectedNode.getUserObject() instanceof categorie) {
                     catControl.newPor(selectedNode, frame);
@@ -364,7 +545,7 @@ public class App {
                 }
                 //------------------------- SINGLE NODE SELECTED
                 else if(treePaths.length == 1){//if only one node is selected
-                    DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
+                    DefaultMutableTreeNode selectedNode = catTree.getSelectedNode();;
                     if(selectedNode!=null){
                         catTree.deleteNode(selectedNode);
                     }
@@ -378,6 +559,31 @@ public class App {
                         catTree.deleteNodes(selectedNodes);
                     }
                 }
+            }
+        });
+    }
+
+    public void componentListener() {
+        panelEdit.addComponentListener(new ComponentListener() {
+
+            public void componentResized(ComponentEvent arg0) {
+                rightScroll.getHorizontalScrollBar().setValue(0);
+                rightScroll.getVerticalScrollBar().setValue(0);
+            }
+
+            @Override
+            public void componentMoved(ComponentEvent e) {
+
+            }
+
+            @Override
+            public void componentShown(ComponentEvent e) {
+
+            }
+
+            @Override
+            public void componentHidden(ComponentEvent e) {
+
             }
         });
     }
