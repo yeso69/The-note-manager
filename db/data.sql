@@ -14,27 +14,3 @@ CREATE TABLE portion (
  id_categorie integer NOT NULL CONSTRAINT fk_categorie REFERENCES categorie(id),
  keywords text
 );
-
-INSERT INTO portion VALUES ('1','1ere portion', '1', "motclé1,keyword1");
-INSERT INTO portion VALUES ('2','2eme ration',  '1', "frite,fondue,lasagnes,coucous,pinpong,frites");
-INSERT INTO portion VALUES ('3','España amigos ! :D', '2', "Vida,loca,espagna,playa,fiesta,corrida,muchachos,hermanos,revolucion,cabron");
-INSERT INTO portion VALUES ('4','4eme portion', '2', "aller,marcher,courir,avancer,tout droit,couscous?,couloir, pk ????");
-INSERT INTO portion VALUES ('5','5eme portion', '3', "stop,fin,fini,end,trottoir");
-INSERT INTO portion VALUES ('6','6eme portion', '3', "motclé1,keyword1");
-INSERT INTO portion VALUES ('7','7eme portion', '4', "motclé1,keyword1");
-INSERT INTO portion VALUES ('8','8eme portion', '4', "motclé1,keyword1");
-INSERT INTO portion VALUES ('9','9eme portion', '4', "motclé1,keyword1");
-INSERT INTO portion VALUES ('10','10eme portion', '6', "motclé1,keyword1");
-INSERT INTO portion VALUES ('11','11eme portion', '6', "motclé1,keyword1");
-INSERT INTO portion VALUES ('12','12eme portion', '6', "motclé1,keyword1");
-INSERT INTO portion VALUES ('13','13eme sans catégorie', '0', "motclé1,keyword1");
-
-INSERT INTO categorie VALUES ('1', 'sql', '0');
-INSERT INTO categorie VALUES ('2', 'test', '1');
-INSERT INTO categorie VALUES ('3', 'Tell', '1');
-INSERT INTO categorie VALUES ('4', 'Me', '1');
-INSERT INTO categorie VALUES ('5', 'If', '1');
-INSERT INTO categorie VALUES ('6', 'Works', '0');
-INSERT INTO categorie VALUES ('7', 'Fine !', '4');
-INSERT INTO categorie VALUES ('8', 'OW !', '7');
-INSERT INTO categorie VALUES ('9', 'POOOOW !', '8');

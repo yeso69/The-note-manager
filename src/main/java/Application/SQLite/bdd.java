@@ -53,10 +53,6 @@ public class bdd
         {
             connection = DriverManager.getConnection("jdbc:sqlite:db/"+this.dbName);
             requete = connection.createStatement();
-
-            requete.executeUpdate("PRAGMA synchronous = OFF;");
-            requete.setQueryTimeout(30);
-
             return true;
         }
         catch(SQLException e)
@@ -219,6 +215,24 @@ public class bdd
         System.out.println("Ajout en BDD de la portion : "+por.toString());
     }
 
+    public boolean exist()
+    {
+        BufferedReader In=null;
+
+        try{
+            In = new BufferedReader(new FileReader("db/test.db"));
+            if (In.readLine() != null)
+            {
+                return true;
+            }
+            //si le fichier existe, les instructions qui suivent seront exécutées.
+        } catch (FileNotFoundException fnfe) {
+            System.out.println(fnfe);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
 
     public void showAllCategories()
