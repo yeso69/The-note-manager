@@ -1,18 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7dafa4de-0fd5-45c5-af46-166b43897725" name="Default" comment="----&gt; Plein de trucs">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/test.db" afterPath="$PROJECT_DIR$/db/test.db" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/img/Thumbs.db" afterPath="$PROJECT_DIR$/src/main/resources/img/Thumbs.db" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/img/p.png" afterPath="$PROJECT_DIR$/src/main/resources/img/p.png" />
+    <list default="true" id="7dafa4de-0fd5-45c5-af46-166b43897725" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/Application/SQLite/bdd.class" afterPath="$PROJECT_DIR$/target/classes/Application/SQLite/bdd.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/data.sql" afterPath="$PROJECT_DIR$/db/data.sql" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Application/App.java" afterPath="$PROJECT_DIR$/src/main/java/Application/App.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Application/Models/portion.java" afterPath="$PROJECT_DIR$/src/main/java/Application/Models/portion.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Application/SQLite/bdd.java" afterPath="$PROJECT_DIR$/src/main/java/Application/SQLite/bdd.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Application/Views/Tree.java" afterPath="$PROJECT_DIR$/src/main/java/Application/Views/Tree.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Application/Views/categoryControl.java" afterPath="$PROJECT_DIR$/src/main/java/Application/Views/categoryControl.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -1269,7 +1260,7 @@
       <workItem from="1481153498093" duration="4287000" />
       <workItem from="1481189944838" duration="18666000" />
       <workItem from="1481227544267" duration="39046000" />
-      <workItem from="1481271779707" duration="7163000" />
+      <workItem from="1481271779707" duration="7252000" />
     </task>
     <task id="LOCAL-00001" summary="Ajout structure projet + catégorie. SQL Fonctionne">
       <created>1479897374492</created>
@@ -1369,11 +1360,18 @@
       <option name="project" value="LOCAL" />
       <updated>1481235156958</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="----&gt; Plein de trucs">
+      <created>1481279678458</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1481279678458</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="278545000" />
+    <option name="totallyTimeSpent" value="278634000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
