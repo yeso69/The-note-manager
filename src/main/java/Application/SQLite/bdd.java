@@ -427,30 +427,30 @@ public class bdd
 
         java.sql.ResultSet rs = null;
         ArrayList<portion> portions = new ArrayList<portion>();
-
+        try {
             for(int i=0; i<kWords.length;i++){
-                try {
+
                     kWords[i] = kWords[i].replace("!", "!!")
                             .replace("%", "!%")
                             .replace("_", "!_")
                             .replace("[", "![");
 
-                    java.sql.PreparedStatement pstatement = connection.prepareStatement("Select * from portion where keywords like ? ESCAPE '!'");
-                    pstatement.setString(1,"%"+kWords[i]+"%");
-                    rs = pstatement.executeQuery();
+                    java.sql.PreparedStatement PSTATEMENT = connection.prepareStatement("Select * from portion where keywords like ? ESCAPE '!'");
+                    PSTATEMENT.setString(1,'%'+kWords[i]+'%');
+                    rs = PSTATEMENT.executeQuery();
                     while (rs.next()) {
                         int id = rs.getInt(1);
                         String text = rs.getString(2);
-                        int idCat = 0;
+                        int idCat = rs.getInt(3);
                         String keywords = rs.getString(4);
                         portions.add(new portion(id, text, idCat, keywords));
-                        rs.close();
                     }
-                }catch (Exception e) {
-                    e.printStackTrace();
-                }
-
             }
+            rs.close();
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+
         return portions;
     }
 

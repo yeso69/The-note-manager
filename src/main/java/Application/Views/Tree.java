@@ -26,12 +26,13 @@ public class Tree {
     ArrayList<portion> portions = null;
     protected ArrayList<categorie> bastardCats;
     protected ArrayList<portion> bastardPors;
+    JScrollPane scroll;
 
 
     public Tree(bdd bdd, ArrayList<categorie> cats, ArrayList<portion> portions,DefaultMutableTreeNode root) {
         this.db = bdd;
 
-        if (this.db != null){//Si la bdd a été donnée on recupère les noeuds depuis la BDD
+        if (cats == null && portions == null){//Si le contenu n'a pas été donné en paramètre on le recupère depuis la BDD
             this.cats = db.getCategories();
             this.portions = db.getPortions();
             buildTree();
@@ -46,7 +47,7 @@ public class Tree {
 
         setDesign();
         tree = new JTree(this.root);
-
+        scroll = new JScrollPane(tree);
         setListener();
         //On permet la selection multiple de noeuds pour la génération de documents
         tree.getSelectionModel().setSelectionMode(TreeSelectionModel.DISCONTIGUOUS_TREE_SELECTION);
@@ -54,6 +55,7 @@ public class Tree {
         tree.setSelectionRows(treeSelectedRows);
         tree.setCellRenderer(new MyRenderer());
         expandAllNodes(tree, 0, tree.getRowCount());
+
         //showTree(root);
     }
 
@@ -136,13 +138,15 @@ public class Tree {
                 JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
             // yes option
             //if node is a category call category delete function
+            node.removeFromParent();
             if (node.getUserObject() instanceof categorie) {
                 delCatNode(node);
                 refresh();
             } else if (node.getUserObject() instanceof portion) {
                 delPortionNode(node);
-                refresh();
+                reloadTreeOnly();
             }
+            tree.setSelectionRow(0);
         }
     }
 
@@ -156,8 +160,9 @@ public class Tree {
                 } else if (node.getUserObject() instanceof portion) {
                     delPortionNode(node);
                 }
+                node.removeFromParent();
             }
-            refresh();
+            tree.setSelectionRow(0);
     }
 
     public void delPortionNode(DefaultMutableTreeNode node){
@@ -165,7 +170,6 @@ public class Tree {
 
         DefaultTreeModel model = (DefaultTreeModel)tree.getModel();
         portion por = (portion) node.getUserObject();
-
         int porId = por.getId();
         db.removePortion(porId);//Delete the category
     }
@@ -192,9 +196,11 @@ public class Tree {
     }
 
     public void reloadTreeOnly(){
+        int[] selected = tree.getSelectionRows();
         DefaultTreeModel model = (DefaultTreeModel)tree.getModel();
         model.reload(root);//refresh the tree
         expandAllNodes(tree,0,tree.getRowCount());
+        tree.setSelectionRows(selected);
     }
 
     private DefaultMutableTreeNode addChilds(categorie cat, ArrayList<categorie> cats, ArrayList<portion> portions, DefaultMutableTreeNode papa, int level) {
@@ -344,6 +350,7 @@ public class Tree {
             if(selectedNode.getUserObject() instanceof categorie){//-----> CAT
                 if(previousNode.getUserObject() instanceof  categorie) {
                     parent.insert(selectedNode,parent.getIndex(selectedNode)-1);
+                    tree.setSelectionRow(tree.getRowForPath(tree.getSelectionPath()));
                     reloadTreeOnly();
                 }
             }
@@ -353,6 +360,7 @@ public class Tree {
                     portion tmp2 = (portion)selectedNode.getUserObject();
                     previousNode.setUserObject(tmp2);
                     selectedNode.setUserObject(tmp1);
+                    tree.setSelectionRow(tree.getRowForPath(tree.getSelectionPath()));
                     reloadTreeOnly();
                 }
             }
@@ -361,6 +369,7 @@ public class Tree {
             if(selectedNode.getUserObject() instanceof categorie){//-----> CAT
                 if(nextNode.getUserObject() instanceof  categorie) {
                     parent.insert(selectedNode,parent.getIndex(selectedNode)+1);
+                    tree.setSelectionRow(tree.getRowForPath(tree.getSelectionPath()));
                     reloadTreeOnly();
                 }
             }
@@ -370,6 +379,7 @@ public class Tree {
                     portion tmp2 = (portion)selectedNode.getUserObject();
                     nextNode.setUserObject(tmp2);
                     selectedNode.setUserObject(tmp1);
+                    tree.setSelectionRow(tree.getRowForPath(tree.getSelectionPath()));
                     reloadTreeOnly();
                 }
             }
@@ -378,6 +388,10 @@ public class Tree {
 
     public DefaultMutableTreeNode getSelectedNode(){
         return (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
+    }
+
+    public JScrollPane getScrollableTree(){
+        return scroll;
     }
 
     public DefaultMutableTreeNode getRoot() {

@@ -8,6 +8,9 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
+import javax.swing.text.Document;
+import javax.swing.text.html.HTMLEditorKit;
+import javax.swing.text.html.StyleSheet;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreePath;
 import java.awt.*;
@@ -25,6 +28,8 @@ public class documentGenerator {
     private ArrayList<DefaultMutableTreeNode> nodesPortions;
     JFrame mainFrame;
     JFrame frame;
+    JPanel panMain;
+    JPanel rightPanel;
     JLabel title;
     JTextField docTitle;
     JButton generate;
@@ -32,6 +37,7 @@ public class documentGenerator {
     JButton down;
     ArrayList<categorie> cats;
     ArrayList<portion> portions;
+    JScrollPane preview;
     Tree tree;
     JTree jTree;
     JRadioButton txt;
@@ -66,7 +72,7 @@ public class documentGenerator {
         frame = new JFrame("Génération de document");
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);// pour eviter que l'appli se ferme quand on ferme la generation de doc
         //frame.setMinimumSize(new Dimension(600, 400));
-        frame.setMinimumSize(new Dimension(600,400));
+        frame.setMinimumSize(new Dimension(700,650));
         frame.setLocationRelativeTo(null);
     }
 
@@ -81,7 +87,8 @@ public class documentGenerator {
     private void buildInterface(){
         JPanel panTop = new JPanel(new GridBagLayout());
         JPanel panBottom = new JPanel(new GridBagLayout());
-        title = new JLabel("Titre du document");
+        panMain = new JPanel(new BorderLayout());
+        title = new JLabel("Nom du fichier");
         docTitle= new JTextField();
         generate = new JButton("Générer le fichier");
         up = new JButton();
@@ -93,15 +100,20 @@ public class documentGenerator {
         cssList.addItem(new css("Blue & White","white.css"));
         cssList.addItem(new css("Dark","dark.css"));
         cssList.addItem(new css("Classic","classic.css"));
-        cssList.setEnabled(false);
+        cssList.setEnabled(true);
 
         ImageIcon fileIcon = Tree.createImageIcon("/img/file.png",30);
         ImageIcon htmlIcon = Tree.createImageIcon("/img/html.png",35);
         ImageIcon checkIcon = Tree.createImageIcon("/img/check.png",30);
         ImageIcon upIcon = Tree.createImageIcon("/img/up.png",20);
         ImageIcon downIcon = Tree.createImageIcon("/img/down.png",20);
+        ImageIcon previewIcon = Tree.createImageIcon("/img/preview.png",30);
+        ImageIcon themeIcon = Tree.createImageIcon("/img/theme.png",30);
+        ImageIcon titleIcon = Tree.createImageIcon("/img/title.png",30);
+        ImageIcon formatIcon = Tree.createImageIcon("/img/format.png",30);
         up.setIcon(upIcon);
         down.setIcon(downIcon);
+        title.setIcon(titleIcon);
 
         generate.setIcon(checkIcon);
         generate.setEnabled(false);
@@ -112,60 +124,87 @@ public class documentGenerator {
         c.gridy = 0;
         c.weightx = 1;
         c.weighty = 1;
-        c.gridwidth=2;
+        c.gridwidth=1;
+        c.fill = GridBagConstraints.HORIZONTAL;
         c.anchor = GridBagConstraints.CENTER;
 
         panTop.add(title,c);
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.gridy++;
+
+        c.gridx++;
         panTop.add(docTitle,c);
 
         c.gridy++;
-        c.gridwidth=1;
-        c.anchor = GridBagConstraints.NORTHEAST;
+        c.gridx=0;
+        JLabel formatLabel = new JLabel("Format");
+        formatLabel.setIcon(formatIcon);
+        panTop.add(formatLabel,c);
 
-        c.gridx = 0;
-        panTop.add(up,c);
-
-        c.gridx++;
-        panTop.add(down,c);
-
-
-
-        c.gridx = 0;
-        c.gridy = 0;
-        c.weightx = 1;
-        c.weighty = 1;
-
-        c.fill = GridBagConstraints.HORIZONTAL;
         group.add(txt);
         group.add(html);
-        txt.setSelected(true);
+        html.setSelected(true);
         JPanel fileFormat = new JPanel(new FlowLayout());
         fileFormat.add(new JLabel(fileIcon));
         fileFormat.add(txt);
         fileFormat.add(new JLabel(htmlIcon));
         fileFormat.add(html);
 
-        c.gridy++;
-        panBottom.add(fileFormat,c);
+        c.gridx++;
+        panTop.add(fileFormat,c);
 
         c.gridy++;
-        panBottom.add(new JLabel("Theme HTML (CSS)"),c);
+        c.gridx=0;
+        JLabel themeLabel = new JLabel("Theme HTML (CSS)");
+        themeLabel.setIcon(themeIcon);
+        panTop.add(themeLabel,c);
 
-        c.gridy++;
-        panBottom.add(cssList,c);
+        c.gridx++;
+        panTop.add(cssList,c);
 
-        c.gridy++;
-        panBottom.add(generate,c);
 
+        panMain.add(panTop,BorderLayout.NORTH);
+
+        //LEFT PANEL ANS SUB PANELS
+        JPanel leftPanel = new JPanel(new BorderLayout());
+        JPanel upDownPanel = new JPanel(new BorderLayout());
+        upDownPanel.add(down,BorderLayout.WEST);
+        upDownPanel.add(up,BorderLayout.EAST);
+        JLabel moveLabel = new JLabel("Déplacer");
+        upDownPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        upDownPanel.add(moveLabel,BorderLayout.CENTER);
+        leftPanel.add(upDownPanel,BorderLayout.SOUTH);
         JScrollPane scroll = new JScrollPane(tree.getTree());
-        scroll.getVerticalScrollBar().setValue(0);
 
+        leftPanel.add(scroll,BorderLayout.CENTER);
+        panMain.add(leftPanel, BorderLayout.WEST);
+
+        rightPanel = new JPanel(new BorderLayout());
+        JLabel previewLabel = new JLabel("Aperçu du document");
+        previewLabel.setIcon(previewIcon);
+        rightPanel.add(previewLabel, BorderLayout.NORTH);
+        showPreview();
+        panMain.add(rightPanel,BorderLayout.CENTER);
+
+        //MARGINS
+        rightPanel.setBorder(BorderFactory.createEmptyBorder(
+                5, //top
+                5,     //left
+                5, //bottom
+                0));   //right
+        leftPanel.setBorder(BorderFactory.createEmptyBorder(
+                5, //top
+                0,     //left
+                5, //bottom
+                5));   //right
+        panMain.setBorder(BorderFactory.createEmptyBorder(
+                5, //top
+                5,     //left
+                5, //bottom
+                5));   //right
+        panMain.add(generate,BorderLayout.SOUTH);
         frame.setLayout(new BorderLayout());
-        frame.add(panTop,BorderLayout.NORTH);
-        frame.add(scroll,BorderLayout.CENTER);
-        frame.add(panBottom, BorderLayout.SOUTH);
+        //frame.add(panTop,BorderLayout.NORTH);
+        frame.add(panMain,BorderLayout.CENTER);
+
     }
 
     private void writeFile(String path){
@@ -188,49 +227,106 @@ public class documentGenerator {
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter(file.getAbsoluteFile(),false));
 
-            String top = new String();
-            String content = new String();
-            String bottom = new String();
-            String document = new String();
 
-            if(txt.isSelected()) {
-                document = generateFileContent(top, root, "");
-                //replace all line separators by \n
-                document.replaceAll(System.getProperty("line.separator"), "\n");
-            } else{
-                top="<!DOCTYPE html>\n" +
-                        "<html lang=\"fr\">\n" +
-                        "  <head>\n" +
-                        "    <meta charset=\"utf-8\">\n" +
-                        "    <title>"+docTitle.getText()+"</title>\n" +
-                        "    <link rel=\"stylesheet\" href=\"style.css\">\n" +
-                        "  </head>\n" +
-                        "  <body>";
-                content = generateHtmlFileContent(new String(),root,1);
-                bottom ="  </body>\n" +
-                        "</html>";
 
-                document = top+content+bottom;
-
-                //str = str.replace(/(?:\r\n|\r|\n)/g, '<br />');
-
-                //CSS copy to the same destination
-                css myCss = (css) cssList.getSelectedItem();
-                java.net.URL cssURL = App.class.getResource(myCss.path);//important let App
-                //System.out.println("Dossier ressources"+App.class.getResource(""));
-                //System.out.println("Mon css: "+myCss.path+myCss.fileName);
-                File cssFile = new File(cssURL.getPath(), myCss.fileName);
-                myCss.copy(cssFile,new File(path,"style.css"));
-            }
-            bw.write(document);
-
+            bw.write(getCompiledContent());
             bw.close();
+            //str = str.replace(/(?:\r\n|\r|\n)/g, '<br />');
+
+            //CSS copy to the same destination
+            css myCss = (css) cssList.getSelectedItem();
+            java.net.URL cssURL = App.class.getResource(myCss.path);//important let App
+            //System.out.println("Dossier ressources"+App.class.getResource(""));
+            //System.out.println("Mon css: "+myCss.path+myCss.fileName);
+            File cssFile = new File(cssURL.getPath(), myCss.fileName);
+            myCss.copy(cssFile,new File(path,"style.css"));
             JOptionPane.showMessageDialog(new JFrame(), "Vous trouverez le fichier dans la destination spécifiée.", "Création du document terminée",
                     JOptionPane.INFORMATION_MESSAGE);
             //Desktop.getDesktop().edit(file);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private String getCompiledContent(){
+        String top = new String();
+        String content = new String();
+        String bottom = new String();
+        String document = new String();
+        if(txt.isSelected()) {
+            document = generateFileContent(top, root, "");
+            //replace all line separators by \n
+            document.replaceAll(System.getProperty("line.separator"), "\n");
+        } else{
+            top="<!DOCTYPE html>\n" +
+                    "<html lang=\"fr\">\n" +
+                    "  <head>\n" +
+                    "    <meta charset=\"utf-8\">\n" +
+                    "    <title>"+docTitle.getText()+"</title>\n" +
+                    "    <link rel=\"stylesheet\" href=\"style.css\">\n" +
+                    "  </head>\n" +
+                    "  <body>";
+            content = generateHtmlFileContent(new String(),root,1);
+            bottom ="  </body>\n" +
+                    "</html>";
+
+            document = top+content+bottom;
+
+        }
+        return document;
+    }
+
+    private void showPreview(){
+        if(html.isSelected()) {
+            // create a JEditorPane
+            JEditorPane jEditorPane = new JEditorPane();
+
+            // make it read-only
+            jEditorPane.setEditable(false);
+
+            // add a HTMLEditorKit to the editor pane
+            HTMLEditorKit kit = new HTMLEditorKit();
+            jEditorPane.setEditorKit(kit);
+
+            // now add it to a scroll pane by first removing the old one
+            if (preview != null)
+                rightPanel.remove(preview);
+            preview = new JScrollPane(jEditorPane);
+
+            // add some styles to the html
+            css myCss = (css) cssList.getSelectedItem();
+            java.net.URL cssURL = App.class.getResource(myCss.path);//important let App
+            File cssFile = new File(cssURL.getPath(), myCss.fileName);
+            FileReader f = null;
+            StyleSheet styleSheet = kit.getStyleSheet();
+            try {
+                f = new FileReader(cssFile);
+                styleSheet.loadRules(f, cssURL);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            kit.setStyleSheet(styleSheet);
+
+            // create a document, set it on the jeditorpane, then add the html
+            Document doc = kit.createDefaultDocument();
+            jEditorPane.setDocument(doc);
+            jEditorPane.setText(getCompiledContent());
+            jEditorPane.setCaretPosition(0);
+        }
+        else{//if TEXT is selected
+            if (preview != null)
+                rightPanel.remove(preview);
+            JTextArea content = new JTextArea(getCompiledContent());
+            content.setEditable(false);
+            preview = new JScrollPane(content);
+        }
+        //ADD THE PREVIEW TO THE RIGHT PART OF THE FRAME
+        rightPanel.add(preview,BorderLayout.CENTER);
+        rightPanel.revalidate();
+        rightPanel.repaint();
+
     }
 
     private String generateHtmlFileContent(String str, DefaultMutableTreeNode node, int level) {
@@ -304,12 +400,14 @@ public class documentGenerator {
         up.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 tree.moveNode(true);
+                showPreview();
             }
         });
 
         down.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 tree.moveNode(false);
+                showPreview();
             }
         });
     }
@@ -341,7 +439,8 @@ public class documentGenerator {
     public void comboboxListener(){
         cssList.addActionListener (new ActionListener () {
             public void actionPerformed(ActionEvent e) {
-                css myCss = (css)cssList.getSelectedItem();
+                //css myCss = (css)cssList.getSelectedItem();
+                showPreview();
             }
         });
     }
@@ -351,6 +450,7 @@ public class documentGenerator {
             @Override
             public void actionPerformed(ActionEvent event) {
                 cssList.setEnabled(false);
+                showPreview();
             }
         });
 
@@ -358,9 +458,12 @@ public class documentGenerator {
             @Override
             public void actionPerformed(ActionEvent event) {
                 cssList.setEnabled(true);
+                showPreview();
             }
         });
     }
+
+
 
     private void treeListeners() {
         // JTREE ----> Quand un élément de l'arbre est sélectionner

@@ -46,8 +46,12 @@ public class App {
     private categoryControl catControl;
     JScrollPane rightScroll;
     JScrollPane treeScroll;
+
     Tree catTree;
     Tree searchTree;
+    Tree currentTree;
+    JScrollPane scrollSearchTree;
+    JTree jtreeSearch = new JTree();
     String keywordsExemple = new String("exemple,de,mots-clés,multiples");
     String searchExemple = new String("Recherche par mots-clés");
     ArrayList<DefaultMutableTreeNode> selectedNodes;
@@ -70,7 +74,7 @@ public class App {
         deleteKeywordsListener();
         newKeywordsListener();
         componentListener();
-        //searchListener();
+        searchListener();
 
         catControl = new categoryControl(db,catTree);
         frame.setMinimumSize(new Dimension(700,650));
@@ -166,9 +170,10 @@ public class App {
 
         //ADDIND TREE IN A SCROLL PANE
         catTree = new Tree(db,null,null,null);
+        currentTree = catTree;
         tree = catTree.getTree();
         leftPanel = new JPanel(new BorderLayout());
-        treeScroll = new JScrollPane(tree);
+        treeScroll = catTree.getScrollableTree();
         leftPanel.add(searchBar,BorderLayout.NORTH);
         leftPanel.add(treeScroll, BorderLayout.CENTER);
         leftPanel.add(delete,BorderLayout.SOUTH);
@@ -218,7 +223,7 @@ public class App {
         rightScroll.getHorizontalScrollBar().setValue(0);
 
 
-
+        panelEdit.setVisible(false);
         panelEdit.add(rightScroll,BorderLayout.CENTER);
         panelEdit.add(editButtonsPanel,BorderLayout.SOUTH);
 
@@ -268,7 +273,7 @@ public class App {
         jp.add(main, c);
     }
 
-    private void treeListeners() {
+    private TreeSelectionListener treeListeners() {
         // JTREE ----> Quand un élément de l'arbre est sélectionner
         TreeSelectionListener treeSelectionListener = new TreeSelectionListener() {
 
@@ -276,7 +281,7 @@ public class App {
             public void valueChanged(TreeSelectionEvent treeSelectionEvent) {
                 JTree treeSource = (JTree) treeSelectionEvent.getSource();
                 //Getting paths of all selected nodes
-                TreePath[] treePaths = treeSource.getSelectionPaths();
+                TreePath[] treePaths = currentTree.getTree().getSelectionPaths();
 
                 if(treePaths == null){
                     return;
@@ -286,8 +291,8 @@ public class App {
                     System.out.println("Une seule noeud selectioné !");
 
                     //we get selected node + root
-                    DefaultMutableTreeNode selectedNode = catTree.getSelectedNode();
-                    DefaultMutableTreeNode root = (DefaultMutableTreeNode) tree.getModel().getRoot();
+                    DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode)treeSource.getLastSelectedPathComponent();
+                    DefaultMutableTreeNode root = (DefaultMutableTreeNode) treeSource.getModel().getRoot();
 
                     if (selectedNode != null) {//if something is selected we can delete
                         delete.setEnabled(true);
@@ -311,7 +316,6 @@ public class App {
                             //SWITCH TITLE TO PORTION
                             libelleCategorie.setVisible(false);
                             portionDeTexte.setVisible(true);
-                           // editTitle.add(portionDeTexte,BorderLayout.NORTH);
                             editTitle.repaint();
                             pkey.setVisible(true);
                             System.out.println(((portion) selectedNode.getUserObject()).getText());
@@ -327,6 +331,10 @@ public class App {
                         if (selectedNode.isRoot()) {
                             delete.setEnabled(false);//Can't delete root
                             addPortion.setEnabled(true);//Can't add a portion without a parent category
+                            panelEdit.setVisible(false);
+                        }
+                        else{
+                            panelEdit.setVisible(true);
                         }
                     }
                     //if the tree is at the max depth we make sure it's not possible to add a new level
@@ -336,6 +344,7 @@ public class App {
                                 //addCategory.setEnabled(false);
                             } else {
                                 addCategory.setEnabled(true);
+                                addPortion.setEnabled(true);
                             }
                         }
                     }
@@ -371,12 +380,21 @@ public class App {
 
 
                 }
-
+                if(currentTree == searchTree)
+                    addCategory.setEnabled(false);
+                    addPortion.setEnabled(false);
 
             }
 
         };
+
+
+
         tree.addTreeSelectionListener(treeSelectionListener);
+        jtreeSearch.addTreeSelectionListener(treeSelectionListener);
+        //currentTree.getTree().addTreeSelectionListener(treeSelectionListener);
+        return treeSelectionListener;
+
     }
 
     private void showKeyWords(portion por) {
@@ -398,7 +416,7 @@ public class App {
         //Quand le bouton Ajouter Catégorie est cliqué on affiche un Jdialog d'ajout
         addCategory.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                DefaultMutableTreeNode selectedNode = catTree.getSelectedNode();
+                DefaultMutableTreeNode selectedNode = currentTree.getSelectedNode();
                 if (selectedNode == null){//Avoid null pointer exception if nothing is selected
                     return;
                 }
@@ -411,10 +429,9 @@ public class App {
 
     public void saveChangesListener()
     {
-        //Quand le bouton Ajouter Catégorie est cliqué on affiche un Jdialog d'ajout
         saveChanges.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                DefaultMutableTreeNode selectedNode = catTree.getSelectedNode();
+                DefaultMutableTreeNode selectedNode = currentTree.getSelectedNode();
                 if (selectedNode == null){//Avoid null pointer exception if nothing is selected
                     return;
                 }
@@ -422,7 +439,11 @@ public class App {
                     portion por = (portion)selectedNode.getUserObject();
                     por.setText(contenuPortion.getText());
                     if(por.updateKeywords(true)){//if user validated this save
+                        showKeyWords(por);
                         catTree.refresh();
+                        if(currentTree == searchTree)
+                            currentTree.reloadTreeOnly();
+
                         System.out.println("depth "+selectedNode.getLevel());
                         //showKeyWords((portion)selectedNode.getUserObject());
                     }
@@ -437,7 +458,7 @@ public class App {
         //Quand le bouton Ajouter Catégorie est cliqué on affiche un Jdialog d'ajout
         deleteKeywords.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                DefaultMutableTreeNode selectedNode = catTree.getSelectedNode();;
+                DefaultMutableTreeNode selectedNode = currentTree.getSelectedNode();;
                 if (selectedNode == null){//Avoid null pointer exception if nothing is selected
                     return;
                 }
@@ -445,7 +466,8 @@ public class App {
                     portion por = (portion)selectedNode.getUserObject();
                     if(por.updateKeywords(false)){//if user validated the deletion
                         catTree.refresh();
-                        //showKeyWords((portion)selectedNode.getUserObject());
+                        if(currentTree == searchTree)
+                            currentTree.reloadTreeOnly();
                     }
                 }
             }
@@ -456,7 +478,7 @@ public class App {
         newKeyword.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
-                portion por = (portion) catTree.getSelectedNode().getUserObject();
+                portion por = (portion) currentTree.getSelectedNode().getUserObject();
                 if(por.getKeywords().length()!=0)
                     por.addKeywords("," + newKeyword.getText());
                 else
@@ -469,8 +491,6 @@ public class App {
         newKeyword.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
-                System.out.println("Focus gained");
-                if(newKeyword.getText().equals(keywordsExemple))
                     newKeyword.setText("");
             }
 
@@ -478,6 +498,7 @@ public class App {
             public void focusLost(FocusEvent e) {
 
             }
+
         });
     }
 
@@ -489,11 +510,19 @@ public class App {
                 if(!search.equals("")){//check if empty don't do anything
                     panelEdit.setVisible(false);
                     ArrayList<portion> pors = catControl.getPortionWithKeywords(search);
-                    searchTree = new Tree(null,new ArrayList<categorie>(),pors,new DefaultMutableTreeNode(new categorie(0,"Recherche",0)));
-                    JTree jtreeSearch = searchTree.getTree();
-                    JScrollPane scrollSearchTree = new JScrollPane(jtreeSearch);
-                    leftPanel.remove(treeScroll);
-                    leftPanel.add(scrollSearchTree,BorderLayout.CENTER);
+                    searchTree = new Tree(db,new ArrayList<categorie>(),pors,new DefaultMutableTreeNode(new categorie(0,"Retour à l'acceuil",0)));
+                    leftPanel.remove(currentTree.getScrollableTree());
+                    currentTree = searchTree;
+                    currentTree.getTree().addTreeSelectionListener(treeListeners());
+                    backToHomeListenner();
+                    leftPanel.add(currentTree.getScrollableTree(),BorderLayout.CENTER);
+                    leftPanel.revalidate();
+                    leftPanel.repaint();
+                }
+                else{
+                    leftPanel.remove(currentTree.getScrollableTree());
+                    leftPanel.add(treeScroll,BorderLayout.CENTER);
+                    currentTree = catTree;
                     leftPanel.revalidate();
                     leftPanel.repaint();
                 }
@@ -509,9 +538,31 @@ public class App {
 
             @Override
             public void focusLost(FocusEvent e) {
-
+                //if(searchBar.getText().equals(""))
+                    //searchBar.setText(searchExemple);
             }
 
+        });
+    }
+
+    private void backToHomeListenner() {
+        //GO BACK TO HOME ON DOUBLE CLICK ON ROOT
+        currentTree.getTree().addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseClicked(MouseEvent e){
+                if(e.getClickCount()==2){
+                    if(currentTree != catTree) {
+                        DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode)currentTree.getSelectedNode();
+                        if(selectedNode.isRoot()) {
+                            leftPanel.remove(currentTree.getScrollableTree());
+                            currentTree = catTree;
+                            leftPanel.add(currentTree.getScrollableTree());
+                            leftPanel.repaint();
+                            leftPanel.revalidate();
+                        }
+                    }
+                }
+            }
         });
     }
 
@@ -519,7 +570,7 @@ public class App {
         //Quand le bouton Ajouter Catégorie est cliqué on affiche un Jdialog d'ajout
         addPortion.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                DefaultMutableTreeNode selectedNode = catTree.getSelectedNode();;
+                DefaultMutableTreeNode selectedNode = currentTree.getSelectedNode();;
                 if(selectedNode ==null){}//avoid nullPointer
                 else if(selectedNode.getUserObject() instanceof categorie) {
                     catControl.newPor(selectedNode, frame);
@@ -536,18 +587,20 @@ public class App {
             public void actionPerformed(ActionEvent e)
             {
 
-
                 //Getting paths of all selected nodes
-                TreePath[] treePaths = tree.getSelectionPaths();
-
+                TreePath[] treePaths = currentTree.getTree().getSelectionPaths();
                 if(treePaths == null){
                     return;
                 }
                 //------------------------- SINGLE NODE SELECTED
                 else if(treePaths.length == 1){//if only one node is selected
-                    DefaultMutableTreeNode selectedNode = catTree.getSelectedNode();;
+                    DefaultMutableTreeNode selectedNode = currentTree.getSelectedNode();;
                     if(selectedNode!=null){
-                        catTree.deleteNode(selectedNode);
+                        currentTree.deleteNode(selectedNode);
+                        if(currentTree == searchTree)
+                            currentTree.reloadTreeOnly();
+                        catTree.refresh();
+
                     }
                     delete.setEnabled(false);
                 }
@@ -556,7 +609,16 @@ public class App {
                     //OPEN ARE YOU SURE POPUP
                     if (JOptionPane.showConfirmDialog(null, "Voulez-vous vraiment supprimer ces éléments ?", "Suppression", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                         // yes option
-                        catTree.deleteNodes(selectedNodes);
+                        currentTree.deleteNodes(selectedNodes);
+
+                        //AFTER DELETION REFRESH DISPLAY
+                        if(currentTree == catTree) {
+                            currentTree.refresh();
+                        }
+                        if(currentTree == searchTree) {
+                            catTree.refresh();
+                            currentTree.reloadTreeOnly();
+                        }
                     }
                 }
             }
@@ -595,10 +657,10 @@ public class App {
             public void actionPerformed(ActionEvent e)
             {
                 //Getting paths of all selected nodes
-                TreePath[] treePaths = tree.getSelectionPaths();
+                TreePath[] treePaths = currentTree.getTree().getSelectionPaths();
                 ArrayList<DefaultMutableTreeNode> nodes = new ArrayList<DefaultMutableTreeNode>();
-                ArrayList<categorie> cats = new ArrayList<categorie>();
-                ArrayList<portion> portions = new ArrayList<portion>();
+                ArrayList<categorie> cats = new ArrayList<>();
+                ArrayList<portion> portions = new ArrayList<>();
 
                 //temporary variables
                 categorie cat;
