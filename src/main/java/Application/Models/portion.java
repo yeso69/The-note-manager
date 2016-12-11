@@ -10,13 +10,13 @@ import java.util.List;
  * Created by Yeso on 30/11/2016.
  */
 public class portion {
-    private int id;
+    private Integer id;
     private String text;
     private int idCat;
     private String keywords;
     List<JCheckBox> checkboxes;
 
-    public portion(int id, String text, int idCat, String keywords) {
+    public portion(Integer id, String text, int idCat, String keywords) {
         this.id = id;
         this.text = text;
         this.idCat = idCat;

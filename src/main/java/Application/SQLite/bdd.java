@@ -324,6 +324,40 @@ public class bdd
         }
     }
 
+    public void showPortion(int id)
+    {
+        if(!existPortion(id))
+        {
+            System.out.println("La catégorie ayant l'id "+id+" n'existe pas !");
+        }
+        else
+        {
+            java.sql.ResultSet rs = null;
+            try
+            {
+                java.sql.PreparedStatement pstatement = connection.prepareStatement("Select * from portion WHERE id= ?");
+                pstatement.setInt(1,id);
+                rs = pstatement.executeQuery();
+
+                int idPortion = rs.getInt(1);
+                String message = rs.getString(2);
+                int id_categorie = rs.getInt(3);
+                String clef = rs.getString(4);
+                System.out.println("-----------------------------------");
+                System.out.println("ID : " + id);
+                System.out.println("Libelle : " + message);
+                System.out.println("ID_CATEGORIE : " + id_categorie);
+                System.out.println("Mots-clés : " + clef);
+                System.out.println("-----------------------------------");
+                rs.close();
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+
     public boolean existCategorie(String lib)
     {
         boolean res = false;
