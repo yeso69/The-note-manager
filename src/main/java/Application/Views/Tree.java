@@ -6,7 +6,10 @@ import Application.Models.portion;
 import Application.SQLite.bdd;
 
 import javax.swing.*;
-import javax.swing.tree.*;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeCellRenderer;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeSelectionModel;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Enumeration;

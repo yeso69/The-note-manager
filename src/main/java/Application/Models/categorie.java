@@ -1,10 +1,5 @@
 package Application.Models;
 
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.MutableTreeNode;
-import javax.swing.tree.TreeNode;
-import java.util.Enumeration;
-
 /**
  * Created by peter on 22/11/16.
  */

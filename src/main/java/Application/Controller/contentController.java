@@ -1,8 +1,9 @@
-package Application.Views;
+package Application.Controller;
 
 import Application.Models.categorie;
 import Application.Models.portion;
 import Application.SQLite.bdd;
+import Application.Views.Tree;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -16,7 +17,7 @@ import java.util.ArrayList;
 /**
  * Created by Yeso on 29/11/2016.
  */
-public class categoryControl {
+public class contentController {
     JPanel jpAddCat;
     JPanel jpAddPor;
     JLabel catTitle;
@@ -32,7 +33,7 @@ public class categoryControl {
     private portion selectedPor;
     private categorie selectedCat;
 
-    public categoryControl(bdd bdd, Tree tree) {
+    public contentController(bdd bdd, Tree tree) {
         this.db = bdd;
         this.tree = tree;
         buildPanelAddCat();

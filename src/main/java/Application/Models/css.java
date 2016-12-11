@@ -1,15 +1,9 @@
 package Application.Models;
 
-import Application.App;
-
-import javax.imageio.ImageIO;
-import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
-import java.nio.file.StandardCopyOption.*;
 
 /**
  * Created by Yeso on 04/12/2016.

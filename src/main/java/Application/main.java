@@ -3,10 +3,6 @@ package Application;
 import Application.SQLite.bdd;
 import Application.Views.view;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-
 /**
  * Created by peter on 22/11/16.
  */

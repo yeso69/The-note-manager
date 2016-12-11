@@ -1,8 +1,9 @@
 package Application.Models;
 
 import javax.swing.*;
-import java.awt.event.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 
 public class JFileChooser extends JPanel {

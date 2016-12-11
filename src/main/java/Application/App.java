@@ -5,7 +5,7 @@ import Application.Models.documentGenerator;
 import Application.Models.portion;
 import Application.SQLite.bdd;
 import Application.Views.Tree;
-import Application.Views.categoryControl;
+import Application.Controller.contentController;
 
 import javax.swing.*;
 import javax.swing.event.TreeSelectionEvent;
@@ -43,7 +43,7 @@ public class App {
     private JPanel panelEdit;
     JPanel leftPanel;
     private ArrayList<String> keywords;
-    private categoryControl catControl;
+    private contentController catControl;
     JScrollPane rightScroll;
     JScrollPane treeScroll;
 
@@ -76,7 +76,7 @@ public class App {
         componentListener();
         searchListener();
 
-        catControl = new categoryControl(db,catTree);
+        catControl = new contentController(db,catTree);
         frame.setMinimumSize(new Dimension(700,650));
         frame.pack();
         frame.setLocationRelativeTo(null);
@@ -301,27 +301,25 @@ public class App {
                             portionDeTexte.setVisible(false);
                             libelleCategorie.setVisible(true);
                             editTitle.repaint();
-                            addPortion.setEnabled(true);
+
                             generateDoc.setEnabled(false);
                             pkey.setVisible(false);
                             contenuPortion.setText(selectedNode.getUserObject().toString());
                             System.out.println(((categorie) selectedNode.getUserObject()).getLibelle());
-                            if (selectedNode.getLevel() - 1 == 4) {//Si un élément de profondeur max est selectionné on désactive l'ajout
-                                //addCategory.setEnabled(false);
-                            }
+
                             addCategory.setEnabled(true);//sinon on peut (quand on veut)
                             addPortion.setEnabled(true);
                         }
                         else if(selectedNode.getUserObject() instanceof portion){
-                            //SWITCH TITLE TO PORTION
+                            addCategory.setEnabled(false);
+                            addPortion.setEnabled(false);
+                            generateDoc.setEnabled(true);
                             libelleCategorie.setVisible(false);
+                            //SWITCH TITLE TO PORTION
                             portionDeTexte.setVisible(true);
                             editTitle.repaint();
                             pkey.setVisible(true);
                             System.out.println(((portion) selectedNode.getUserObject()).getText());
-                            addCategory.setEnabled(false);
-//                            addPortion.setEnabled(false);
-                            generateDoc.setEnabled(true);
                             showKeyWords((portion)selectedNode.getUserObject());
                             contenuPortion.setText(((portion) selectedNode.getUserObject()).getText());
                         }
@@ -329,8 +327,9 @@ public class App {
 
                         }
                         if (selectedNode.isRoot()) {
+                            addCategory.setEnabled(true);
+                            addPortion.setEnabled(true);
                             delete.setEnabled(false);//Can't delete root
-                            addPortion.setEnabled(true);//Can't add a portion without a parent category
                             panelEdit.setVisible(false);
                         }
                         else{
@@ -354,7 +353,7 @@ public class App {
                 else if(treePaths.length > 1){
                     System.out.println("Plusieurs noeuds selectionés !");
                     addCategory.setEnabled(false);
-                    //addPortion.setEnabled(false);
+                    addPortion.setEnabled(false);
 
                     //CREATING ARRAYLIST OF ALL SELECTED NODES
                     boolean rootIn = false;
@@ -382,7 +381,7 @@ public class App {
                 }
                 if(currentTree == searchTree)
                     addCategory.setEnabled(false);
-//                    addPortion.setEnabled(false);
+                    //addPortion.setEnabled(false);
 
             }
 

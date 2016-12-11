@@ -1,6 +1,6 @@
 package Application.Models;
 
-import Application.Views.categoryControl;
+import Application.Controller.contentController;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -128,7 +128,7 @@ public class portion {
         System.out.println("updated keywords = "+updatedKeywords);
         //Finally we update the database thanks to the control
         this.keywords = updatedKeywords;
-        categoryControl.updatePortion(this);
+        contentController.updatePortion(this);
         return true;
     }
 }
