@@ -54,8 +54,8 @@ public class bdd
             connection = DriverManager.getConnection("jdbc:sqlite:db/"+this.dbName);
             requete = connection.createStatement();
 
-            requete.executeUpdate("PRAGMA synchronous = OFF;");
-            requete.setQueryTimeout(30);
+//            requete.executeUpdate("PRAGMA synchronous = OFF;");
+//            requete.setQueryTimeout(30);
 
             return true;
         }
@@ -219,6 +219,24 @@ public class bdd
         System.out.println("Ajout en BDD de la portion : "+por.toString());
     }
 
+    public boolean exist()
+    {
+        BufferedReader In=null;
+
+        try{
+            In = new BufferedReader(new FileReader("db/test.db"));
+            if (In.readLine() != null)
+            {
+                return true;
+            }
+            //si le fichier existe, les instructions qui suivent seront exécutées.
+        } catch (FileNotFoundException fnfe) {
+            System.out.println(fnfe);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
 
     public void showAllCategories()
@@ -314,6 +332,40 @@ public class bdd
                 System.out.println("ID : " + id);
                 System.out.println("Libelle : " + libelle);
                 System.out.println("ID_PARENT : " + id_parent);
+                System.out.println("-----------------------------------");
+                rs.close();
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void showPortion(int id)
+    {
+        if(!existPortion(id))
+        {
+            System.out.println("La catégorie ayant l'id "+id+" n'existe pas !");
+        }
+        else
+        {
+            java.sql.ResultSet rs = null;
+            try
+            {
+                java.sql.PreparedStatement pstatement = connection.prepareStatement("Select * from portion WHERE id= ?");
+                pstatement.setInt(1,id);
+                rs = pstatement.executeQuery();
+
+                int idPortion = rs.getInt(1);
+                String message = rs.getString(2);
+                int id_categorie = rs.getInt(3);
+                String clef = rs.getString(4);
+                System.out.println("-----------------------------------");
+                System.out.println("ID : " + id);
+                System.out.println("Libelle : " + message);
+                System.out.println("ID_CATEGORIE : " + id_categorie);
+                System.out.println("Mots-clés : " + clef);
                 System.out.println("-----------------------------------");
                 rs.close();
             }

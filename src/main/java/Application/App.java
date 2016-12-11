@@ -279,7 +279,7 @@ public class App {
 
             @Override
             public void valueChanged(TreeSelectionEvent treeSelectionEvent) {
-                JTree treeSource = (JTree) treeSelectionEvent.getSource();
+                JTree treeSource = (JTree) currentTree.getTree();
                 //Getting paths of all selected nodes
                 TreePath[] treePaths = currentTree.getTree().getSelectionPaths();
 
@@ -308,9 +308,9 @@ public class App {
                             System.out.println(((categorie) selectedNode.getUserObject()).getLibelle());
                             if (selectedNode.getLevel() - 1 == 4) {//Si un élément de profondeur max est selectionné on désactive l'ajout
                                 //addCategory.setEnabled(false);
-                            } else {
-                                addCategory.setEnabled(true);//sinon on peut (quand on veut)
                             }
+                            addCategory.setEnabled(true);//sinon on peut (quand on veut)
+                            addPortion.setEnabled(true);
                         }
                         else if(selectedNode.getUserObject() instanceof portion){
                             //SWITCH TITLE TO PORTION
@@ -320,7 +320,7 @@ public class App {
                             pkey.setVisible(true);
                             System.out.println(((portion) selectedNode.getUserObject()).getText());
                             addCategory.setEnabled(false);
-                            addPortion.setEnabled(false);
+//                            addPortion.setEnabled(false);
                             generateDoc.setEnabled(true);
                             showKeyWords((portion)selectedNode.getUserObject());
                             contenuPortion.setText(((portion) selectedNode.getUserObject()).getText());
@@ -354,7 +354,7 @@ public class App {
                 else if(treePaths.length > 1){
                     System.out.println("Plusieurs noeuds selectionés !");
                     addCategory.setEnabled(false);
-                    addPortion.setEnabled(false);
+                    //addPortion.setEnabled(false);
 
                     //CREATING ARRAYLIST OF ALL SELECTED NODES
                     boolean rootIn = false;
@@ -382,7 +382,7 @@ public class App {
                 }
                 if(currentTree == searchTree)
                     addCategory.setEnabled(false);
-                    addPortion.setEnabled(false);
+//                    addPortion.setEnabled(false);
 
             }
 

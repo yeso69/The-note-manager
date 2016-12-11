@@ -80,7 +80,7 @@ public class documentGenerator {
     private void buildTree(){
         categorie racine = new categorie(0,"Contenu",0);
         this.root = new DefaultMutableTreeNode(racine);
-        tree = new Tree(null,cats,portions,root,2);
+        tree = new Tree(null,cats,portions,root,4);
         tree.showTree(root);
         jTree = tree.getTree();
     }
@@ -186,7 +186,9 @@ public class documentGenerator {
         for(int i = 2; i< 8;i++){
             maxLevelList.addItem(i);
         }
+        maxLevelList.setSelectedIndex(2);
         leftPanel.add(maxLevelList,BorderLayout.NORTH);
+
 
         panMain.add(leftPanel, BorderLayout.WEST);
 
@@ -457,6 +459,13 @@ public class documentGenerator {
         cssList.addActionListener (new ActionListener () {
             public void actionPerformed(ActionEvent e) {
                 //css myCss = (css)cssList.getSelectedItem();
+                showPreview();
+            }
+        });
+
+        maxLevelList.addActionListener (new ActionListener () {
+            public void actionPerformed(ActionEvent e) {
+                tree.setMaxLevel((int)maxLevelList.getSelectedItem());
                 showPreview();
             }
         });
