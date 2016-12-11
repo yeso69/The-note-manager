@@ -20,6 +20,7 @@ public class Tree {
     protected DefaultMutableTreeNode root;
     protected bdd db = null;
     protected JTree tree;
+    protected int maxLevel = -1;
     protected Font fontCat;
     protected Font fontPortion;
     ArrayList<categorie> cats = null;
@@ -29,8 +30,12 @@ public class Tree {
     JScrollPane scroll;
 
 
-    public Tree(bdd bdd, ArrayList<categorie> cats, ArrayList<portion> portions,DefaultMutableTreeNode root) {
+    public Tree(bdd bdd, ArrayList<categorie> cats, ArrayList<portion> portions,DefaultMutableTreeNode root,int maxLevel) {
         this.db = bdd;
+        if(maxLevel <=0)
+            this.maxLevel = 100;
+        else
+            this.maxLevel = maxLevel;
 
         if (cats == null && portions == null){//Si le contenu n'a pas été donné en paramètre on le recupère depuis la BDD
             this.cats = db.getCategories();
@@ -57,6 +62,13 @@ public class Tree {
         expandAllNodes(tree, 0, tree.getRowCount());
 
         //showTree(root);
+    }
+
+    public void setMaxLevel(int level){
+        this.maxLevel = level;
+        root.removeAllChildren();
+        buildTree(this.cats,this.portions,this.root);
+        reloadTreeOnly();
     }
 
     /** Returns an ImageIcon, or null if the path was invalid. */
@@ -108,8 +120,7 @@ public class Tree {
 
     private void buildTree(ArrayList<categorie> cats, ArrayList<portion> portions, DefaultMutableTreeNode root){
         categorie racine =(categorie)root.getUserObject();
-        addChilds(racine, cats, portions, root, 1);
-
+        addChilds(racine, cats, portions, root,1);
     }
 
     public void addCatNode(String parent, categorie cat){
@@ -204,7 +215,8 @@ public class Tree {
     }
 
     private DefaultMutableTreeNode addChilds(categorie cat, ArrayList<categorie> cats, ArrayList<portion> portions, DefaultMutableTreeNode papa, int level) {
-        //if (level <= 4) { // 4 levels only
+        if(level <= this.maxLevel) {//IF tree's depth is not unlimited OR the max level of depth has been reached
+
             int id = cat.getId(); //id of current node
             DefaultMutableTreeNode child; //child node
             categorie currentCat;
@@ -212,9 +224,9 @@ public class Tree {
             boolean bastard = true;
 
 
-            for(Iterator<portion> iter = portions.iterator(); iter.hasNext();){
+            for (Iterator<portion> iter = portions.iterator(); iter.hasNext(); ) {
                 currentPortion = iter.next();
-                if(currentPortion.getIdCat() == id){//If cat of this portion is found
+                if (currentPortion.getIdCat() == id) {//If cat of this portion is found
                     //Creating the new node for this portion
                     child = new DefaultMutableTreeNode(currentPortion, false);//false because it does not allow children
                     child.setUserObject(currentPortion);
@@ -224,22 +236,22 @@ public class Tree {
 
 
             //Adding category childs of papa
-            for (Iterator<categorie> iter2 = cats.iterator(); iter2.hasNext();) {
+            for (Iterator<categorie> iter2 = cats.iterator(); iter2.hasNext(); ) {
                 currentCat = iter2.next();
                 if (currentCat.getId_parent() == id) {//when child is found
 //                    if(bastardCats!=null)
 //                        bastardCats.remove(currentCat);
                     child = new DefaultMutableTreeNode(currentCat.getLibelle());
                     child.setUserObject(currentCat);
-                    child = addChilds(currentCat, cats, portions, child, level+1);
+                    child = addChilds(currentCat, cats, portions, child, level + 1);
                     papa.add(child);//Adding the child and its childs to the parents papa
 
                 }
 
             }
+        }
 
 
-        //}//end of if level<4
 
         return papa;
     }
@@ -350,7 +362,7 @@ public class Tree {
             if(selectedNode.getUserObject() instanceof categorie){//-----> CAT
                 if(previousNode.getUserObject() instanceof  categorie) {
                     parent.insert(selectedNode,parent.getIndex(selectedNode)-1);
-                    tree.setSelectionRow(tree.getRowForPath(tree.getSelectionPath()));
+                    tree.setSelectionRow(0);
                     reloadTreeOnly();
                 }
             }
@@ -360,7 +372,7 @@ public class Tree {
                     portion tmp2 = (portion)selectedNode.getUserObject();
                     previousNode.setUserObject(tmp2);
                     selectedNode.setUserObject(tmp1);
-                    tree.setSelectionRow(tree.getRowForPath(tree.getSelectionPath()));
+                    tree.setSelectionRow(tree.getLeadSelectionRow()-1);
                     reloadTreeOnly();
                 }
             }
@@ -369,7 +381,7 @@ public class Tree {
             if(selectedNode.getUserObject() instanceof categorie){//-----> CAT
                 if(nextNode.getUserObject() instanceof  categorie) {
                     parent.insert(selectedNode,parent.getIndex(selectedNode)+1);
-                    tree.setSelectionRow(tree.getRowForPath(tree.getSelectionPath()));
+                    tree.setSelectionRow(0);
                     reloadTreeOnly();
                 }
             }
@@ -379,7 +391,7 @@ public class Tree {
                     portion tmp2 = (portion)selectedNode.getUserObject();
                     nextNode.setUserObject(tmp2);
                     selectedNode.setUserObject(tmp1);
-                    tree.setSelectionRow(tree.getRowForPath(tree.getSelectionPath()));
+                    tree.setSelectionRow(tree.getLeadSelectionRow()+1);
                     reloadTreeOnly();
                 }
             }

@@ -1,0 +1,98 @@
+/*
+Template Name:Azuka HTML Template
+Description:A CV/Resume HTML Template
+Author:Chris Creed
+URL:http://www.chris-creed.com
+*/
+
+/* Colors:Blue - #0b8bbb // Orange - #e86e14 */
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td{
+	margin:0;
+	padding:0;
+	border:0;
+	outline:0;
+	font-weight:inherit;
+	font-style:inherit;
+	font-size:100%;
+	font-family:inherit;
+	vertical-align:baseline;
+}
+
+
+body{
+	
+	font-family:times, serif;
+	background-color:#eee;
+	width:85%;
+	margin: 1% auto;
+	font-family:"Myriad Pro", "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
+	color:#555;
+	border:1px #eee solid;
+	padding:5% 5% 2% 5%;
+	background:#fff;
+	box-shadow:0 0 45px #bbb;
+	line-height:1;
+	color:black;
+	background:white;
+}
+h1{
+	font-size:40px;
+	margin:0 0 30px 0;
+	letter-spacing:-1px;
+	margin:50px 0 50px 0;
+	color:#444;
+}
+h2{
+	font-size:34px;
+	margin:0 0 20px 0;
+	color:#0b8bbb;
+	font-size:28px;
+	margin:30px 0 30px 0;
+}
+h3{
+	font-size:24px;
+	margin:20px 0 20px 0;
+	color:#777;
+}
+h4{
+	font-size:20px;
+	margin:10px 0 10px 0;
+	color:#0b8bbb;
+}
+
+h5{
+	font-size:18px;
+	margin:5px 0 5px 0;
+}
+p{
+	line-height:22px;
+	margin:0 0 15px 0;
+}
+ p{
+	font-size:16px;
+	margin:10px 0 10px 0;
+}
+a{
+	text-decoration:none;
+	color:#0b8bbb;
+}
+a:hover{
+	color:#eee;
+}
+
+
+
+#header #header-photo{
+	float:right;
+	background-color:#eee;
+	padding:5px 5px 2px 5px;
+	-webkit-box-shadow:0 0 10px #aaa;
+	-moz-box-shadow:0 0 10px #aaa;
+	box-shadow:0 0 10px #aaa;
+}
+#header #header-photo img{
+	width:200px;
+	height:220px;
+	border:1px #ddd solid;
+}

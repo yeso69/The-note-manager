@@ -44,6 +44,7 @@ public class documentGenerator {
     JRadioButton html;
     ButtonGroup group;
     JComboBox<css> cssList;
+    JComboBox maxLevelList;
     DefaultMutableTreeNode root;
 
     public documentGenerator(ArrayList<categorie> cats, ArrayList<portion> portions, JFrame mainFrame) {
@@ -79,14 +80,16 @@ public class documentGenerator {
     private void buildTree(){
         categorie racine = new categorie(0,"Contenu",0);
         this.root = new DefaultMutableTreeNode(racine);
-        tree = new Tree(null,cats,portions,root);
+        tree = new Tree(null,cats,portions,root,2);
         tree.showTree(root);
         jTree = tree.getTree();
     }
 
     private void buildInterface(){
-        JPanel panTop = new JPanel(new GridBagLayout());
+        JPanel panTopLabels = new JPanel(new BorderLayout());
         JPanel panBottom = new JPanel(new GridBagLayout());
+        JLabel themeLabel = new JLabel("Theme HTML (CSS) ");
+        JLabel formatLabel = new JLabel("Format");
         panMain = new JPanel(new BorderLayout());
         title = new JLabel("Nom du fichier");
         docTitle= new JTextField();
@@ -97,10 +100,13 @@ public class documentGenerator {
         html = new JRadioButton("HTML");
         group = new ButtonGroup();
         cssList = new JComboBox<css>();
+        //cssList.addItem(new css("ODZ Theme","odz.css"));
         cssList.addItem(new css("Blue & White","white.css"));
         cssList.addItem(new css("Dark","dark.css"));
         cssList.addItem(new css("Classic","classic.css"));
         cssList.setEnabled(true);
+
+
 
         ImageIcon fileIcon = Tree.createImageIcon("/img/file.png",30);
         ImageIcon htmlIcon = Tree.createImageIcon("/img/html.png",35);
@@ -111,6 +117,9 @@ public class documentGenerator {
         ImageIcon themeIcon = Tree.createImageIcon("/img/theme.png",30);
         ImageIcon titleIcon = Tree.createImageIcon("/img/title.png",30);
         ImageIcon formatIcon = Tree.createImageIcon("/img/format.png",30);
+
+        formatLabel.setIcon(formatIcon);
+        themeLabel.setIcon(themeIcon);
         up.setIcon(upIcon);
         down.setIcon(downIcon);
         title.setIcon(titleIcon);
@@ -126,42 +135,39 @@ public class documentGenerator {
         c.weighty = 1;
         c.gridwidth=1;
         c.fill = GridBagConstraints.HORIZONTAL;
-        c.anchor = GridBagConstraints.CENTER;
+        c.anchor = GridBagConstraints.NORTHWEST;
 
-        panTop.add(title,c);
+        //LABELS OF THE TOP PANEL
+        panTopLabels.add(title,BorderLayout.NORTH);
+        panTopLabels.add(formatLabel,BorderLayout.CENTER);
+        panTopLabels.add(themeLabel,BorderLayout.SOUTH);
 
-        c.gridx++;
-        panTop.add(docTitle,c);
 
-        c.gridy++;
-        c.gridx=0;
-        JLabel formatLabel = new JLabel("Format");
-        formatLabel.setIcon(formatIcon);
-        panTop.add(formatLabel,c);
+        //FIELDS OF THE TOP PANEL
+        JPanel panTopFields = new JPanel(new BorderLayout());
+        panTopFields.add(docTitle,BorderLayout.NORTH);
 
         group.add(txt);
         group.add(html);
         html.setSelected(true);
+
         JPanel fileFormat = new JPanel(new FlowLayout());
         fileFormat.add(new JLabel(fileIcon));
         fileFormat.add(txt);
         fileFormat.add(new JLabel(htmlIcon));
         fileFormat.add(html);
 
-        c.gridx++;
-        panTop.add(fileFormat,c);
+        panTopFields.add(fileFormat,BorderLayout.CENTER);
+        panTopFields.add(cssList,BorderLayout.SOUTH);
 
-        c.gridy++;
-        c.gridx=0;
-        JLabel themeLabel = new JLabel("Theme HTML (CSS)");
-        themeLabel.setIcon(themeIcon);
-        panTop.add(themeLabel,c);
-
-        c.gridx++;
-        panTop.add(cssList,c);
+        //ADDING LABELS ANDS FIELDS IN A TOP PANEL P
+        JPanel panelTop = new JPanel(new BorderLayout());
+        panelTop.add(panTopLabels,BorderLayout.WEST);
+        panelTop.add(panTopFields,BorderLayout.CENTER);
 
 
-        panMain.add(panTop,BorderLayout.NORTH);
+
+        panMain.add(panelTop,BorderLayout.NORTH);
 
         //LEFT PANEL ANS SUB PANELS
         JPanel leftPanel = new JPanel(new BorderLayout());
@@ -175,6 +181,13 @@ public class documentGenerator {
         JScrollPane scroll = new JScrollPane(tree.getTree());
 
         leftPanel.add(scroll,BorderLayout.CENTER);
+
+        maxLevelList = new JComboBox<>();
+        for(int i = 2; i< 8;i++){
+            maxLevelList.addItem(i);
+        }
+        leftPanel.add(maxLevelList,BorderLayout.NORTH);
+
         panMain.add(leftPanel, BorderLayout.WEST);
 
         rightPanel = new JPanel(new BorderLayout());
@@ -314,6 +327,10 @@ public class documentGenerator {
             jEditorPane.setDocument(doc);
             jEditorPane.setText(getCompiledContent());
             jEditorPane.setCaretPosition(0);
+//            JDialog d = new JDialog(frame, "Preview", true);
+//            d.add(jEditorPane);
+//            d.setVisible(true);
+
         }
         else{//if TEXT is selected
             if (preview != null)
@@ -443,6 +460,7 @@ public class documentGenerator {
                 showPreview();
             }
         });
+
     }
 
     public void radiobuttonsListener(){

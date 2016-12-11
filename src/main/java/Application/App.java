@@ -169,7 +169,7 @@ public class App {
 
 
         //ADDIND TREE IN A SCROLL PANE
-        catTree = new Tree(db,null,null,null);
+        catTree = new Tree(db,null,null,null,-1);
         currentTree = catTree;
         tree = catTree.getTree();
         leftPanel = new JPanel(new BorderLayout());
@@ -510,7 +510,7 @@ public class App {
                 if(!search.equals("")){//check if empty don't do anything
                     panelEdit.setVisible(false);
                     ArrayList<portion> pors = catControl.getPortionWithKeywords(search);
-                    searchTree = new Tree(db,new ArrayList<categorie>(),pors,new DefaultMutableTreeNode(new categorie(0,"Retour à l'acceuil",0)));
+                    searchTree = new Tree(db,new ArrayList<categorie>(),pors,new DefaultMutableTreeNode(new categorie(0,"Retour à l'acceuil",0)),-1);
                     leftPanel.remove(currentTree.getScrollableTree());
                     currentTree = searchTree;
                     currentTree.getTree().addTreeSelectionListener(treeListeners());
