@@ -62,8 +62,6 @@ public class documentGenerator {
         treeListeners();
         upDownListener();
 
-        //frame.pack();
-
         frame.setVisible(true);
         mainFrame.setVisible(false);
 
@@ -251,13 +249,10 @@ public class documentGenerator {
             //CSS copy to the same destination
             css myCss = (css) cssList.getSelectedItem();
             java.net.URL cssURL = App.class.getResource(myCss.path);//important let App
-            //System.out.println("Dossier ressources"+App.class.getResource(""));
-            //System.out.println("Mon css: "+myCss.path+myCss.fileName);
             File cssFile = new File(cssURL.getPath(), myCss.fileName);
             myCss.copy(cssFile,new File(path,"style.css"));
             JOptionPane.showMessageDialog(new JFrame(), "Vous trouverez le fichier dans la destination spécifiée.", "Création du document terminée",
                     JOptionPane.INFORMATION_MESSAGE);
-            //Desktop.getDesktop().edit(file);
         } catch (IOException e) {
             e.printStackTrace();
         }
